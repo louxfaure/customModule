@@ -1,0 +1,46 @@
+:root {
+    /* --- COULEURS PRIMAIRES (Le pivot : Bordeaux/Prune) --- */
+    --sys-primary: #8b1f5a;
+    --sys-on-primary: #ffffff;
+    --sys-primary-container: #ffd9e2; /* Rose très pâle pour les fonds de boutons secondaires */
+    --sys-on-primary-container: #3e0021;
+    --sys-primary-fixed: #ffd9e2;
+    --sys-primary-fixed-dim: #ffb1c8;
+
+    /* --- COULEURS SECONDAIRES (Harmonie : Vieux rose / Mauve sourd) --- */
+    --sys-secondary: #74565f;
+    --sys-on-secondary: #ffffff;
+    --sys-secondary-container: #ffd9e2;
+    --sys-on-secondary-container: #2b151c;
+
+    /* --- COULEURS TERTIAIRES (Accent : Doré / Ocre pour le contraste) --- */
+    /* Utile pour les alertes douces ou les "coups de cœur" */
+    --sys-tertiary: #7c5635;
+    --sys-on-tertiary: #ffffff;
+    --sys-tertiary-container: #ffddc2;
+    --sys-on-tertiary-fixed-variant: #5e3f20;
+
+    /* --- NEUTRES & SURFACES (Inspirés par la chaleur du papier) --- */
+    --sys-background: #fff8f8;
+    --sys-on-background: #22191c;
+    --sys-surface: #fff8f8;
+    --sys-surface-bright: #fff8f8;
+    --sys-surface-container: #f9ecee; /* Très léger voile rosé pour les cartes */
+    --sys-surface-container-high: #f3e6e8;
+    --sys-surface-container-highest: #eee0e2;
+    --sys-surface-variant: #f4dddf;
+    --sys-on-surface: #22191c;
+    --sys-on-surface-variant: #524346;
+
+    /* --- OUTLINES & ERREURS --- */
+    --sys-outline: #847376;
+    --sys-outline-variant: #d6c2c4;
+    --sys-error: #ba1a1a;
+    --sys-on-error: #ffffff;
+    --sys-error-container: #ffdad6;
+    
+    /* --- INVERSE --- */
+    --sys-inverse-surface: #382e30;
+    --sys-inverse-on-surface: #fbeeed;
+    --sys-inverse-primary: #ffb1c8;
+}
