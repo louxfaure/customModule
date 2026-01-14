@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UbmBriefDisplayComponent } from './ubm-brief-display.component';
+import { TestAlexComponent } from './test-alex.component';
 
-describe('UbmBriefDisplayComponent', () => {
-  let component: UbmBriefDisplayComponent;
-  let fixture: ComponentFixture<UbmBriefDisplayComponent>;
+describe('TestAlexComponent', () => {
+  let component: TestAlexComponent;
+  let fixture: ComponentFixture<TestAlexComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UbmBriefDisplayComponent]
+      imports: [TestAlexComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(UbmBriefDisplayComponent);
+    fixture = TestBed.createComponent(TestAlexComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
