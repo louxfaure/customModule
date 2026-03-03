@@ -29,10 +29,15 @@ export class UbmBriefDisplayComponent {
             
             // Si on accède à lds01 ET que le résultat est vide ou n'existe pas
             if (key.items === "lds01" && (!result || result.length === 0)) {
-              // Récupérer les créateurs et contributeurs
               const pnxDisplay = recordMainDetails?.pnx?.display;
-              const creators = pnxDisplay?.creator || [];
-              const contributors = pnxDisplay?.contributor || [];
+              
+              // On définit le type string pour l'argument 'val'
+              const cleanField = (val: string): string => {
+                return typeof val === 'string' ? val.replace(/\$\$Q.*/g, '').trim() : val;
+              };
+
+              const creators: string[] = (pnxDisplay?.creator || []).map(cleanField);
+              const contributors: string[] = (pnxDisplay?.contributor || []).map(cleanField);
               
               // Combiner les deux listes
               const allAuthors = [...creators, ...contributors];
