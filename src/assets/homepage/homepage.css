@@ -89,7 +89,7 @@
     }
 
     .welcome {
-      //max-width: 32rem;
+      max-width: 24rem;
       padding-block: 1rem;
       gap: 1.5rem;
 
@@ -125,7 +125,7 @@
         border: none;
         cursor: pointer;
         transition: background-color 0.3s ease;
-        text-underline: none;
+        text-decoration: none;
 
         @include mixing.respond-to('medium', 'small', 'xsmall') {
           font-size: vars.$mediumFontSize;
@@ -253,7 +253,8 @@
       }
     }
   }
-
 }
+
+
 
 

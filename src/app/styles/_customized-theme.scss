@@ -7,3 +7,15 @@
  @include mat.all-component-colors(m3-theme.$light-theme);
  @include mat.system-level-colors(m3-theme.$light-theme);
 }
+
+
+html {
+  --sys-body-large-size:1.25rem;
+  --sys-body-large-line-height: 1.6rem;
+  --sys-body-large-weight:      400;
+  --sys-body-large-tracking:    .031rem;
+  --sys-body-large: 400 1.25rem / 1.6rem Noto Sans Display, sans-serif;
+  --sys-body-medium-size: 1rem;
+  --sys-body-medium-line-height: 1.6rem;
+
+}

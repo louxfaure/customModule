@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Showcase — Types de documents</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap');
+
+  :root {
+    --pink-light: #FDE8EF;
+    --pink-mid:   #F2AFCA;
+    --bordeaux:   #9B2456;
+    --bordeaux-dark: #6e1a3d;
+    --text:       #2a1020;
+    --text-muted: #8a5570;
+    --bg:         #fdf4f7;
+    --card-bg:    #ffffff;
+    --border:     #f0d0de;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--bordeaux);
+    padding: 2.5rem 3rem 2rem;
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5rem;
+  }
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: #fff;
+    line-height: 1.1;
+  }
+  header p {
+    font-size: 0.85rem;
+    color: var(--pink-mid);
+    margin-top: 0.3rem;
+    font-weight: 300;
+    letter-spacing: 0.03em;
+  }
+  .header-badge {
+    background: var(--pink-light);
+    color: var(--bordeaux);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: 0.3rem 0.8rem;
+    border-radius: 2rem;
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+  }
+
+  .toolbar {
+    padding: 1.2rem 3rem;
+    background: white;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .search-box {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    padding: 0.45rem 0.9rem;
+    flex: 1;
+    max-width: 320px;
+  }
+  .search-box input {
+    border: none;
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text);
+    outline: none;
+    width: 100%;
+  }
+  .search-box svg { flex-shrink: 0; }
+
+  .count-badge {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-left: auto;
+  }
+  #count-num { font-weight: 600; color: var(--bordeaux); }
+
+  main {
+    padding: 2rem 3rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 1.2rem 0.8rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: default;
+    transition: box-shadow 0.18s, transform 0.18s, border-color 0.18s;
+  }
+  .card:hover {
+    box-shadow: 0 6px 24px rgba(155,36,86,0.10);
+    transform: translateY(-2px);
+    border-color: var(--pink-mid);
+  }
+
+  .icon-wrap {
+    width: 68px;
+    height: 98px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .icon-wrap img {
+    width: 68px;
+    height: 98px;
+    object-fit: contain;
+  }
+
+  /* Fallback placeholder when image missing */
+  .icon-placeholder {
+    width: 68px;
+    height: 98px;
+    background: var(--pink-light);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .icon-placeholder::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 0; height: 0;
+    border-style: solid;
+    border-width: 0 14px 14px 0;
+    border-color: transparent var(--pink-mid) transparent transparent;
+  }
+  .icon-placeholder svg {
+    opacity: 0.35;
+  }
+
+  .label-fr {
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--bordeaux-dark);
+    text-align: center;
+    line-height: 1.3;
+    word-break: break-word;
+  }
+  .label-en {
+    font-size: 0.63rem;
+    color: var(--text-muted);
+    text-align: center;
+    font-weight: 300;
+  }
+  .code-tag {
+    font-size: 0.55rem;
+    color: var(--text-muted);
+    background: var(--pink-light);
+    padding: 0.15rem 0.4rem;
+    border-radius: 0.25rem;
+    font-family: monospace;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .hidden { display: none !important; }
+
+  .no-results {
+    grid-column: 1/-1;
+    text-align: center;
+    color: var(--text-muted);
+    padding: 3rem;
+    font-size: 0.9rem;
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="header-badge">Référentiel</div>
+    <h1>Types de documents</h1>
+    <p>Showcase des icônes et libellés — référentiel media types</p>
+  </div>
+</header>
+
+<div class="toolbar">
+  <div class="search-box">
+    <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#9B2456" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+    <input type="text" id="search" placeholder="Rechercher un type de document…" oninput="filterCards()"/>
+  </div>
+  <span class="count-badge"><span id="count-num">0</span> types affichés</span>
+</div>
+
+<main>
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer>Types de documents — tous droits réservés</footer>
+
+<script>
+const ASSETS = '/assets/images/';
+
+// Map code -> icon filename (existing images)
+const iconMap = {
+  'mediatype.article':             'icon_article.png',
+  'mediatype.audio':               'icon_audio.png',
+  'mediatype.book':                'icon_book.png',
+  'mediatype.books':               'icon_book.png',
+  'mediatype.book_chapter':        'icon_chapter.png',
+  'mediatype.other':               'icon_other.png',
+  'mediatype.comic':               'icon_comic.png',
+  'mediatype.conferencepaper':     'icon_conference_act.png',
+  'mediatype.conference_proceeding':'icon_conference_act.png',
+  'mediatype.database':            'icon_database.png',
+  'mediatype.datasets':            'icon_dataset.png',
+  'mediatype.research_dataset':    'icon_dataset.png',
+  'mediatype.statistical_data_set':'icon_dataset.png',
+  'mediatype.audiovisual':         'icon_dvd.png',
+  'mediatype.film':                'icon_dvd.png',
+  'mediatype.image':               'icon_image.png',
+  'mediatype.visual_material':     'icon_image.png',
+  'mediatype.painting':            'icon_image.png',
+  'mediatype.journal':             'icon_journal.png',
+  'mediatype.journals':            'icon_journal.png',
+  'mediatype.map':                 'icon_map.png',
+  'mediatype.newspaper':           'icon_newspaper.png',
+  'mediatype.newspapers':          'icon_newspaper.png',
+  'mediatype.newspaper_article':   'icon_newspaper_article.png',
+  'mediatype.patents':             'icon_patent.png',
+  'mediatype.rare_book':           'icon_rarebook.png',
+  'mediatype.video':               'icon_video.png',
+  'mediatype.web_resource':        'icon_website.png',
+  'mediatype.dissertations':       'icon_academic_work.png',
+  'mediatype.dissertation':        'icon_academic_work.png',
+  'mediatype.thesis':              'icon_academic_work.png',
+  'mediatype.encyclopediaentry':   'icon_article_encyclopedia.png',
+  'mediatype.reference_entry':     'icon_article_encyclopedia.png',
+  'mediatype.reference_entrys':    'icon_article_encyclopedia.png',
+  'mediatype.bookReview':          'icon_book_review.png',
+  'mediatype.review':              'icon_book_review.png',
+};
+
+const data = [
+  ['mediatype.abstracts','Abstract','Extraits'],
+  ['mediatype.acceptedmanuscript','Accepted Manuscript','Manuscrit accepté'],
+  ['mediatype.activity','Activity','Activité'],
+  ['mediatype.annotations','Annotation','Annotations'],
+  ['mediatype.archival_material','Archival Material','Matériel d\'archive'],
+  ['mediatype.archival_material_manuscript','Archival Material / Manuscripts','Matériel d\'archive / Manuscrits'],
+  ['mediatype.article','Article','Article'],
+  ['mediatype.assignment','Assignment','Devoir'],
+  ['mediatype.audio','Audio CD','CD Audio'],
+  ['mediatype.audiovisual','Audiovisual','Audio Vidéo'],
+  ['mediatype.bibliographys','Bibliography','Bibliographies'],
+  ['mediatype.blog','Blog','Blog'],
+  ['mediatype.book','Book','Livre'],
+  ['mediatype.book_chapter','Book Chapter','Chapitre de livre'],
+  ['mediatype.bookReview','Book Review','Compte-rendu de livre'],
+  ['mediatype.casestudy','Case study','Étude de cas'],
+  ['mediatype.choreography','Choreography','Chorégraphie'],
+  ['mediatype.code','Code','Code'],
+  ['mediatype.collection','Collection','Sélections'],
+  ['mediatype.computer_file','Computer Files','Fichier d\'ordinateur'],
+  ['mediatype.conferencepaper','Conference Paper','Acte de colloque'],
+  ['mediatype.conferenceposter','Conference Poster','Affiche de colloque'],
+  ['mediatype.conferencepresentation','Conference Presentation','Présentation de colloque'],
+  ['mediatype.conference_proceeding','Conference Proceeding','Acte de conférence'],
+  ['mediatype.conferenceprogram','Conference Program','Programme de colloque'],
+  ['mediatype.coursemodule','Course module','Module de cours'],
+  ['mediatype.dance','Dance','Danse'],
+  ['mediatype.database','Database','Base de données'],
+  ['mediatype.datasets','Dataset','Ensemble de données'],
+  ['mediatype.demonstration','Demonstration','Démonstration'],
+  ['mediatype.designandarchitecture','Design and Architecture','Design et architecture'],
+  ['mediatype.dictionaryentry','Dictionary Entry','Entrée de dictionnaire'],
+  ['mediatype.dissertations','Dissertation','Travaux universitaires'],
+  ['mediatype.drama','Drama','Art dramatique'],
+  ['mediatype.editorials','Editorial','Éditoriaux'],
+  ['mediatype.encyclopediaentry','Encyclopedia Entry','Entrée d\'encyclopédie'],
+  ['mediatype.essay','Essay','Essai'],
+  ['mediatype.event','Event','Évènement'],
+  ['mediatype.eventposter','Event Poster','Affiche d\'évènement'],
+  ['mediatype.exhibitioncatalog','Exhibition Catalog','Catalogue d\'exposition'],
+  ['mediatype.fiction','Fiction','Fiction'],
+  ['mediatype.film','Film','Film'],
+  ['mediatype.flashcards','Flashcards','Cartes-questionnaires'],
+  ['mediatype.government_document','Government Document','Document gouvernemental'],
+  ['mediatype.image','Image','Image'],
+  ['mediatype.interactive_resource','Interactive Resource','Ressource interactive'],
+  ['mediatype.journal','Journal','Revue'],
+  ['mediatype.journalissue','Journal Issue','Numéro de revue'],
+  ['mediatype.kit','Kit','Ensemble multisupport'],
+  ['mediatype.lecture','Lecture','Conférence'],
+  ['mediatype.legal_document','Legal Document','Document légal'],
+  ['mediatype.letters','Letter','Lettres'],
+  ['mediatype.magazine','Magazine','Magazine'],
+  ['mediatype.magazinearticle','Magazine Article','Article de magazine'],
+  ['mediatype.manual','Manual','Manuel'],
+  ['mediatype.manuscript','Manuscript','Manuscrit'],
+  ['mediatype.map','Map','Carte'],
+  ['mediatype.market_research','Market Research','Etude de Marché'],
+  ['mediatype.microform','Microform','Microforme'],
+  ['mediatype.model','Model','Maquette'],
+  ['mediatype.multiplever','Multiple Versions','Plusieurs versions disponibles'],
+  ['mediatype.music','Music','Musique'],
+  ['mediatype.musicalcomposition','Musical Composition','Composition musicale'],
+  ['mediatype.musicalperformance','Musical Performance','Performance musicale'],
+  ['mediatype.newmedia','New Media','Nouveau média'],
+  ['mediatype.newsletterarticle','Newsletter Article','Articles de newsletter'],
+  ['mediatype.newspaper','Newspaper','Journal'],
+  ['mediatype.newspaper_article','Newspaper Article','Article de journal'],
+  ['mediatype.nonfiction','Non Fiction','Œuvre non romanesque'],
+  ['mediatype.other','Other','Autre'],
+  ['mediatype.other_creative_work','Other Creative Work','Autre œuvre créative'],
+  ['mediatype.other_learning_object','Other Learning Object','Autre objet d\'apprentissage'],
+  ['mediatype.outline','Outline','Plan'],
+  ['mediatype.painting','Painting','Peinture'],
+  ['mediatype.patents','Patent','Brevet'],
+  ['mediatype.podcast','Podcast','Podcast'],
+  ['mediatype.poetry','Poetry','Poésie'],
+  ['mediatype.preprint','Preprint','Pré-publication'],
+  ['mediatype.presentation','Presentation','Présentation'],
+  ['mediatype.questionbank','Question bank','Banque de questions'],
+  ['mediatype.questionnaire','Questionnaire','Questionnaire'],
+  ['mediatype.rare_book','Rare Book','Livre ancien'],
+  ['mediatype.realia','Realia','Realia'],
+  ['mediatype.reference_entry','Reference Entry','Article d\'encyclopédie'],
+  ['mediatype.reports','Report','Rapports'],
+  ['mediatype.research_dataset','Research Dataset','Données de recherche'],
+  ['mediatype.review','Review','Compte rendu d\'ouvrage'],
+  ['mediatype.score','Score','Partition'],
+  ['mediatype.script','Script','Script'],
+  ['mediatype.sculpture','Sculpture','Sculpture'],
+  ['mediatype.setdesign','Set Design','Décor'],
+  ['mediatype.software','Software','Logiciel'],
+  ['mediatype.standard','Standards','Standards'],
+  ['mediatype.statistical_data_set','Statistical Data Set','Ensemble de données statistiques'],
+  ['mediatype.studyguide','Study guide','Guide d\'étude'],
+  ['mediatype.syllabus','Syllabus','Plan de cours'],
+  ['mediatype.teaching_learning','Teaching and Learning','Enseignement et apprentissage'],
+  ['mediatype.technicaldocumentation','Technical Documentation','Documentation technique'],
+  ['mediatype.technical_report','Technical Report','Rapport technique'],
+  ['mediatype.text_resource','Text Resource','Ressource textuelle'],
+  ['mediatype.textbook','Textbook','Manuel scolaire'],
+  ['mediatype.theater','Theater','Théâtre'],
+  ['mediatype.thesis','Thesis','Thèse'],
+  ['mediatype.transcript','Transcript','Transcription'],
+  ['mediatype.translations','Translation','Traductions'],
+  ['mediatype.tutorial','Tutorial','Tutoriel'],
+  ['mediatype.video','Video','Vidéo'],
+  ['mediatype.virtualrealityenvironment','Virtual Reality Environment','Environnement de réalité virtuelle'],
+  ['mediatype.visual_material','Visual Material','Matériel visuel'],
+  ['mediatype.web_resource','Web Resources','Ressource web'],
+  ['mediatype.webinar','Webinar','Webinaire'],
+  ['mediatype.workbook','Workbook','Cahier d\'exercices'],
+  ['mediatype.workflow','Workflow','Workflow'],
+  ['mediatype.workingpaper','Working Paper','Papier de travail'],
+  ['mediatype.newspapers','Newspaper','Journal'],
+  ['mediatype.books','Book','Livre'],
+  ['mediatype.journals','Journal','Revue'],
+  ['mediatype.test_psy','Psychotechnical test','Test psychotechnique'],
+  ['mediatype.game','Game','Jeu'],
+  ['mediatype.comic','Comic','Bande dessinée'],
+];
+
+// Deduplicate by french label (keep first occurrence)
+const seen = new Set();
+const deduped = data.filter(([code, en, fr]) => {
+  const key = fr.toLowerCase();
+  if (seen.has(key)) return false;
+  seen.add(key);
+  return true;
+});
+
+// Sort alphabetically by french label
+deduped.sort((a, b) => a[2].localeCompare(b[2], 'fr'));
+
+const placeholder = `<div class="icon-placeholder">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#9B2456" stroke-width="1.5">
+    <rect x="4" y="2" width="16" height="20" rx="2"/>
+    <line x1="8" y1="8" x2="16" y2="8"/>
+    <line x1="8" y1="12" x2="16" y2="12"/>
+    <line x1="8" y1="16" x2="12" y2="16"/>
+  </svg>
+</div>`;
+
+const grid = document.getElementById('grid');
+
+deduped.forEach(([code, en, fr]) => {
+  const imgHtml = `<img src="${ASSETS}icon_${code.replace('mediatype.','')}.png" alt="${fr}" onerror="this.parentNode.innerHTML='${placeholder.replace(/"/g,"'")}'">`;
+
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.dataset.search = (fr + ' ' + en + ' ' + code).toLowerCase();
+  card.innerHTML = `
+    <div class="icon-wrap">${imgHtml}</div>
+    <div class="label-fr">${fr}</div>
+    <div class="label-en">${en}</div>
+    <div class="code-tag">${code.replace('mediatype.','')}</div>
+  `;
+  grid.appendChild(card);
+});
+
+updateCount();
+
+function filterCards() {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  document.querySelectorAll('.card').forEach(c => {
+    c.classList.toggle('hidden', q && !c.dataset.search.includes(q));
+  });
+  document.querySelector('.no-results')?.remove();
+  const visible = document.querySelectorAll('.card:not(.hidden)').length;
+  if (visible === 0) {
+    const msg = document.createElement('div');
+    msg.className = 'no-results';
+    msg.textContent = 'Aucun type de document trouvé.';
+    grid.appendChild(msg);
+  }
+  updateCount();
+}
+
+function updateCount() {
+  const n = document.querySelectorAll('.card:not(.hidden)').length;
+  document.getElementById('count-num').textContent = n;
+}
+</script>
+</body>
+</html>

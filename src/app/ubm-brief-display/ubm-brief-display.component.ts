@@ -23,12 +23,13 @@ export class UbmBriefDisplayComponent {
     
     recordMainDetails.displayLinesCache = new Proxy(originalCache, {
       get: (target, prop) => {
-        if (prop === 'get') {
-          return (key: any) => {
+if (prop === 'get') {
+  return (key: any) => {
+            console.log('Cache key:', JSON.stringify(key)); // log toutes les clés
             const result = target.get(key);
-            
+    
             // Si on accède à lds01 ET que le résultat est vide ou n'existe pas
-            if (key.items === "lds01" && (!result || result.length === 0)) {
+            if (typeof key === 'string' && key.includes('lds01') && (!result || result.length === 0)) {
               const pnxDisplay = recordMainDetails?.pnx?.display;
               
               // On définit le type string pour l'argument 'val'

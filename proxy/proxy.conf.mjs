@@ -73,6 +73,22 @@ const proxyRules = [
     logLevel: 'debug',
 
   }
+// {
+//     // Remplacez le bloc '**' par celui-ci
+//     context: [
+//       '/primaws/**',
+//       '/discovery/**',
+//       '/view/**' // Optionnel, selon vos besoins
+//     ],
+//     target: PROXY_TARGET,
+//     secure: false, // Passer à false souvent nécessaire en local pour éviter les soucis SSL
+//     changeOrigin: true,
+//     logLevel: 'debug',
+//     // Ajoutez ceci pour éviter que le proxy n'intercepte vos fichiers locaux s'ils ont le même nom
+//     onProxyReq: (proxyReq, req, res) => {
+//        console.log(`[Proxy API] : ${req.method} ${req.url}`);
+//     }
+//   }
 ];
 
 

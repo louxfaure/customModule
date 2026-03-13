@@ -10,18 +10,17 @@ import { AutoAssetSrcDirective } from './services/auto-asset-src.directive';
 import {SHELL_ROUTER} from "./injection-tokens";
 
 
-
 export const AppModule = ({providers, shellRouter}: {providers:any, shellRouter: Router}) => {
    @NgModule({
     declarations: [
       AppComponent,
-      AutoAssetSrcDirective
+      AutoAssetSrcDirective,
     ],
     exports: [AutoAssetSrcDirective],
     imports: [
       BrowserModule,
       CommonModule,
-      TranslateModule.forRoot({})
+      TranslateModule.forRoot({}),
     ],
     providers: [...providers, {provide: SHELL_ROUTER, useValue: shellRouter}],
     bootstrap: []

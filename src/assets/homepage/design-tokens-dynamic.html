@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="fr" class="custom-nde-theme">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Tokens M3 — Référence dynamique</title>
+<link rel="stylesheet" href="http://localhost:4201/nde/styles.041564dffb811f18.css">
+<link rel="stylesheet" href="http://localhost:4201/nde/nde-color-theme.ea312477a20fc30d.css">
+<link rel="stylesheet" href="http://localhost:4201/nde/nde-typography.42149504db692eb5.css">
+<link rel="stylesheet" href="http://localhost:4201/nde/custom/33PUDB_UBM-NDE/custom.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #fff8f8;
+    color: #1e1b1c;
+    font-family: 'Noto Sans Display', sans-serif;
+    font-size: 16px;
+    min-height: 100vh;
+    transition: background .3s, color .3s;
+  }
+
+  header {
+    background: #a3336d;
+    color: white;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  }
+  header h1 { font-size: 1.25rem; font-weight: 500; }
+  header p  { font-size: .8rem; opacity: .8; margin-top: .2rem; }
+
+  .header-actions { display: flex; gap: .75rem; align-items: center; }
+
+  .btn-sm {
+    padding: .4rem .9rem;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: .8rem;
+    font-weight: 500;
+    transition: opacity .2s;
+  }
+  .btn-sm:hover { opacity: .85; }
+  .btn-outline-white {
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255,255,255,.5);
+  }
+  .btn-white {
+    background: white;
+    color: #a3336d;
+  }
+
+  nav {
+    background: #faf1f3;
+    border-bottom: 1px solid #dac0c8;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    padding: 0 2rem;
+  }
+  nav button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: .875rem;
+    font-weight: 500;
+    color: #554249;
+    padding: .9rem 1.25rem;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: color .2s, border-color .2s;
+    letter-spacing: .03rem;
+  }
+  nav button:hover { color: #a3336d; }
+  nav button.active { color: #a3336d; border-bottom-color: #a3336d; }
+
+  main { padding: 2rem; max-width: 1200px; margin: 0 auto; }
+
+  .section { display: none; }
+  .section.active { display: block; }
+
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #a3336d;
+    margin-bottom: .4rem;
+  }
+  .section-desc {
+    font-size: .9rem;
+    color: #554249;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  .stat-pill {
+    background: #f5ebed;
+    border: 1px solid #dac0c8;
+    border-radius: 20px;
+    padding: .35rem .9rem;
+    font-size: .8rem;
+    color: #554249;
+  }
+  .stat-pill strong { color: #a3336d; }
+
+  /* ── SEARCH ── */
+  .search-bar {
+    display: flex;
+    gap: .75rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+  }
+  .search-bar input {
+    flex: 1;
+    padding: .6rem 1rem;
+    border: 1px solid #dac0c8;
+    border-radius: 8px;
+    font-size: .9rem;
+    background: white;
+    color: #1e1b1c;
+    outline: none;
+    transition: border-color .2s;
+  }
+  .search-bar input:focus { border-color: #a3336d; }
+
+  /* ── COLOR GRID ── */
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: .75rem;
+  }
+  .group-header {
+    grid-column: 1 / -1;
+    font-size: .8rem;
+    font-weight: 600;
+    color: #554249;
+    text-transform: uppercase;
+    letter-spacing: .08rem;
+    padding: .75rem 0 .4rem;
+    border-bottom: 1px solid #dac0c8;
+    margin-top: .5rem;
+  }
+  .color-chip {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #dac0c8;
+    cursor: pointer;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .color-chip:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.12); }
+  .color-swatch { height: 72px; position: relative; }
+  .color-swatch .copy-hint {
+    position: absolute; bottom: 6px; right: 8px;
+    font-size: 10px; opacity: 0; transition: opacity .2s;
+    background: rgba(0,0,0,.35); color: white;
+    padding: 2px 6px; border-radius: 4px;
+  }
+  .color-chip:hover .copy-hint { opacity: 1; }
+  .color-info { background: white; padding: .5rem .7rem; }
+  .color-name { font-size: .78rem; font-weight: 600; color: #1e1b1c; display: block; }
+  .color-token { font-family: 'Courier New', monospace; font-size: .7rem; color: #a3336d; display: block; }
+  .color-hex { font-family: 'Courier New', monospace; font-size: .7rem; color: #554249; }
+
+  /* ── TYPO ── */
+  .typo-list { display: flex; flex-direction: column; gap: .5rem; }
+  .typo-row {
+    background: white;
+    border: 1px solid #dac0c8;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    display: grid;
+    grid-template-columns: 180px 1fr 60px;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .typo-row:hover { background: #f5ebed; }
+  .typo-token { font-family: 'Courier New', monospace; font-size: .72rem; color: #a3336d; background: #ffd8e6; padding: .15rem .4rem; border-radius: 4px; }
+  .typo-specs { font-size: .72rem; color: #554249; margin-top: .2rem; }
+  .typo-preview { color: #1e1b1c; }
+  .size-badge { background: #efe6e8; color: #554249; font-size: .72rem; padding: .2rem .5rem; border-radius: 12px; text-align: center; }
+
+  /* ── RAW TABLE ── */
+  .raw-table-wrap { overflow-x: auto; }
+  .raw-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .85rem;
+  }
+  .raw-table th {
+    background: #f5ebed;
+    color: #554249;
+    font-weight: 600;
+    padding: .6rem 1rem;
+    text-align: left;
+    border-bottom: 2px solid #dac0c8;
+    position: sticky;
+    top: 0;
+  }
+  .raw-table td {
+    padding: .5rem 1rem;
+    border-bottom: 1px solid #efe6e8;
+    vertical-align: middle;
+  }
+  .raw-table tr:hover td { background: #faf1f3; }
+  .raw-table .token-col { font-family: 'Courier New', monospace; font-size: .78rem; color: #a3336d; cursor: pointer; }
+  .raw-table .token-col:hover { text-decoration: underline; }
+  .raw-table .value-col { font-family: 'Courier New', monospace; font-size: .78rem; color: #554249; max-width: 300px; word-break: break-all; }
+  .raw-table .type-badge { display: inline-block; padding: .1rem .5rem; border-radius: 10px; font-size: .7rem; font-weight: 600; }
+
+  /* ── TOAST ── */
+  #toast {
+    position: fixed; bottom: 1.5rem; left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: #342f31; color: #f8eef0;
+    padding: .65rem 1.4rem; border-radius: 8px;
+    font-size: .85rem; z-index: 9999;
+    transition: transform .3s ease;
+    pointer-events: none;
+  }
+  #toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ── LOADING ── */
+  #loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+    color: #554249;
+    font-size: .9rem;
+    gap: .75rem;
+  }
+  .spinner {
+    width: 20px; height: 20px;
+    border: 2px solid #dac0c8;
+    border-top-color: #a3336d;
+    border-radius: 50%;
+    animation: spin .7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: #554249;
+    font-size: .9rem;
+  }
+  .empty-state div { font-size: 2rem; margin-bottom: .5rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Design Tokens M3 — Référence dynamique</h1>
+    <p id="subtitle">Lecture des variables CSS en cours…</p>
+  </div>
+  <div class="header-actions">
+    <button class="btn-sm btn-outline-white" onclick="exportJSON()">⬇ JSON</button>
+    <button class="btn-sm btn-outline-white" onclick="exportCSS()">⬇ CSS</button>
+    <button class="btn-sm btn-white" onclick="refreshTokens()">↻ Rafraîchir</button>
+  </div>
+</header>
+
+<nav>
+  <button class="active" onclick="showSection('colors', this)">🎨 Couleurs</button>
+  <button onclick="showSection('typography', this)">✍️ Typographie</button>
+  <button onclick="showSection('raw', this)">📋 Toutes les variables</button>
+</nav>
+
+<main>
+  <div id="loading"><div class="spinner"></div> Lecture des variables CSS…</div>
+
+  <div id="colors" class="section"></div>
+  <div id="typography" class="section"></div>
+  <div id="raw" class="section"></div>
+</main>
+
+<div id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════════
+//  LECTURE DYNAMIQUE DES VARIABLES CSS
+// ══════════════════════════════════════════════
+
+let ALL_TOKENS = {};
+
+function readAllSysTokens() {
+  const computed = getComputedStyle(document.documentElement);
+  const tokens = {};
+
+  // Parcourt toutes les règles CSS de toutes les feuilles de style
+  const allSheets = [...document.styleSheets];
+
+  // Méthode 1 : depuis les styleSheets (variables déclarées dans :root)
+  for (const sheet of allSheets) {
+    try {
+      const rules = [...sheet.cssRules];
+      for (const rule of rules) {
+        const text = rule.cssText || '';
+        const matches = text.matchAll(/--(sys-[\w-]+)\s*:/g);
+        for (const m of matches) {
+          const name = '--' + m[1];
+          if (!tokens[name]) {
+            const val = computed.getPropertyValue(name).trim();
+            if (val) tokens[name] = val;
+          }
+        }
+      }
+    } catch (e) { /* cross-origin ignoré */ }
+  }
+
+  // Méthode 2 : fallback — scan du texte de tous les styles de la page
+  // utile si les variables viennent d'une feuille externe (Angular)
+  const allStyleEls = [...document.querySelectorAll('style, link[rel="stylesheet"]')];
+  // On récupère aussi via getPropertyValue sur des noms connus
+  const knownPrefixes = [
+    'background','body','display','error','headline','inverse',
+    'label','neutral','on','outline','primary','scrim','secondary',
+    'shadow','surface','tertiary','title'
+  ];
+
+  // Méthode 3 : brute-force sur noms connus depuis la liste fournie
+  // (garantit de tout capturer même si les sheets sont cross-origin)
+  const knownTokens = [
+    '--sys-background','--sys-body-large','--sys-body-large-font',
+    '--sys-body-large-line-height','--sys-body-large-size','--sys-body-large-tracking',
+    '--sys-body-large-weight','--sys-body-medium','--sys-body-medium-font',
+    '--sys-body-medium-line-height','--sys-body-medium-size','--sys-body-medium-tracking',
+    '--sys-body-medium-weight','--sys-body-small','--sys-body-small-font',
+    '--sys-body-small-line-height','--sys-body-small-size','--sys-body-small-tracking',
+    '--sys-body-small-weight','--sys-display-large','--sys-display-large-font',
+    '--sys-display-large-line-height','--sys-display-large-size','--sys-display-large-tracking',
+    '--sys-display-large-weight','--sys-display-medium','--sys-display-medium-font',
+    '--sys-display-medium-line-height','--sys-display-medium-size','--sys-display-medium-tracking',
+    '--sys-display-medium-weight','--sys-display-small','--sys-display-small-font',
+    '--sys-display-small-line-height','--sys-display-small-size','--sys-display-small-tracking',
+    '--sys-display-small-weight','--sys-error','--sys-error-container',
+    '--sys-headline-large','--sys-headline-large-font','--sys-headline-large-line-height',
+    '--sys-headline-large-size','--sys-headline-large-tracking','--sys-headline-large-weight',
+    '--sys-headline-medium','--sys-headline-medium-font','--sys-headline-medium-line-height',
+    '--sys-headline-medium-size','--sys-headline-medium-tracking','--sys-headline-medium-weight',
+    '--sys-headline-small','--sys-headline-small-font','--sys-headline-small-line-height',
+    '--sys-headline-small-size','--sys-headline-small-tracking','--sys-headline-small-weight',
+    '--sys-inverse-on-surface','--sys-inverse-primary','--sys-inverse-surface',
+    '--sys-label-large','--sys-label-large-font','--sys-label-large-line-height',
+    '--sys-label-large-size','--sys-label-large-tracking','--sys-label-large-weight',
+    '--sys-label-large-weight-prominent','--sys-label-medium','--sys-label-medium-font',
+    '--sys-label-medium-line-height','--sys-label-medium-size','--sys-label-medium-tracking',
+    '--sys-label-medium-weight','--sys-label-medium-weight-prominent','--sys-label-small',
+    '--sys-label-small-font','--sys-label-small-line-height','--sys-label-small-size',
+    '--sys-label-small-tracking','--sys-label-small-weight','--sys-neutral-variant20',
+    '--sys-neutral10','--sys-on-background','--sys-on-error','--sys-on-error-container',
+    '--sys-on-primary','--sys-on-primary-container','--sys-on-primary-fixed',
+    '--sys-on-primary-fixed-variant','--sys-on-secondary','--sys-on-secondary-container',
+    '--sys-on-secondary-fixed','--sys-on-secondary-fixed-variant','--sys-on-surface',
+    '--sys-on-surface-variant','--sys-on-tertiary','--sys-on-tertiary-container',
+    '--sys-on-tertiary-fixed','--sys-on-tertiary-fixed-variant','--sys-outline',
+    '--sys-outline-variant','--sys-primary','--sys-primary-container','--sys-primary-fixed',
+    '--sys-primary-fixed-dim','--sys-scrim','--sys-secondary','--sys-secondary-container',
+    '--sys-secondary-fixed','--sys-secondary-fixed-dim','--sys-shadow','--sys-surface',
+    '--sys-surface-bright','--sys-surface-container','--sys-surface-container-high',
+    '--sys-surface-container-highest','--sys-surface-container-low',
+    '--sys-surface-container-lowest','--sys-surface-dim','--sys-surface-tint',
+    '--sys-surface-variant','--sys-tertiary','--sys-tertiary-container','--sys-tertiary-fixed',
+    '--sys-tertiary-fixed-dim','--sys-title-large','--sys-title-large-font',
+    '--sys-title-large-line-height','--sys-title-large-size','--sys-title-large-tracking',
+    '--sys-title-large-weight','--sys-title-medium','--sys-title-medium-font',
+    '--sys-title-medium-line-height','--sys-title-medium-size','--sys-title-medium-tracking',
+    '--sys-title-medium-weight','--sys-title-small','--sys-title-small-font',
+    '--sys-title-small-line-height','--sys-title-small-size','--sys-title-small-tracking',
+    '--sys-title-small-weight'
+  ];
+
+  for (const name of knownTokens) {
+    if (!tokens[name]) {
+      const val = computed.getPropertyValue(name).trim();
+      if (val) tokens[name] = val;
+    }
+  }
+
+  return tokens;
+}
+
+// ── Détecte le type d'un token ──
+function tokenType(name, value) {
+  if (name.includes('-size')) return 'size';
+  if (name.includes('-weight')) return 'weight';
+  if (name.includes('-tracking')) return 'tracking';
+  if (name.includes('-line-height')) return 'line-height';
+  if (name.includes('-font')) return 'font-family';
+  if (/^#[0-9a-fA-F]{3,8}$/.test(value)) return 'color';
+  if (value.includes('rem') && value.includes('/')) return 'font-shorthand';
+  return 'other';
+}
+
+// ── Vérifie si une valeur est une couleur ──
+function isColor(value) {
+  return /^#[0-9a-fA-F]{3,8}$/.test(value.trim());
+}
+
+// ── Luminosité d'une couleur hex ──
+function getLuminance(hex) {
+  hex = hex.replace('#', '');
+  if (hex.length === 3) hex = hex.split('').map(c => c+c).join('');
+  const r = parseInt(hex.slice(0,2),16);
+  const g = parseInt(hex.slice(2,4),16);
+  const b = parseInt(hex.slice(4,6),16);
+  return (0.299*r + 0.587*g + 0.114*b) / 255;
+}
+
+// ══════════════════════════════════════════════
+//  RENDU — COULEURS
+// ══════════════════════════════════════════════
+
+const COLOR_GROUPS = [
+  { label: 'Primaire',   filter: k => k.includes('primary') && !k.includes('on-') && !k.includes('inverse') },
+  { label: 'Sur Primaire (on-primary)', filter: k => k.startsWith('--sys-on-primary') },
+  { label: 'Secondaire', filter: k => k.includes('secondary') && !k.includes('on-') },
+  { label: 'Sur Secondaire', filter: k => k.startsWith('--sys-on-secondary') },
+  { label: 'Tertiaire',  filter: k => k.includes('tertiary') && !k.includes('on-') },
+  { label: 'Sur Tertiaire', filter: k => k.startsWith('--sys-on-tertiary') },
+  { label: 'Erreur',     filter: k => k.includes('error') },
+  { label: 'Surface',    filter: k => k.includes('surface') && !k.includes('on-') && !k.includes('inverse') },
+  { label: 'Sur Surface & Fond', filter: k => (k.startsWith('--sys-on-surface') || k === '--sys-on-background' || k === '--sys-background') },
+  { label: 'Contours',   filter: k => k.includes('outline') },
+  { label: 'Inverse',    filter: k => k.includes('inverse') },
+  { label: 'Autres',     filter: k => ['--sys-scrim','--sys-shadow','--sys-surface-tint','--sys-neutral10','--sys-neutral-variant20'].includes(k) },
+];
+
+function renderColors(tokens) {
+  const colorTokens = Object.entries(tokens).filter(([k,v]) => isColor(v));
+  const el = document.getElementById('colors');
+
+  let html = `
+    <h2 class="section-title">Couleurs</h2>
+    <p class="section-desc">Variables lues dynamiquement depuis le document. Cliquez sur une couleur pour copier <code>var(--sys-xxx)</code>.</p>
+    <div class="stats-bar">
+      <span class="stat-pill"><strong>${colorTokens.length}</strong> variables couleur trouvées</span>
+    </div>
+    <div class="search-bar">
+      <input type="text" id="color-search" placeholder="Filtrer les couleurs… (ex: primary, surface)" oninput="filterColors(this.value)">
+    </div>
+    <div class="color-grid" id="color-grid">
+  `;
+
+  const rendered = new Set();
+
+  for (const group of COLOR_GROUPS) {
+    const items = colorTokens.filter(([k]) => group.filter(k) && !rendered.has(k));
+    if (!items.length) continue;
+
+    html += `<div class="group-header">${group.label}</div>`;
+    for (const [name, value] of items) {
+      rendered.add(name);
+      const lum = getLuminance(value);
+      const hintColor = lum > 0.5 ? '#1e1b1c' : 'white';
+      html += `
+        <div class="color-chip" onclick="copyToken('${name}')" data-name="${name}" data-value="${value}">
+          <div class="color-swatch" style="background:${value}">
+            <span class="copy-hint" style="color:${hintColor}">📋 Copier</span>
+          </div>
+          <div class="color-info">
+            <span class="color-name">${name.replace('--sys-','')}</span>
+            <span class="color-token">${name}</span>
+            <span class="color-hex">${value}</span>
+          </div>
+        </div>`;
+    }
+  }
+
+  // Couleurs non classées
+  const unrendered = colorTokens.filter(([k]) => !rendered.has(k));
+  if (unrendered.length) {
+    html += `<div class="group-header">Autres couleurs</div>`;
+    for (const [name, value] of unrendered) {
+      const lum = getLuminance(value);
+      const hintColor = lum > 0.5 ? '#1e1b1c' : 'white';
+      html += `
+        <div class="color-chip" onclick="copyToken('${name}')" data-name="${name}" data-value="${value}">
+          <div class="color-swatch" style="background:${value}">
+            <span class="copy-hint" style="color:${hintColor}">📋 Copier</span>
+          </div>
+          <div class="color-info">
+            <span class="color-name">${name.replace('--sys-','')}</span>
+            <span class="color-token">${name}</span>
+            <span class="color-hex">${value}</span>
+          </div>
+        </div>`;
+    }
+  }
+
+  html += `</div>`;
+  el.innerHTML = html;
+}
+
+function filterColors(query) {
+  const chips = document.querySelectorAll('#color-grid .color-chip');
+  const headers = document.querySelectorAll('#color-grid .group-header');
+  const q = query.toLowerCase();
+  chips.forEach(chip => {
+    const match = chip.dataset.name.includes(q) || chip.dataset.value.includes(q);
+    chip.style.display = match ? '' : 'none';
+  });
+}
+
+// ══════════════════════════════════════════════
+//  RENDU — TYPOGRAPHIE
+// ══════════════════════════════════════════════
+
+const TYPO_LEVELS = [
+  { key: 'display-large',   label: 'Display Large',   group: 'Display' },
+  { key: 'display-medium',  label: 'Display Medium',  group: 'Display' },
+  { key: 'display-small',   label: 'Display Small',   group: 'Display' },
+  { key: 'headline-large',  label: 'Headline Large',  group: 'Headline' },
+  { key: 'headline-medium', label: 'Headline Medium', group: 'Headline' },
+  { key: 'headline-small',  label: 'Headline Small',  group: 'Headline' },
+  { key: 'title-large',     label: 'Title Large',     group: 'Title' },
+  { key: 'title-medium',    label: 'Title Medium',    group: 'Title' },
+  { key: 'title-small',     label: 'Title Small',     group: 'Title' },
+  { key: 'body-large',      label: 'Body Large',      group: 'Body' },
+  { key: 'body-medium',     label: 'Body Medium',     group: 'Body' },
+  { key: 'body-small',      label: 'Body Small',      group: 'Body' },
+  { key: 'label-large',     label: 'Label Large',     group: 'Label' },
+  { key: 'label-medium',    label: 'Label Medium',    group: 'Label' },
+  { key: 'label-small',     label: 'Label Small',     group: 'Label' },
+];
+
+function renderTypography(tokens) {
+  const el = document.getElementById('typography');
+  let html = `
+    <h2 class="section-title">Typographie</h2>
+    <p class="section-desc">Rendu en live des niveaux typographiques M3.</p>
+    <div class="typo-list">
+  `;
+
+  let lastGroup = '';
+  for (const level of TYPO_LEVELS) {
+    const fontVar  = `--sys-${level.key}`;
+    const sizeVar  = `--sys-${level.key}-size`;
+    const weightVar= `--sys-${level.key}-weight`;
+    const trackVar = `--sys-${level.key}-tracking`;
+
+    const fontVal   = tokens[fontVar]   || '';
+    const sizeVal   = tokens[sizeVar]   || '?';
+    const weightVal = tokens[weightVar] || '?';
+    const trackVal  = tokens[trackVar]  || '0';
+
+    if (!fontVal) continue;
+
+    if (level.group !== lastGroup) {
+      html += `<div style="font-size:.75rem;font-weight:700;color:#877179;text-transform:uppercase;letter-spacing:.08rem;padding:.75rem 0 .25rem;border-top:1px solid #dac0c8;margin-top:.5rem">${level.group}</div>`;
+      lastGroup = level.group;
+    }
+
+    html += `
+      <div class="typo-row" onclick="copyToken('${fontVar}')">
+        <div>
+          <div><span class="typo-token">${fontVar}</span></div>
+          <div class="typo-specs">${weightVal} · ${sizeVal} · tracking ${trackVal}</div>
+        </div>
+        <div class="typo-preview" style="font:var(${fontVar});letter-spacing:var(${trackVar})">${level.label}</div>
+        <span class="size-badge">${sizeVal}</span>
+      </div>`;
+  }
+
+  html += `</div>`;
+  el.innerHTML = html;
+}
+
+// ══════════════════════════════════════════════
+//  RENDU — TABLE BRUTE
+// ══════════════════════════════════════════════
+
+const TYPE_COLORS = {
+  'color':         { bg: '#ffd8e6', color: '#3d0023' },
+  'font-shorthand':{ bg: '#ffdcc2', color: '#2e1500' },
+  'size':          { bg: '#ffd9e0', color: '#3b0619' },
+  'weight':        { bg: '#f5ebed', color: '#554249' },
+  'tracking':      { bg: '#efe6e8', color: '#554249' },
+  'line-height':   { bg: '#e9e0e2', color: '#554249' },
+  'font-family':   { bg: '#dac0c8', color: '#1e1b1c' },
+  'other':         { bg: '#f8eef0', color: '#554249' },
+};
+
+function renderRaw(tokens) {
+  const el = document.getElementById('raw');
+  const entries = Object.entries(tokens).sort(([a],[b]) => a.localeCompare(b));
+
+  let html = `
+    <h2 class="section-title">Toutes les variables</h2>
+    <p class="section-desc">Liste complète des tokens <code>--sys-*</code> détectés. Cliquez sur un token pour copier.</p>
+    <div class="stats-bar">
+      <span class="stat-pill">Total : <strong>${entries.length}</strong> variables</span>
+      <span class="stat-pill">Couleurs : <strong>${entries.filter(([k,v])=>isColor(v)).length}</strong></span>
+      <span class="stat-pill">Typographie : <strong>${entries.filter(([k])=>k.includes('-size')||k.includes('-weight')||k.includes('-tracking')||k.includes('-line-height')).length}</strong></span>
+    </div>
+    <div class="search-bar">
+      <input type="text" id="raw-search" placeholder="Filtrer… (ex: primary, size, tracking)" oninput="filterRaw(this.value)">
+    </div>
+    <div class="raw-table-wrap">
+    <table class="raw-table" id="raw-table">
+      <thead><tr>
+        <th>Variable</th>
+        <th>Valeur</th>
+        <th>Type</th>
+        <th>Aperçu</th>
+      </tr></thead>
+      <tbody>
+  `;
+
+  for (const [name, value] of entries) {
+    const type = tokenType(name, value);
+    const tc = TYPE_COLORS[type] || TYPE_COLORS.other;
+    const typeBadge = `<span class="type-badge" style="background:${tc.bg};color:${tc.color}">${type}</span>`;
+
+    let preview = '';
+    if (type === 'color') {
+      const lum = getLuminance(value);
+      preview = `<div style="width:32px;height:24px;background:${value};border-radius:4px;border:1px solid #dac0c8;display:inline-block" title="${value}"></div>`;
+    } else if (type === 'font-shorthand') {
+      preview = `<span style="font:${value};font-size:13px;color:#1e1b1c">Abc</span>`;
+    } else if (type === 'size') {
+      preview = `<span style="font-size:${value === '?' ? 'inherit' : value};line-height:1;color:#1e1b1c">Aa</span>`;
+    }
+
+    html += `
+      <tr data-name="${name}" data-value="${value}">
+        <td class="token-col" onclick="copyToken('${name}')">${name}</td>
+        <td class="value-col">${value}</td>
+        <td>${typeBadge}</td>
+        <td>${preview}</td>
+      </tr>`;
+  }
+
+  html += `</tbody></table></div>`;
+  el.innerHTML = html;
+}
+
+function filterRaw(query) {
+  const rows = document.querySelectorAll('#raw-table tbody tr');
+  const q = query.toLowerCase();
+  rows.forEach(row => {
+    const match = row.dataset.name.includes(q) || row.dataset.value.toLowerCase().includes(q);
+    row.style.display = match ? '' : 'none';
+  });
+}
+
+// ══════════════════════════════════════════════
+//  ACTIONS
+// ══════════════════════════════════════════════
+
+function copyToken(name) {
+  const text = `var(${name})`;
+  navigator.clipboard.writeText(text).catch(() => {});
+  showToast(`📋 ${text} copié !`);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+
+function exportJSON() {
+  const blob = new Blob([JSON.stringify(ALL_TOKENS, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'design-tokens.json';
+  a.click();
+  showToast('⬇ JSON exporté');
+}
+
+function exportCSS() {
+  const lines = Object.entries(ALL_TOKENS).map(([k,v]) => `  ${k}: ${v};`).join('\n');
+  const css = `:root {\n${lines}\n}`;
+  const blob = new Blob([css], { type: 'text/css' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'design-tokens.css';
+  a.click();
+  showToast('⬇ CSS exporté');
+}
+
+function refreshTokens() {
+  document.getElementById('loading').style.display = 'flex';
+  document.querySelectorAll('.section').forEach(s => {
+    s.classList.remove('active');
+    s.innerHTML = '';
+  });
+  setTimeout(init, 100);
+}
+
+// ══════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════
+
+function init() {
+  ALL_TOKENS = readAllSysTokens();
+  const count = Object.keys(ALL_TOKENS).length;
+
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('subtitle').textContent =
+    `${count} variables trouvées · ${new Date().toLocaleTimeString()}`;
+
+  renderColors(ALL_TOKENS);
+  renderTypography(ALL_TOKENS);
+  renderRaw(ALL_TOKENS);
+
+  // Affiche la section active
+  document.getElementById('colors').classList.add('active');
+  document.querySelector('nav button').classList.add('active');
+}
+
+// Lance au chargement
+window.addEventListener('load', () => setTimeout(init, 50));
+</script>
+</body>
+</html>
