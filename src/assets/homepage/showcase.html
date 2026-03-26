@@ -239,48 +239,10 @@
 <footer>Types de documents — tous droits réservés</footer>
 
 <script>
-const ASSETS = '/assets/images/';
-
-// Map code -> icon filename (existing images)
-const iconMap = {
-  'mediatype.article':             'icon_article.png',
-  'mediatype.audio':               'icon_audio.png',
-  'mediatype.book':                'icon_book.png',
-  'mediatype.books':               'icon_book.png',
-  'mediatype.book_chapter':        'icon_chapter.png',
-  'mediatype.other':               'icon_other.png',
-  'mediatype.comic':               'icon_comic.png',
-  'mediatype.conferencepaper':     'icon_conference_act.png',
-  'mediatype.conference_proceeding':'icon_conference_act.png',
-  'mediatype.database':            'icon_database.png',
-  'mediatype.datasets':            'icon_dataset.png',
-  'mediatype.research_dataset':    'icon_dataset.png',
-  'mediatype.statistical_data_set':'icon_dataset.png',
-  'mediatype.audiovisual':         'icon_dvd.png',
-  'mediatype.film':                'icon_dvd.png',
-  'mediatype.image':               'icon_image.png',
-  'mediatype.visual_material':     'icon_image.png',
-  'mediatype.painting':            'icon_image.png',
-  'mediatype.journal':             'icon_journal.png',
-  'mediatype.journals':            'icon_journal.png',
-  'mediatype.map':                 'icon_map.png',
-  'mediatype.newspaper':           'icon_newspaper.png',
-  'mediatype.newspapers':          'icon_newspaper.png',
-  'mediatype.newspaper_article':   'icon_newspaper_article.png',
-  'mediatype.patents':             'icon_patent.png',
-  'mediatype.rare_book':           'icon_rarebook.png',
-  'mediatype.video':               'icon_video.png',
-  'mediatype.web_resource':        'icon_website.png',
-  'mediatype.dissertations':       'icon_academic_work.png',
-  'mediatype.dissertation':        'icon_academic_work.png',
-  'mediatype.thesis':              'icon_academic_work.png',
-  'mediatype.encyclopediaentry':   'icon_article_encyclopedia.png',
-  'mediatype.reference_entry':     'icon_article_encyclopedia.png',
-  'mediatype.reference_entrys':    'icon_article_encyclopedia.png',
-  'mediatype.bookReview':          'icon_book_review.png',
-  'mediatype.review':              'icon_book_review.png',
-};
-
+const IS_DEV = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+const ASSETS = IS_DEV
+  ? '/assets/images/'
+  : '/nde/custom/33PUDB_UBM-NDE/assets/images/';
 const data = [
   ['mediatype.abstracts','Abstract','Extraits'],
   ['mediatype.acceptedmanuscript','Accepted Manuscript','Manuscrit accepté'],

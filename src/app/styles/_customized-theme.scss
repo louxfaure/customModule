@@ -1,21 +1,40 @@
 @use '@angular/material' as mat;
 @use 'm3-theme' as m3-theme;
 
-//uncomment the following lines in order to apply your own theme
+.custom-nde-theme {
+  @include mat.all-component-colors(m3-theme.$light-theme);
+  @include mat.system-level-colors(m3-theme.$light-theme);
 
-.custom-nde-theme{
- @include mat.all-component-colors(m3-theme.$light-theme);
- @include mat.system-level-colors(m3-theme.$light-theme);
+  // Overrides après les includes — écrase ce qu'ils ont généré
+  --sys-secondary: #1a3a8f;
+  --sys-secondary-container: #d8e2ff;
+  --sys-secondary-fixed: #d8e2ff;
+  --sys-secondary-fixed-dim: #aec6ff;
+  --sys-on-secondary: #ffffff;
+  --sys-on-secondary-container: #00174a;
+  --sys-on-secondary-fixed: #00174a;
+  --sys-on-secondary-fixed-variant: #1a3a8f;
+  --sys-on-surface: #1a1b1f;
+  --sys-on-surface-variant: #46474e;
+  --sys-surface: #f8f9ff;
+  --sys-surface-bright: #f8f9ff;
+  --sys-surface-container: #ebebf4;
+  --sys-surface-container-high: #e5e5ef;
+  --sys-surface-container-highest: #dfdfe9;
+  --sys-surface-container-low: #f1f1fa;
+  --sys-surface-container-lowest: #ffffff;
+  --sys-surface-dim: #d8d8e2;
+  --sys-surface-tint: #1a3a8f;
+  --ubm-bg-color: #F5F5F7;
+  --sys-background: #FFFFFF;
 }
 
-
-html {
-  --sys-body-large-size:1.25rem;
+// Les typos restent sur html car elles ne sont pas dans l'include
+html, :root, body {
+  --sys-body-large-size: 1.18rem;
   --sys-body-large-line-height: 1.6rem;
-  --sys-body-large-weight:      400;
-  --sys-body-large-tracking:    .031rem;
-  --sys-body-large: 400 1.25rem / 1.6rem Noto Sans Display, sans-serif;
-  --sys-body-medium-size: 1rem;
+  --sys-body-large-weight: 400;
+  --sys-body-large-tracking: .031rem;
+  --sys-body-medium-size: 1.1rem;
   --sys-body-medium-line-height: 1.6rem;
-
 }

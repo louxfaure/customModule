@@ -1,0 +1,55 @@
+<div class="ubm-holdings-list" *ngIf="physicalAvailability === 'no_inventory'">
+  <button class="ubm-holding-row ubm-holding--external" (click)="onHoldingClick($event)">
+    
+    <div class="ubm-status-indicator status--external"></div>
+
+    <div class="ubm-holding-body">
+      <div class="ubm-holding-header">
+        <span class="ubm-holding-library">{{ 'delivery.code.no_inventory' | translate }}</span>
+        <span class="ubm-holding-status-badge">Réseau</span>
+      </div>
+      
+      <div class="ubm-holding-footer">
+        <span class="ubm-holding-sublocation">Consulter les modalités d'accès ou de prêt</span>
+      </div>
+    </div>
+
+    <span class="ubm-holding-external-icon">
+      <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
+        <path d="Selected icon path for network/share" fill="currentColor"/>
+      </svg>
+    </span>
+  </button>
+</div>
+
+
+<div class="ubm-holdings-list" *ngIf="holdings.length > 0">
+  <button
+    *ngFor="let holding of holdings"
+    class="ubm-holding-row"
+    [ngClass]="getConfig(holding).cssClass"
+    (click)="onHoldingClick($event)"
+  >
+    <div class="ubm-status-indicator" [ngClass]="'status--' + holding.availabilityStatus"></div>
+
+    <div class="ubm-holding-body">
+      <div class="ubm-holding-header">
+        <span class="ubm-holding-library">{{ holding.mainLocation }}</span>
+        <span class="ubm-holding-status-badge">{{ getConfig(holding).label | translate }}</span>
+      </div>
+
+      <div class="ubm-holding-footer">
+        <span class="ubm-holding-sublocation" *ngIf="holding.subLocation">
+          {{ holding.subLocation }}
+        </span>
+        <span class="ubm-holding-callnumber" *ngIf="holding.callNumber">
+          {{ holding.callNumber }}
+        </span>
+      </div>
+    </div>
+
+    <a *ngIf="holding.stackMapUrl" class="ubm-holding-map-link" [href]="holding.stackMapUrl" target="_blank" (click)="onMapClick($event)">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2.5" fill="white"/></svg>
+    </a>
+  </button>
+</div>

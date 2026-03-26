@@ -1,36 +1,354 @@
+/* Couleur d'arrière plan générale */
+body.mat-app-background {
+  background-color: var(--ubm-bg-color);
+}
+
+
+
 
 
 /*#################
 # Page d'accueil  #
 ###################*/
 
+/* Désactive l'overlay sur l'image du bandeau de page d'accueil */
+.custom-search-bar-container .background-overlay {
+  display: none;
+}
+
+/*Empêche le zoom de l'image*/
+.top-bar-background-image {
+  background-size: contain !important;
+  background-repeat: repeat-x !important; /* Répète l'image horizontalement pour combler le vide */
+  border-bottom: 1px solid rgba(138, 21, 56, 0.2); /* Bordeaux à 20% d'opacité */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
 /* Message d'accueil */
 div.custom-search-bar-container h2 {
-  text-shadow:0 0 15px #000;
-  padding-bottom:.5em
+  text-align: center;
+  color: var(--sys-on-primary-container) !important;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  /* padding-bottom:.5em */
+}
+
+
+/* Barre de recherche */
+
+/* 1. Aligner le conteneur parent */
+.search_box_container {
+  display: flex !important;
+  align-items: stretch !important; /* Force tous les enfants directs à la même hauteur */
+  height: 3.6rem; 
+}
+
+/* 2. Ajuster l'input et le premier bouton (dropdown) */
+#main-search-bar, 
+#contain-search-dropdown button {
+  height: 100% !important;
+  line-height: 3.6rem !important;
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+}
+
+/* On stabilise le conteneur et on force la couleur du SVG */
+.search-dropdown-container-button-icon {
+  display: inline-flex !important;
+  width: 24px !important;
+  height: 24px !important;
+  vertical-align: middle;
+}
+
+.search-dropdown-container-button-icon svg {
+  width: 100% !important;
+  height: 100% !important;
+  fill: var(--sys-primary) !important
+}
+
+.search-dropdown-container-button-icon svg path {
+  fill: inherit !important;
+}
+/* 3. Aligner verticalement les deux derniers boutons */
+nde-search-bar-presenter .flex-row.ng-star-inserted {
+  display: flex !important;
+  align-items: center !important;
+} 
+
+/* 4. Ajuster les boutons de recherche avancée / question */
+.advanced-search-btn-home-page {
+  height: 2.8rem !important; /* Légèrement plus petits pour l'esthétique, ou 100% pour la même taille */
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.advanced-search-button {
+  background-color: var(--sys-primary) !important;
+  color: var(--sys-on-primary) !important;
+  border-radius: 2.5rem !important;
+  border: 1.5px solid transparent !important;
+  padding: 0 20px !important;
+  height: 36px !important;
+  text-decoration: none !important;
+
+  transition:
+    background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+
+  .mat-icon svg path,
+  .mat-icon svg {
+    /* fill: var(--sys-on-secondary) !important; */
+    stroke: var(--sys-on-primary) !important;
+    transition: fill 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  span {
+    color: var(--sys-on-primary) !important;
+    text-decoration: none !important;
+    transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &:hover {
+    background-color: var(--sys-primary-container) !important;
+    color: var(--sys-on-primary-container) !important;
+    border-color: var(--sys-primary-container) !important;
+    box-shadow:
+      0 2px 8px rgba(138, 21, 56, 0.2),
+      0 0 0 3px rgba(138, 21, 56, 0.08) !important;
+    transform: translateY(-1px) !important;
+    text-decoration: none !important;
+
+    .mat-icon svg path,
+    .mat-icon svg {
+      /* fill: var(--sys-secondary) !important; */
+      stroke: var(--sys-primary) !important;
+    }
+
+    span {
+      color: var(--sys-on-primary-container) !important;
+      text-decoration: none !important;
+    }
+  }
+
+  &:active {
+    transform: translateY(0px) !important;
+    box-shadow: 0 1px 3px rgba(138, 21, 56, 0.15) !important;
+    transition:
+      transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--sys-secondary) !important;
+    outline-offset: 3px !important;
+    text-decoration: none !important;
+  }
+}
+
+/*#######################
+# Menu                  #
+#########################*/
+/*Zone utilisateur*/
+.user-area-btn {
+    scale: 1.5 !important;
 }
 
 /*#######################
 # Liste des résultats  #
 #########################*/
+/*------------------*/
 /*Barre de recherche*/
+/*----------------- */
 /* AFA202603115REC Ajout d'un arrière plan avec la couleur primaire et modification de la couleur de police des boutons rechercher */
-.container nde-top-bar:not(.top-bar-not-sticky) {
+/* .search-container>nde-top-bar {
   background-color: var(--sys-primary)!important;
-}
-.container nde-top-bar:not(.top-bar-not-sticky) .advanced-search-button{
+} */
+/* .search-container>nde-top-bar .advanced-search-button{
   color: var(--sys-on-primary)!important;
 }
-.container nde-top-bar:not(.top-bar-not-sticky) .advanced-search-button .icon-primary-fill.mat-icon svg path{
+.search-container>nde-top-bar .advanced-search-button .icon-primary-fill.mat-icon svg path{
   fill: var(--sys-on-primary) !important;
-}
-/*Fin AFA202603115REC*/
+} */
 
-/*Zone des filtres sous la brre de recherche*/
-/* AFA20260315 - Mise en cohérence des couleurs lorsqu'un tlevel filtre est une facettesont sélectionnés  */
+/*Fin AFA202603115REC*/
+/*-----------------------*/
+/* Filtre type docuemnts */
+/*-----------------------*/
+/*Mise en valeur des filtres types de document. C'est pompé sur la css de Cyril */
+/* TODO A méliorer */
+/* nde-search-results-resource-type-bar .mdc-button {
+    position: relative;
+    display: inline-block;
+}
+
+nde-search-results-resource-type-bar .mdc-button::after,
+nde-search-results-resource-type-bar .mdc-button::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, var(--sys-primary), var(--sys-primary-fixed-dim));
+    bottom: -5px;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s ease-out;
+}
+
+nde-search-results-resource-type-bar .mdc-button::before {
+    top: -5px;
+    transform-origin: left;
+}
+
+nde-search-results-resource-type-bar button:not(.active-resource-type):hover::after,
+nde-search-results-resource-type-bar button:not(.active-resource-type):hover::before {
+    transform: scaleX(1);
+}
+
+
+.active-resource-type {
+    color: var(--sys-on-primary) !important;
+    border-bottom: unset !important;
+    box-shadow: inset 0 0 0.5px 1px hsla(0, 0%, 100%, 0.075), 0 0 0 1px hsla(0, 0%, 0%, 0.05), 0 0.3px 0.4px hsla(0, 0%, 0%, 0.02), 0 0.9px 1.5px hsla(0, 0%, 0%, 0.045), 0 3.5px 6px hsla(0, 0%, 0%, 0.09);
+    background-color: var(--sys-primary) !important;
+    border-radius: 5px !important;
+}
+
+nde-search-results-resource-type-bar .mat-mdc-button:not(.active-resource-type):hover .mat-mdc-button-persistent-ripple::before {
+    opacity: 0 !important;
+    color: var(--sys-primary) !important;
+}
+
+.resource-type-items :hover {
+    color: unset;
+} */
+/* 1. Base du bouton */
+nde-search-results-resource-type-bar .mdc-button {
+    position: relative;
+    overflow: visible !important; /* Pour voir le soulignement */
+    transition: all 0.3s ease;
+}
+
+/* 2. L'effet de soulignement unique (au lieu des deux traits) */
+nde-search-results-resource-type-bar .mdc-button::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; /* Ajuste selon tes besoins */
+    left: 15%;
+    width: 70%; /* Ne prend pas toute la largeur pour plus de finesse */
+    height: 2px;
+    background: var(--sys-primary);
+    transform: scaleX(0);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+}
+
+/* Désactive l'arrière-plan gris au moment du clic (état active) */
+nde-search-results-resource-type-bar .mat-mdc-button .mat-mdc-button-persistent-ripple::before {
+    display: none !important;
+}
+
+/* Si tu veux aussi supprimer l'onde de choc circulaire (le ripple JS) */
+nde-search-results-resource-type-bar .mat-mdc-button .mat-ripple-element {
+    background-color: transparent !important;
+}
+
+/* Pour que la transition vers le violet soit fluide sans étape grise */
+nde-search-results-resource-type-bar .mat-mdc-button {
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out !important;
+}
+
+/* 3. Comportement au Survol (Seulement si PAS actif) */
+nde-search-results-resource-type-bar .mat-mdc-button:not(.active-resource-type):hover::after {
+    transform: scaleX(1);
+}
+
+nde-search-results-resource-type-bar .active-resource-type:hover .mdc-button__label {
+    color: var(--sys-primary) !important;
+}
+
+/* 4. On supprime l'effet grisâtre de Material au survol */
+nde-search-results-resource-type-bar .mat-mdc-button:hover .mat-mdc-button-persistent-ripple::before {
+    opacity: 0 !important;
+}
+
+/* 5. Le bouton Actif (Ton style actuel optimisé) */
+.active-resource-type {
+    background-color: var(--sys-inverse-on-surface) !important;
+    color: var(--sys-primary) !important;
+    border-style:solid !important;
+    border-width: 1px !important;
+    border-color: var(--sys-primary) !important;
+    border-radius: 8px !important; /* Un peu plus arrondi pour coller à ton accueil */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Ombre plus naturelle */
+    transform: translateY(-1px); /* Petit effet de levée */
+}
+
+/* On cache la barre de soulignement quand le bouton est actif */
+.active-resource-type::after {
+    display: none !important;
+}
+
+/* 6. Nettoyage final */
+nde-search-results-resource-type-bar .mdc-button::before {
+    display: none !important; /* Supprime l'ancien trait du haut */
+}
+
+#allFilterToggleButton,
+#allFilterToggleButton .mat-icon svg path
+{
+    color: var(--sys-primary);
+    font-size: 1.125rem;
+}
+/* FIN -filtre type documents */
+/*------------------*/
+/*Autres filtres    */
+/*------------------*/
+.filters-container{
+ background-color: var(--ubm-bg-color) !important;
+
+}
+
+/*Zone des filtres sous la bare de recherche*/
+
+/* Tous les boiutons : lègère ombre */
+#button-list button{
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Ombre plus naturelle */
+    transform: translateY(-1px); /* Petit effet de levée */
+}
+
+/* AFA20260315 - Facettes sélectionnés : mise en cohérence des couleurs lorsqu'un tlevel filtre est une facettesont sélectionnés  */
 button.selected-filters-container{
   background-color:var(--sys-inverse-on-surface);
 }
+
+/* Mise ena vant des filtres en ligne et support physique */
+
+nde-quick-filters button[aria-pressed="false"]{
+  background-color: var(--sys-primary) !important;
+  color: var(--sys-inverse-on-surface) !important;
+    transition:
+    background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    &:hover {
+    background-color: var(--sys-primary-container) !important;
+    color: var(--sys-on-primary-container) !important;
+    border-color: var(--sys-primary-container) !important;
+    box-shadow:
+      0 2px 8px rgba(138, 21, 56, 0.2),
+      0 0 0 3px rgba(138, 21, 56, 0.08) !important;
+    transform: translateY(-1px) !important;
+    text-decoration: none !important;
+    }
+
+  
+}
+
 
 /*Facette*/
 /* AFA20260315Tlevel La tlevel est affichée à la fois sous le masque de recherche et dans la liste des facettes
@@ -45,3 +363,177 @@ nde-filters-group#tlevel {
 /* html {
   font-size: 24px; 
 } */
+
+/* ------------------------------------------------------------------ */
+/*  Affichage bref                                                    */
+/* ------------------------------------------------------------------ */
+
+.search-result-item {
+  background-color: var(--whiteBG);
+  /* border-radius: 8px; */
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); */
+  /* border: 1px solid #E0E0E0; */
+  /* transition: transform 0.2s ease; */
+}
+
+/* Effet au survol d'un résultat */
+.search-result-item:hover {
+  border-color: #8A1538;
+  transform: translateY(-2px);
+}
+
+/*Lien signalant les groupements FRBR*/
+.frbr-line-badge .mat-icon svg rect,
+mat-icon[data-mat-icon-name='frbr-list'] svg rect {
+    fill: var(--sys-secondary) !important;
+
+}
+
+.frbr-line-badge .mdc-button__label {
+    color: var(--sys-secondary) !important;
+}
+
+.frbr-line-badge:hover .mdc-button__label {
+    color: var(--sys-on-secondary-fixed-variant) !important;
+}
+
+.frbr-line-badge.mat-mdc-button:hover .mdc-button__label span {
+    box-shadow: unset !important;
+}
+
+
+/* ------------------------------------------------------------------ */
+/*  Disponibilité                                                     */
+/* ------------------------------------------------------------------ */
+
+/* --------------------------------------------------------------------------- */
+/*  Version physique : nde-physical-availability-line                          */
+/*  cf. app/ubm-ubm-custom-availability/ubm-custom-availability.component.scss */
+/* --------------------------------------------------------------------------- */
+
+/* Disponibilité physique Masquer le composant original */
+nde-physical-availability-line {
+  display: none !important;
+}
+
+/* ------------------------------------------------------------------ */
+/*  nde-online-availability — style infocard                           */
+/* ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------ */
+/*  Conteneur                                                           */
+/* ------------------------------------------------------------------ */
+nde-online-availability .availability-container {
+  margin-top: 6px;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Card de base — commune aux deux cas                                 */
+/* ------------------------------------------------------------------ */
+nde-online-availability .quicklink-button {
+  display: inline-grid !important;
+  grid-template-columns: 36px 1fr auto !important;
+  align-items: center !important;
+  gap: 0 8px !important;
+
+  min-width: 0 !important;
+  max-width: 360px !important;
+  width: auto !important;
+  height: auto !important;
+  min-height: 52px !important;
+
+  padding: 8px 10px 8px 8px !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--sys-outline-variant, #dac0c8) !important;
+  background: var(--sys-surface-container-low, #faf1f3) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .06) !important;
+  transition: background 0.18s ease, box-shadow 0.18s ease !important;
+  text-align: left !important;
+}
+
+nde-online-availability .quicklink-button:hover {
+  background: var(--sys-surface-container, #f5ebed) !important;
+  box-shadow: 0 2px 6px rgba(163, 51, 109, .12) !important;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Colonne 1 : icône décorative via ::before                          */
+/* ------------------------------------------------------------------ */
+nde-online-availability .quicklink-button::before {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background-color: rgba(163, 51, 109, .1);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px 20px;
+  flex-shrink: 0;
+
+  /* Icône "lien externe" par défaut */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7z' fill='%23a3336d'/%3E%3Cpath d='M14 3v2h3.59l-9.3 9.29 1.42 1.42L19 6.41V10h2V3h-7z' fill='%23a3336d'/%3E%3C/svg%3E");
+}
+
+/* ------------------------------------------------------------------ */
+/*  Colonne 2 : label                                                   */
+/* ------------------------------------------------------------------ */
+nde-online-availability .quicklink-button .mdc-button__label {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1px !important;
+  min-width: 0 !important;
+  align-items: flex-start !important;
+}
+
+nde-online-availability .quicklink-button .mdc-button__label > span {
+  font-family: var(--sys-body-medium-font, 'Noto Sans Display', sans-serif) !important;
+  font-size: var(--sys-label-medium-size, .75rem) !important;
+  font-weight: var(--sys-label-medium-weight, 500) !important;
+  color: var(--sys-primary, #a3336d) !important;
+  white-space: normal !important;
+  word-break: break-word !important;
+  line-height: 1.3 !important;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Colonne 3 : mat-icon à droite du label (cas PDF)                   */
+/*  On la positionne dans la 3e colonne du grid                        */
+/* ------------------------------------------------------------------ */
+nde-online-availability .quicklink-button .mat-icon {
+  grid-column: 3 !important;
+  width: 18px !important;
+  height: 18px !important;
+  font-size: 18px !important;
+  flex-shrink: 0 !important;
+  align-self: center !important;
+  opacity: 0.75;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Bouton expand (flèche) — style cohérent avec la card               */
+/* ------------------------------------------------------------------ */
+nde-online-availability .quicklinks-expand-button {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--sys-outline-variant, #dac0c8) !important;
+  background: var(--sys-surface-container-low, #faf1f3) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .06) !important;
+  transition: background 0.18s ease, box-shadow 0.18s ease !important;
+  flex-shrink: 0 !important;
+}
+
+nde-online-availability .quicklinks-expand-button:hover {
+  background: var(--sys-surface-container, #f5ebed) !important;
+  box-shadow: 0 2px 6px rgba(163, 51, 109, .12) !important;
+}
+
+nde-online-availability .quicklinks-expand-button .mat-icon {
+  width: 16px !important;
+  height: 16px !important;
+  font-size: 16px !important;
+}

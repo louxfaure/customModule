@@ -23,10 +23,11 @@
       li {
 
         a {
-          background-color: var(--sys-inverse-on-surface);
+          background-color: var(--whiteBG);
           display: flex;
           padding: 1rem;
-          border: .0625rem solid var(--sys-primary);
+          border: none !important;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
           border-radius: .5rem;
           align-items: center;
           flex-direction: column;
@@ -182,7 +183,7 @@
 
       .about-text {
         padding: 2rem;
-        background-color: var(--sys-inverse-on-surface);
+        background-color: var(--whiteBG);
         gap: 1.5rem;
 
         @include mixing.respond-to('small', 'xsmall') {
