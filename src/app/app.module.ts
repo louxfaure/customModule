@@ -1,13 +1,18 @@
-import {ApplicationRef, DoBootstrap, Injector, NgModule} from '@angular/core';
+import {ApplicationRef, DoBootstrap, Injector, NgModule, LOCALE_ID} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 import {createCustomElement, NgElementConstructor} from "@angular/elements";
 import {Router} from "@angular/router";
 import {selectorComponentMap} from "./custom1-module/customComponentMappings";
 import {TranslateModule} from "@ngx-translate/core";
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { AutoAssetSrcDirective } from './services/auto-asset-src.directive';
 import {SHELL_ROUTER} from "./injection-tokens";
+import localeFr from '@angular/common/locales/fr'; // Importe les données FR
+
+// ENREGISTREMENT DE LA LOCALE 
+registerLocaleData(localeFr);
 
 
 export const AppModule = ({providers, shellRouter}: {providers:any, shellRouter: Router}) => {
@@ -21,8 +26,11 @@ export const AppModule = ({providers, shellRouter}: {providers:any, shellRouter:
       BrowserModule,
       CommonModule,
       TranslateModule.forRoot({}),
+      HttpClientModule
     ],
-    providers: [...providers, {provide: SHELL_ROUTER, useValue: shellRouter}],
+    providers: [...providers, 
+              {provide: SHELL_ROUTER, useValue: shellRouter},
+              {provide: LOCALE_ID, useValue: 'fr-FR'}],
     bootstrap: []
   })
   class AppModule implements DoBootstrap{

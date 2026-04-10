@@ -1,0 +1,479 @@
+/* -- Variable de couleur Bordeaux (tu peux la remplacer par l'orange si tu préfères) -- */
+    :host {
+ /* Bordeaux UBM */
+        --text-dark: #333;
+        --text-light: #777;
+        --bg-light: #f7f9fa; /* Fond très léger derrière les onglets */
+    }
+
+    /* ==========================================================================
+       1. Le bouton d'accès à l'aide
+       ========================================================================== */
+    .aide-onglet {
+      position: fixed;
+      top: 50%;
+      right: 0;
+      z-index: 10000;
+      background-color: var(--sys-primary);
+      color: white;
+      
+      /* On définit une zone de clic confortable */
+      width: 44px;
+      height: 120px;
+      
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 8px 0 0 8px;
+      box-shadow: -2px 0px 10px rgba(0,0,0,0.2);
+      transform: translateY(-50%);
+      transition: all 0.3s ease;
+    }
+    .aide-onglet:hover {
+        width: 50px; /* Effet de zoom au survol */
+         background-color: var(--sys-primary-container);
+        color: var(--sys-on-primary-container);
+        }
+    /* Le conteneur qui pivote à 90° */
+    .content-wrapper {
+      display: flex;
+      flex-direction: row; /* On les met côte à côte horizontalement d'abord */
+      align-items: center;
+      gap: 12px;
+      
+      /* ON PIVOTE TOUT LE BLOC */
+      /* -90deg pour que le haut de l'icône regarde vers la gauche de l'écran */
+      transform: rotate(-90deg); 
+      white-space: nowrap;
+    }
+
+    .icon-wrapper {
+      width: 22px;
+      height: 22px;
+      display: flex;
+    }
+
+    .icon-wrapper svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .label {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    /* ==========================================================================
+       2. LE PANNEAU LATÉRAL COULISSANT
+       ========================================================================== */
+
+    /* Petite animation d'apparition */
+    .fadeIn {
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4); z-index: 10000; backdrop-filter: blur(2px);
+    }
+   /* Panneau Coulissant */
+    .aide-panneau {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 550px; 
+    height: 100vh;
+    /* Panneau plus large */
+    background: var(--whiteBG);
+    z-index: 10001;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+    transform: translateX(100%);
+    transition: transform 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    }
+
+@media (max-width: 500px) { .aide-panneau { width: 100%; } }
+
+.aide-panneau.open { transform: translateX(0); }
+
+/* Bandeau Image */
+.panneau-banner {
+  height: 180px;
+  position: relative;
+  background: var(--sys-primary);
+  overflow: hidden;
+}
+
+.panneau-banner img {
+  width: 100%; height: 100%; object-fit: cover; opacity: 0.6;
+}
+
+.panneau-banner h2 {
+  position: absolute; bottom: 20px; left: 25px;
+  color: white; margin: 0; font-size: 1.8rem;
+}
+
+.close-btn {
+  position: absolute; top: 15px; right: 20px;
+  background: white; border: none; border-radius: 50%;
+  width: 30px; height: 30px; cursor: pointer; font-size: 1.2rem;
+}
+
+/* Contenu */
+.panneau-inner { padding: 25px; overflow-y: auto; }
+
+
+/* Grille de services */
+/* Grille à 3 colonnes égales */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 colonnes identiques */
+  gap: 15px;
+}
+
+.service-item {
+  background: var(--ubm-bg-color);
+  padding: 15px 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+    .s-icon {
+  width: 35px;
+  height: 35px;
+  color: var(--sys-on-primary-container);
+  margin-bottom: 12px;
+  }
+  .s-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Titre du service */
+  .s-label {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--sys-on-primary-container);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  /* Description brève */
+  .s-desc {
+    font-size: 0.75rem;
+    line-height: 1.3;
+    color: #666;
+    margin: 0;
+}
+}
+
+.service-item:hover {
+  background: #fff5f8; /* Légère teinte bordeaux */
+  border: 1px solid var(--sys-primary)30;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    .s-icon {
+      color: var(--sys-on-primary-container);
+    }
+    .s-label {
+      color: var(--sys-on-primary-container);
+    }
+}
+
+/* Onglets Style UBM */
+
+
+.ta-container {
+  color: var(--text-dark);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* --- EN-TÊTE PRINCIPAL --- */
+.ta-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+
+  h3 {
+    font:var(--sys-headline-large);
+    color: var(--sys-on-primary-container);
+    margin: 0;
+    
+    /* On aligne l'icône et le texte sur la même ligne de base */
+    display: flex;
+    align-items: center; 
+    gap: 0.5rem; /* Espace proportionnel entre l'icône et le texte */
+
+    .main-icon {
+      /* Magie ici : l'icône prend la taille du texte actuel */
+      display: inline-flex;
+      height: 1em; 
+      width: 1em;
+      
+      /* Ajustement visuel fin pour l'alignement vertical */
+      vertical-align: middle;
+
+      svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+        /* "currentColor" dans le SVG permet d'hériter de la couleur du h3 */
+        fill: currentColor; 
+      }
+    }
+  }
+}
+
+
+
+/* --- BARRE D'ONGLETS (Style Image 5) --- */
+.ta-tabs-bar {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+  background-color: var(--bg-light);
+}
+
+.ta-tabs-bar button {
+  flex: 1; /* Onglets de largeur égale */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 15px 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  
+  /* Style du texte (Majuscules, gris clair) */
+  color: var(--text-light);
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  
+  /* Transition pour le soulignement */
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+/* Icônes dans les onglets (tes images d'origine) */
+.tab-icon {
+  width: 18px;
+  height: auto;
+  opacity: 0.7; /* Légèrement grisées par défaut */
+  transition: opacity 0.2s ease;
+}
+
+/* Style de l'onglet actif */
+.ta-tabs-bar button.active {
+  color: var(--sys-primary);
+}
+
+.ta-tabs-bar button.active .tab-icon {
+  opacity: 1; /* Icône en couleur pleine */
+}
+
+/* Le trait de soulignement bordeaux */
+.ta-tabs-bar button::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--sys-primary);
+  transform: scaleX(0); /* Masqué par défaut */
+  transition: transform 0.3s ease;
+}
+
+.ta-tabs-bar button.active::after {
+  transform: scaleX(1); /* Affiché pour l'actif */
+}
+
+/* --- ZONE DE CONTENU --- */
+.ta-content {
+  padding: 25px 0;
+}
+
+/* Section s'identifier */
+.content-header {
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.login-link {
+  color: var(--sys-primary);
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
+
+.login-icon {
+  width: 18px;
+  height: 18px;
+  fill: currentColor; /* Prend la couleur du lien bordeaux */
+}
+
+/* --- LA LISTE NUMÉROTÉE (Le cœur du design Image 5) --- */
+.numbered-list {
+  list-style: none; /* On enlève les numéros par défaut */
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Espace entre les lignes */
+}
+
+.numbered-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #555;
+}
+
+.numbered-list li a {
+  color: var(--sys-primary);
+  text-decoration: none;
+}
+.numbered-list li a:hover {
+  text-decoration: underline;
+}
+
+/* Création des cercles bordeaux numérotés */
+.numbered-list li::before {
+  /* On utilise le compteur CSS automatique */
+  content: counter(li);
+  counter-increment: li;
+  
+  /* Style du cercle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0; /* Empêche le cercle de s'écraser */
+  
+  width: 28px;
+  height: 28px;
+  background-color: var(--sys-primary); /* Couleur violette de l'image 5 */
+  color: white;
+  border-radius: 50%;
+  
+  /* Style du numéro */
+  font-weight: 700;
+  font-size: 0.9rem;
+  font-family: Arial, sans-serif; /* Pour un numéro très géométrique */
+  
+  /* Petit décalage vers le haut pour aligner avec le texte */
+  margin-top: 2px;
+}
+
+/* On initialise le compteur sur la liste */
+.numbered-list {
+  counter-reset: li;
+}
+
+/*Section Conseils de recherche*/
+.entete{
+  /*background: #009ee0;*/
+  padding:5px 10px;
+  color:var(--sys-primary);
+  font-weight: var(--sys-body-medium);
+  border-left: 3px solid var(--sys-primary);
+}
+.astuces{
+  line-height: 30px;
+}
+.astuces h5 {
+  font-weight:var(--sys-title-medium);
+  color:var(--sys-on-primary-container);
+}
+.exemple{
+  font-style: italic;
+  line-height: initial;
+  padding-left: 15px;
+  
+}
+// Section tutos vidéos
+.video-grid {
+  display: grid;
+  /* Crée autant de colonnes de 250px minimum que possible */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 12px;
+  padding: 20px 0;
+}
+
+.video-card {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: var(--ubm-bg-color);
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent; 
+
+  &:hover {
+    background-color: #ffffff;
+    border-left-color: var(--sys-primary); 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transform: translateX(5px); /* Glissement léger vers la droite */
+    
+    .video-icon {
+      transform: scale(1.1);
+    }
+  }
+
+  .video-icon {
+    width: 35px;
+    height: 35px;
+    color: var(--sys-primary);
+    margin-right: 12px;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .video-content {
+    display: flex;
+    flex-direction: column;
+    
+    .video-title {
+      font-weight: 500;
+      color: #2c3e50;
+      font-size: 0.95rem;
+      line-height: 1.2;
+    }
+    
+    .video-duration {
+      font-size: 0.8rem;
+      color: #7f8c8d;
+      margin-top: 4px;
+    }
+  }
+}

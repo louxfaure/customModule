@@ -10,7 +10,7 @@ body.mat-app-background {
 /*#################
 # Page d'accueil  #
 ###################*/
-
+/* Uniquement le bandeau pour le contenu de lapage voir src/app/ubm-homepage-actu/ubm-homepage-actu.component.scss */
 /* Désactive l'overlay sur l'image du bandeau de page d'accueil */
 .custom-search-bar-container .background-overlay {
   display: none;
@@ -536,4 +536,97 @@ nde-online-availability .quicklinks-expand-button .mat-icon {
   width: 16px !important;
   height: 16px !important;
   font-size: 16px !important;
+}
+
+.svg-icon {
+  display: inline-block;
+  width: 61px;  /* La taille de tes icônes originales */
+  height: 61px;
+  fill: #750849; /* Pour être sûr que la couleur est appliquée */
+}
+
+/* Très important pour que le contenu du symbole soit visible */
+.svg-icon use {
+  width: 100%;
+  height: 100%;
+}
+
+/*#####################
+# Affichage détaillé  #
+#######################*/
+/*---------
+- Notices -
+-----------*/
+/* TOC reprise ancienne CSS pur l'instant les balises css ne sont pas interprétées */
+.toc1,
+.toc1_alone {
+    margin-top: 0px;
+    line-height: 24px;
+}
+
+.toc1,
+.toc1_alone,
+.toc2,
+.toc3,
+.toc4,
+.toc5,
+.toc6,
+.toc7,
+.toc8 {
+    display: block;
+}
+
+.vol {
+    text-transform: capitalize;
+}
+
+.toc {
+    font-weight: 600;
+}
+
+/* .toc1 {
+    font-weight: bold;
+} */
+
+.toc2 {
+    padding-left: 15px;
+}
+
+.toc3 {
+    padding-left: 30px;
+}
+
+/*On continue identation pour reso>1280px*/
+@media screen and (min-width: 1280px) {
+    .toc4 {
+        padding-left: 45px;
+    }
+
+    .toc5 {
+        padding-left: 60px;
+    }
+
+    .toc6 {
+        padding-left: 75px;
+    }
+
+    .toc7 {
+        padding-left: 90px;
+    }
+
+    .toc8 {
+        padding-left: 105px;
+    }
+}
+
+/*sous 1280px les tocs de niveau 4 à 8 ont la même identation*/
+@media screen and (max-width: 1279px) {
+
+    .toc4,
+    .toc5,
+    .toc6,
+    .toc7,
+    .toc8 {
+        padding-left: 45px;
+    }
 }
