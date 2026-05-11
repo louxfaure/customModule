@@ -9,7 +9,7 @@ import {UbmHelpOverlayComponent} from '../ubm-help-overlay/ubm-help-overlay.comp
 export const selectorComponentMap = new Map<string, any>([
     ['nde-record-main-details-before', UbmBriefDisplayComponent],
     ['nde-search-results-resource-type-bar-before', UbmResourceTypeBarHookComponent],
-    ['nde-physical-availability-line-before', UbmCustomAvailabilityComponent],
+    ['nde-physical-availability-line-bottom', UbmCustomAvailabilityComponent],
     ['nde-landing-page',UbmHomepageActuComponent],
     ['nde-footer-after',UbmHelpOverlayComponent]
     // ['nde-main-actions-before', UbmRecordActionsComponent]

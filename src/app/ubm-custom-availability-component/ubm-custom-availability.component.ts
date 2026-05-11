@@ -111,23 +111,44 @@ export class UbmCustomAvailabilityComponent {
   const originalBtn = this.originalAvailabilityEl
     ?.querySelector<HTMLButtonElement>('button.available-at-button');
 
-  if (originalBtn) {
-    console.log('[UBM-Availability] délégation clic → bouton original');
-    originalBtn.click();
-    return;
+  const hostElement = event.currentTarget as HTMLElement;
+  const container = hostElement.closest('nde-physical-availability-line');
+    console.log('[UBM-Availability]',container);
+
+  if (container) {
+    const originalBtn = container.querySelector<HTMLButtonElement>('button.available-at-button');
+    
+    if (originalBtn) {
+      console.log('[UBM-Availability] Bouton spécifique trouvé dans le conteneur');
+      originalBtn.click();
+      return;
+    }
   }
 
-  // Fallback : chercher dans tout le document si parentElement n'était pas bon
-  console.warn('[UBM-Availability] bouton introuvable via originalAvailabilityEl, fallback document');
-  const fallbackBtn = document
-    .querySelector<HTMLButtonElement>('nde-physical-availability-line button.available-at-button');
-
-  if (fallbackBtn) {
-    fallbackBtn.click();
-  } else {
-    console.error('[UBM-Availability] bouton .available-at-button introuvable dans tout le document');
-  }
+  console.error('[UBM-Availability] Impossible de trouver le bouton parent de cette notice');
 }
+
+
+
+  // 2. On remonte au conteneur de la notice (ex: prm-brief-result-container ou nde-availability-line)
+  // Remplace 'prm-brief-result-container' par le sélecteur du bloc qui englobe UNE notice
+  // if (originalBtn) {
+  //   console.log('[UBM-Availability] délégation clic → bouton original');
+  //   originalBtn.click();
+  //   return;
+  // }
+
+  // // Fallback : chercher dans tout le document si parentElement n'était pas bon
+  // console.warn('[UBM-Availability] bouton introuvable via originalAvailabilityEl, fallback document');
+  // const fallbackBtn = document
+  //   .querySelector<HTMLButtonElement>('nde-physical-availability-line button.available-at-button');
+
+  // if (fallbackBtn) {
+  //   fallbackBtn.click();
+  // } else {
+  //   console.error('[UBM-Availability] bouton .available-at-button introuvable dans tout le document');
+  // }
+// }
 
   // ------------------------------------------------------------------ //
   //  Clic carte → ne pas propager

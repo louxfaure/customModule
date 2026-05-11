@@ -18,17 +18,18 @@ body.mat-app-background {
 
 /*Empêche le zoom de l'image*/
 .top-bar-background-image {
-  background-size: contain !important;
-  background-repeat: repeat-x !important; /* Répète l'image horizontalement pour combler le vide */
+  /* background-size: contain !important; */
+  /* background-repeat: repeat-x !important; */
   border-bottom: 1px solid rgba(138, 21, 56, 0.2); /* Bordeaux à 20% d'opacité */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 /* Message d'accueil */
-div.custom-search-bar-container h2 {
-  text-align: center;
+div.custom-search-bar-container h1 {
+  display: none !important;
+  /* text-align: center;
   color: var(--sys-on-primary-container) !important;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5); */
   /* padding-bottom:.5em */
 }
 
@@ -151,10 +152,14 @@ nde-search-bar-presenter .flex-row.ng-star-inserted {
 /*#######################
 # Menu                  #
 #########################*/
+/*Logo*/
+/* Augmenter la taille */
+nde-logo .ng-star-inserted { height: 60px; }
 /*Zone utilisateur*/
 .user-area-btn {
     scale: 1.5 !important;
 }
+
 
 /*#######################
 # Liste des résultats  #
@@ -163,9 +168,9 @@ nde-search-bar-presenter .flex-row.ng-star-inserted {
 /*Barre de recherche*/
 /*----------------- */
 /* AFA202603115REC Ajout d'un arrière plan avec la couleur primaire et modification de la couleur de police des boutons rechercher */
-/* .search-container>nde-top-bar {
-  background-color: var(--sys-primary)!important;
-} */
+.search-container>nde-top-bar {
+  background-color: var(--ubm-bg-color)!important;
+}
 /* .search-container>nde-top-bar .advanced-search-button{
   color: var(--sys-on-primary)!important;
 }
@@ -412,7 +417,7 @@ mat-icon[data-mat-icon-name='frbr-list'] svg rect {
 /* --------------------------------------------------------------------------- */
 
 /* Disponibilité physique Masquer le composant original */
-nde-physical-availability-line {
+nde-physical-availability-line div.availability-status{
   display: none !important;
 }
 
@@ -433,6 +438,10 @@ nde-online-availability .availability-container {
 /* ------------------------------------------------------------------ */
 /*  Card de base — commune aux deux cas                                 */
 /* ------------------------------------------------------------------ */
+ /* --ubm-available-color:      #2e7d32;
+  --ubm-available-bg:         #f0f7f0;
+  --ubm-available-bg-hover:   #dff0df;
+  --ubm-available-border:     #a5d6a7; */
 nde-online-availability .quicklink-button {
   display: inline-grid !important;
   grid-template-columns: 36px 1fr auto !important;
@@ -447,15 +456,16 @@ nde-online-availability .quicklink-button {
 
   padding: 8px 10px 8px 8px !important;
   border-radius: 8px !important;
-  border: 1px solid var(--sys-outline-variant, #dac0c8) !important;
-  background: var(--sys-surface-container-low, #faf1f3) !important;
+  border: 1px solid #a5d6a7 !important;
+  color:#2e7d32 !important;
+  background: #f0f7f0 !important;
   box-shadow: 0 1px 2px rgba(0, 0, 0, .06) !important;
   transition: background 0.18s ease, box-shadow 0.18s ease !important;
   text-align: left !important;
 }
 
 nde-online-availability .quicklink-button:hover {
-  background: var(--sys-surface-container, #f5ebed) !important;
+  background: #dff0df !important;
   box-shadow: 0 2px 6px rgba(163, 51, 109, .12) !important;
 }
 
@@ -468,15 +478,14 @@ nde-online-availability .quicklink-button::before {
   width: 36px;
   height: 36px;
   border-radius: 6px;
-  background-color: rgba(163, 51, 109, .1);
+  color:#2e7d32 !important;
+  background-color: #dff0df;
   background-repeat: no-repeat;
   background-position: center;
   background-size: 20px 20px;
   flex-shrink: 0;
-
-  /* Icône "lien externe" par défaut */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7z' fill='%23a3336d'/%3E%3Cpath d='M14 3v2h3.59l-9.3 9.29 1.42 1.42L19 6.41V10h2V3h-7z' fill='%23a3336d'/%3E%3C/svg%3E");
-}
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='36px' viewBox='0 -960 960 960' width='36px' fill='%232e7d32'%3E%3Cpath d='M260-160q-91 0-155.5-63T40-377q0-78 47-139t123-78q25-92 100-149t170-57q117 0 198.5 81.5T760-520q69 8 114.5 59.5T920-340q0 75-52.5 127.5T740-160H260Zm0-80h480q42 0 71-29t29-71q0-42-29-71t-71-29h-60v-80q0-83-58.5-141.5T480-720q-83 0-141.5 58.5T280-520h-20q-58 0-99 41t-41 99q0 58 41 99t99 41Zm220-240Z'/%3E%3C/svg%3E");
+  }
 
 /* ------------------------------------------------------------------ */
 /*  Colonne 2 : label                                                   */
@@ -493,7 +502,7 @@ nde-online-availability .quicklink-button .mdc-button__label > span {
   font-family: var(--sys-body-medium-font, 'Noto Sans Display', sans-serif) !important;
   font-size: var(--sys-label-medium-size, .75rem) !important;
   font-weight: var(--sys-label-medium-weight, 500) !important;
-  color: var(--sys-primary, #a3336d) !important;
+  color:#2e7d32 !important;
   white-space: normal !important;
   word-break: break-word !important;
   line-height: 1.3 !important;
@@ -520,15 +529,15 @@ nde-online-availability .quicklinks-expand-button {
   width: 32px !important;
   height: 32px !important;
   border-radius: 8px !important;
-  border: 1px solid var(--sys-outline-variant, #dac0c8) !important;
-  background: var(--sys-surface-container-low, #faf1f3) !important;
+  border: 1px solid var(--sys-outline-variant, #a5d6a7) !important;
+  background: var(--sys-surface-container-low, #dff0df) !important;
   box-shadow: 0 1px 2px rgba(0, 0, 0, .06) !important;
   transition: background 0.18s ease, box-shadow 0.18s ease !important;
   flex-shrink: 0 !important;
 }
 
 nde-online-availability .quicklinks-expand-button:hover {
-  background: var(--sys-surface-container, #f5ebed) !important;
+  background: var(--sys-surface-container, #dff0df) !important;
   box-shadow: 0 2px 6px rgba(163, 51, 109, .12) !important;
 }
 
@@ -542,7 +551,7 @@ nde-online-availability .quicklinks-expand-button .mat-icon {
   display: inline-block;
   width: 61px;  /* La taille de tes icônes originales */
   height: 61px;
-  fill: #750849; /* Pour être sûr que la couleur est appliquée */
+  fill: #2e7d32; /* Pour être sûr que la couleur est appliquée */
 }
 
 /* Très important pour que le contenu du symbole soit visible */
@@ -554,6 +563,117 @@ nde-online-availability .quicklinks-expand-button .mat-icon {
 /*#####################
 # Affichage détaillé  #
 #######################*/
+
+/*---------
+- Navigation -
+-----------*/
+nde-full-display-navigation {
+  background-color: var(--ubm-bg-color) !important;
+  border-bottom:1px solid var(--sys-surface-container-low);
+  padding-bottom:1rem;
+  width:100%
+}
+/*---------
+- Affichage Bref -
+-----------*/
+nde-full-display-container div.search-result-item {
+  border-radius: 8px !important;
+}
+/*---------
+- Demandes -
+-----------*/
+/* On masque les demandes */
+div#nde\.request\.title{
+  display: none !important;
+}
+
+/*---------
+- geitt et viewit + disponibilité dans une autre institution -
+-----------*/
+/* Proprités du conteneur */
+.getit-location-card, .view-it-card-container,.view-it-other-service-card {
+  border-radius: 8px !important;
+  background-color: var(--whiteBG) !important;
+}
+
+div.location-brief-properties-container,nde-holding-properties, .view-it-text, .other-location-details, .get-it-other-description{
+  font-size: 14px !important;
+}
+
+/*Get it Ligne d'affichage Disponibilité, Localisation Cote */
+/*On remplace le ; et la virgule par des > on préfixe la cote et la localisation*/
+/* Ajout du chevron après Disponible */
+div.location-brief-properties-container [data-qa="location-availability"]::after, div.other-location-details [data-qa="location-availability"]::after {
+    content: " >";
+    color: #000;
+}
+
+/* 2. Localisation */
+div.location-brief-properties-container [data-qa="location-sub-location"],div.other-location-details [data-qa="other-location-main-location"]::after {
+    font-weight: normal;
+}
+
+/* Ajout du préfixe en gras et suppression visuelle du ";" */
+div.location-brief-properties-container [data-qa="location-sub-location"]::before {
+    content: "Localisation : ";
+    font-weight: bold;
+}
+
+
+/* Ajout du chevron après la localisation */
+div.location-brief-properties-container [data-qa="location-sub-location"]::after {
+    content: " >";
+}
+
+/* 3. Cote */
+div.location-brief-properties-container [data-qa="location-call-number"]::before {
+    content: "Cote : ";
+    font-weight: bold;
+}
+
+/* 4. Nombre d'exemplaires en italique */
+div.location-brief-properties-container  .location-copies, div.other-location-details, div.other-location-details  .location-copies {
+    font-style: italic;
+    color: #666;
+}
+
+/*View it */
+
+/* Indication visuelle d'un lien externe */
+.package-name::before {
+  content: "";
+  display: inline-block;
+  
+  /* Dimensions de l'icône */
+  width: 1.2em; 
+  height: 1.2em;
+  
+  /* Marges pour l'espace avec le texte */
+  margin-right: 8px;
+  
+  /* Alignement vertical par rapport au texte */
+  vertical-align: middle;
+  
+  /* Insertion du SVG */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7z' fill='%23a3336d'/%3E%3Cpath d='M14 3v2h3.59l-9.3 9.29 1.42 1.42L19 6.41V10h2V3h-7z' fill='%23a3336d'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+/* On s'assurer que tout est bien aligné */
+.package-name {
+  display: flex;
+  align-items: center;
+}
+/* On essaye de donner moins d'importance visuelles aux services aditionnels. PB. la div. n'est pas clairement identifiée. Mais elle est toujours en deuxième position */
+
+nde-view-it-section:nth-child(2) .view-it-card-container {
+  padding: 0rem 0rem 0rem 1rem;
+}
+
+nde-view-it-section:nth-child(2) .view-it-text h3 {
+  font: var(--sys-body-medium);
+}
 /*---------
 - Notices -
 -----------*/

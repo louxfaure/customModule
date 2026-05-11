@@ -1,0 +1,150 @@
+:host {
+  /* Couleurs de Statuts (Harmonisées avec le Bordeaux) */
+  --statut-dispo-text:    #2d6a4f;
+  --statut-dispo-bg:      #f2f9f5;
+  --statut-indispo-text:  #a33333;
+  --statut-indispo-bg:    #fdf5f5;
+  --statut-check-text:    #9a5d00;
+  --statut-check-bg:      #fffaf2;
+  
+  /* Couleurs Neutres Babord+ */
+  --ubm-card-bg:          #ffffff;
+  --ubm-text-main:        #1e1b1c;
+  --ubm-text-sub:         #5f5759;
+  --ubm-border-light:     #e2dadd; /* Légèrement rosé pour rappeler le bordeaux */
+
+  /* Bleu : Disponible dans le réseau / Autre institution */
+  --statut-external-text:   #005a8d; 
+  --statut-external-bg:     #f0f7ff;
+  --statut-external-border: #bcd9f5;
+}
+
+.ubm-holdings-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.ubm-holding-row {
+  display: grid;
+  grid-template-columns: 4px 1fr auto; /* 4px pour la barre de couleur */
+  gap: 12px;
+  align-items: center;
+  background: var(--ubm-card-bg);
+  border: 1px solid var(--ubm-border-light);
+  border-radius: 8px;
+  padding: 10px 14px 10px 0; /* Pas de padding à gauche pour coller la barre */
+  overflow: hidden;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--sys-primary); /* Rappel bordeaux au survol */
+    box-shadow: 0 4px 12px rgba(128, 32, 80, 0.08);
+    transform: translateY(-1px);
+  }
+}
+
+/* La Barre de Statut Verticale */
+.ubm-status-indicator {
+  height: 100%;
+  width: 4px;
+  border-radius: 0 4px 4px 0;
+  
+  &.status--available      { background-color: var(--statut-dispo-text); }
+  &.status--unavailable    { background-color: var(--statut-indispo-text); }
+  &.status--check_holdings { background-color: var(--statut-check-text); }
+}
+
+.ubm-holding-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ubm-holding-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.ubm-holding-library {
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--ubm-text-main);
+  line-height: 1.2;
+}
+
+/* Badge de statut compact */
+.ubm-holding-status-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 4px;
+
+  .ubm-holding--available &   { background: var(--statut-dispo-bg); color: var(--statut-dispo-text); }
+  .ubm-holding--unavailable & { background: var(--statut-indispo-bg); color: var(--statut-indispo-text); }
+  .ubm-holding--check &       { background: var(--statut-check-bg); color: var(--statut-check-text); }
+}
+
+.ubm-holding-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ubm-holding-sublocation {
+  font-size: 0.75rem;
+  color: var(--ubm-text-sub);
+}
+
+.ubm-holding-callnumber {
+  align-self: flex-start;
+  font-family: 'Monaco', 'Consolas', monospace;
+  font-size: 0.7rem;
+  background: #f0f0f0;
+  padding: 1px 6px;
+  border-radius: 3px;
+  border: 1px solid #e0e0e0;
+  color: #333;
+}
+
+.ubm-holding-map-link {
+  color: var(--sys-primary);
+  opacity: 0.4;
+  transition: opacity 0.2s;
+  
+  svg { width: 16px; height: 16px; }
+  &:hover { opacity: 1; }
+}
+
+/* Style spécifique pour le bouton externe */
+.ubm-holding--external {
+  background: var(--ubm-card-bg) !important;
+  border-color: var(--ubm-border-light) !important;
+  
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 90, 141, 0.1) !important;
+  }
+}
+
+/* La barre verticale bleue */
+.ubm-status-indicator.status--external {
+  background-color: var(--statut-external-text);
+}
+
+/* Le badge Réseau */
+.ubm-holding--external .ubm-holding-status-badge {
+  background: var(--statut-external-bg);
+  color: var(--statut-external-text);
+  border: 1px solid var(--statut-external-border);
+}
+
+/* Le texte de la bibliothèque pour le cas externe */
+.ubm-holding--external .ubm-holding-library {
+  color: var(--statut-external-text);
+}
