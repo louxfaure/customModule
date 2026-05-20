@@ -36,6 +36,15 @@ div.custom-search-bar-container h1 {
 
 /* Barre de recherche */
 
+/* On empêche les border au focus */
+
+/* Supprime le contour pour les clics de souris / trackpad */
+input#main-search-bar:focus, 
+input#main-search-bar:active, 
+input#main-search-bar:focus-visible {
+    outline: none !important;
+    box-shadow: unset !important; /* Parfois, ce n'est pas un outline mais une ombre ! */
+}
 /* 1. Aligner le conteneur parent */
 .search_box_container {
   display: flex !important;
@@ -61,15 +70,7 @@ div.custom-search-bar-container h1 {
   vertical-align: middle;
 }
 
-.search-dropdown-container-button-icon svg {
-  width: 100% !important;
-  height: 100% !important;
-  fill: var(--sys-primary) !important
-}
 
-.search-dropdown-container-button-icon svg path {
-  fill: inherit !important;
-}
 /* 3. Aligner verticalement les deux derniers boutons */
 nde-search-bar-presenter .flex-row.ng-star-inserted {
   display: flex !important;
@@ -78,7 +79,7 @@ nde-search-bar-presenter .flex-row.ng-star-inserted {
 
 /* 4. Ajuster les boutons de recherche avancée / question */
 .advanced-search-btn-home-page {
-  height: 2.8rem !important; /* Légèrement plus petits pour l'esthétique, ou 100% pour la même taille */
+  height: 3.6rem !important; /* Légèrement plus petits pour l'esthétique, ou 100% pour la même taille */
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -149,6 +150,14 @@ nde-search-bar-presenter .flex-row.ng-star-inserted {
   }
 }
 
+/* Pour la page d'acceuil*/
+.landing-page-search-bar-wrapper .search_box_container {
+  height: 4.2rem !important; 
+}
+.advanced-search-btn-home-page {
+  height: 3.4rem !important; /* Légèrement plus petits pour l'esthétique, ou 100% pour la même taille */
+}
+
 /*#######################
 # Menu                  #
 #########################*/
@@ -161,9 +170,9 @@ nde-logo .ng-star-inserted { height: 60px; }
 }
 
 
-/*#######################
-# Liste des résultats  #
-#########################*/
+/*##############################################
+# Barre de recherche et filtres des documents  #
+################################################*/
 /*------------------*/
 /*Barre de recherche*/
 /*----------------- */
@@ -171,65 +180,22 @@ nde-logo .ng-star-inserted { height: 60px; }
 .search-container>nde-top-bar {
   background-color: var(--ubm-bg-color)!important;
 }
-/* .search-container>nde-top-bar .advanced-search-button{
-  color: var(--sys-on-primary)!important;
-}
-.search-container>nde-top-bar .advanced-search-button .icon-primary-fill.mat-icon svg path{
-  fill: var(--sys-on-primary) !important;
-} */
 
 /*Fin AFA202603115REC*/
 /*-----------------------*/
-/* Filtre type docuemnts */
+/* Filtre types docuemnts */
 /*-----------------------*/
-/*Mise en valeur des filtres types de document. C'est pompé sur la css de Cyril */
-/* TODO A méliorer */
-/* nde-search-results-resource-type-bar .mdc-button {
-    position: relative;
-    display: inline-block;
+
+/* Empêche les effets d'encadrement sur les focus */
+nde-search-results-resource-type-bar button:focus, 
+nde-search-results-resource-type-bar button:active, 
+nde-search-results-resource-type-bar button:focus-visible,
+nde-search-bar-filters button:focus, 
+nde-search-bar-filters button:active, 
+nde-search-bar-filters button:focus-visible {
+    outline: none !important;
+    box-shadow: unset !important; /* Parfois, ce n'est pas un outline mais une ombre ! */
 }
-
-nde-search-results-resource-type-bar .mdc-button::after,
-nde-search-results-resource-type-bar .mdc-button::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(to right, var(--sys-primary), var(--sys-primary-fixed-dim));
-    bottom: -5px;
-    left: 0;
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.4s ease-out;
-}
-
-nde-search-results-resource-type-bar .mdc-button::before {
-    top: -5px;
-    transform-origin: left;
-}
-
-nde-search-results-resource-type-bar button:not(.active-resource-type):hover::after,
-nde-search-results-resource-type-bar button:not(.active-resource-type):hover::before {
-    transform: scaleX(1);
-}
-
-
-.active-resource-type {
-    color: var(--sys-on-primary) !important;
-    border-bottom: unset !important;
-    box-shadow: inset 0 0 0.5px 1px hsla(0, 0%, 100%, 0.075), 0 0 0 1px hsla(0, 0%, 0%, 0.05), 0 0.3px 0.4px hsla(0, 0%, 0%, 0.02), 0 0.9px 1.5px hsla(0, 0%, 0%, 0.045), 0 3.5px 6px hsla(0, 0%, 0%, 0.09);
-    background-color: var(--sys-primary) !important;
-    border-radius: 5px !important;
-}
-
-nde-search-results-resource-type-bar .mat-mdc-button:not(.active-resource-type):hover .mat-mdc-button-persistent-ripple::before {
-    opacity: 0 !important;
-    color: var(--sys-primary) !important;
-}
-
-.resource-type-items :hover {
-    color: unset;
-} */
 /* 1. Base du bouton */
 nde-search-results-resource-type-bar .mdc-button {
     position: relative;
@@ -280,7 +246,7 @@ nde-search-results-resource-type-bar .mat-mdc-button:hover .mat-mdc-button-persi
     opacity: 0 !important;
 }
 
-/* 5. Le bouton Actif (Ton style actuel optimisé) */
+/* 5. Le bouton Actif */
 .active-resource-type {
     background-color: var(--sys-inverse-on-surface) !important;
     color: var(--sys-primary) !important;
@@ -309,65 +275,47 @@ nde-search-results-resource-type-bar .mdc-button::before {
     font-size: 1.125rem;
 }
 /* FIN -filtre type documents */
-/*------------------*/
-/*Autres filtres    */
-/*------------------*/
+
+/*---------------------------------------*/
+/*Top Filters et filtres sélectionnés    */
+/*---------------------------------------*/
+/*Arrère-plan du conteneur*/
 .filters-container{
  background-color: var(--ubm-bg-color) !important;
-
 }
-
-/*Zone des filtres sous la bare de recherche*/
-
-/* Tous les boiutons : lègère ombre */
-#button-list button{
+/* Tous les boutons : lègère ombre */
+    nde-selected-filters>button , button.quick-filter-btn-active{
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Ombre plus naturelle */
     transform: translateY(-1px); /* Petit effet de levée */
 }
 
-/* AFA20260315 - Facettes sélectionnés : mise en cohérence des couleurs lorsqu'un tlevel filtre est une facettesont sélectionnés  */
-button.selected-filters-container{
-  background-color:var(--sys-inverse-on-surface);
+/* Facettes sélectionnées  */
+nde-selected-filters mat-chip-option {
+  background-color: #e9e9ed;
 }
 
-/* Mise ena vant des filtres en ligne et support physique */
+/* Filtres en ligne et support physique */
 
-nde-quick-filters button[aria-pressed="false"]{
-  background-color: var(--sys-primary) !important;
-  color: var(--sys-inverse-on-surface) !important;
-    transition:
-    background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    &:hover {
-    background-color: var(--sys-primary-container) !important;
-    color: var(--sys-on-primary-container) !important;
-    border-color: var(--sys-primary-container) !important;
-    box-shadow:
-      0 2px 8px rgba(138, 21, 56, 0.2),
-      0 0 0 3px rgba(138, 21, 56, 0.08) !important;
-    transform: translateY(-1px) !important;
-    text-decoration: none !important;
-    }
-
-  
+nde-quick-filters button.quick-filter-btn-unselected{
+  /* background-color: var(--sys-primary) !important; */
+  color: var(--sys-primary) !important;
+  font-size: 1rem;
+  border: none !important;
+}
+nde-quick-filters button.quick-filter-btn-active{
+  background-color: #e9e9ed !important;
 }
 
-
-/*Facette*/
+/* ------------------------------------------------------------------ */
+/*  Facettes                                                    */
+/* ------------------------------------------------------------------ */
 /* AFA20260315Tlevel La tlevel est affichée à la fois sous le masque de recherche et dans la liste des facettes
 Si on la désactive dans la configuration de la vue, elle disparait partout. On la masque donc en css*/
 nde-filters-group#tlevel {
   display:none;
 }
 
-/* Fin liste des résultats*/
 
-/* styles.css */
-/* html {
-  font-size: 24px; 
-} */
 
 /* ------------------------------------------------------------------ */
 /*  Affichage bref                                                    */
@@ -603,7 +551,7 @@ div.location-brief-properties-container,nde-holding-properties, .view-it-text, .
 /*Get it Ligne d'affichage Disponibilité, Localisation Cote */
 /*On remplace le ; et la virgule par des > on préfixe la cote et la localisation*/
 /* Ajout du chevron après Disponible */
-div.location-brief-properties-container [data-qa="location-availability"]::after, div.other-location-details [data-qa="location-availability"]::after {
+div.location-brief-properties-container [data-qa="location-availability"]::after, div.other-location-details [data-qa="other-location-availability"]::after {
     content: " >";
     color: #000;
 }
@@ -614,25 +562,25 @@ div.location-brief-properties-container [data-qa="location-sub-location"],div.ot
 }
 
 /* Ajout du préfixe en gras et suppression visuelle du ";" */
-div.location-brief-properties-container [data-qa="location-sub-location"]::before {
+div.location-brief-properties-container [data-qa="location-sub-location"]::before, div.get-it-other-description [data-qa="get-it-other-location-sub-location"]::before {
     content: "Localisation : ";
     font-weight: bold;
 }
 
 
 /* Ajout du chevron après la localisation */
-div.location-brief-properties-container [data-qa="location-sub-location"]::after {
+div.location-brief-properties-container [data-qa="location-sub-location"]::after, div.get-it-other-description [data-qa="get-it-other-location-sub-location"]::after {
     content: " >";
 }
 
 /* 3. Cote */
-div.location-brief-properties-container [data-qa="location-call-number"]::before {
+div.location-brief-properties-container [data-qa="location-call-number"]::before, div.get-it-other-description [data-qa="get-it-other-location-call-number"]::before {
     content: "Cote : ";
     font-weight: bold;
 }
 
 /* 4. Nombre d'exemplaires en italique */
-div.location-brief-properties-container  .location-copies, div.other-location-details, div.other-location-details  .location-copies {
+div.location-brief-properties-container  .location-copies, div.other-location-details .location-copies {
     font-style: italic;
     color: #666;
 }

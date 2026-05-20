@@ -19,29 +19,33 @@ import { Observable, map } from 'rxjs'; // Ajoute map dans tes imports rxjs
 export class UbmHomepageActuComponent implements OnInit {
   librariesData = [
     {"Name" : "Bibliothèque de Lettres et Sciences humaines",
-      "Code" : "bulsh",
+      "Image" : "assets/images/bibliotheque-bulsh.png",
       "Url" : "https://www.u-bordeaux-montaigne.fr/fr/documentation/vos-bibliotheques/bibliotheque-de-lettres-et-sciences-humaines.html"
     },
     {"Name" : "Bibliothèque Rigoberta Menchú",
-      "Code" : "brm",
+      "Image" : "assets/images/bibliotheque-brm.png",
       "Url" : "https://www.u-bordeaux-montaigne.fr/fr/documentation/vos-bibliotheques/bibliotheque-rigoberta-menchu.html"
     },
     {"Name" : "Bibliothèque Robert Étienne",
-      "Code" : "bre",
+      "Image" : "assets/images/bibliotheque-bre.png",
       "Url" : "https://www.u-bordeaux-montaigne.fr/fr/documentation/vos-bibliotheques/bibliotheque-robert-etienne.html"
     },
     {"Name" : "Bibliothèque universitaire du campus du Pin (Agen)",
-      "Code" : "agen",
+      "Image" : "assets/images/bibliotheque-campusPin.png",
       "Url" : "https://www.u-bordeaux-montaigne.fr/fr/documentation/vos-bibliotheques/bibliotheque-universitaire-du-campus-du-pin-agen.html"
     },
     {"Name" : "Centre de ressources Montaigne IUT/IJBA",
-      "Code" : "iut",
+      "Image" : "assets/images/bibliotheque-crm.png",
       "Url" : "https://www.u-bordeaux-montaigne.fr/fr/documentation/vos-bibliotheques/centre_de_ressources_montaigne.html"
     },
     {"Name" : "Centre Regards – Espace GeoDock",
-      "Code" : "regards",
+      "Image" : "assets/images/bibliotheque-regards.jpg",
       "Url" : "https://www.u-bordeaux-montaigne.fr/fr/documentation/vos-bibliotheques/centre-regards-espace-geodock.html"
     },
+    {"Name" : "Centre de documentation sur la langue et les textes basques IKER - UMR 5478",
+      "Image" : "assets/images/bibliotheque-iker.jpg",
+      "Url" : "https://www.u-bordeaux-montaigne.fr/fr/documentation/vos-bibliotheques/centre-de-documentation-iker.html"
+    }
   ]
   // libraryIds = ['1064001697', '1062954753']; Horaires depuis Open Street Map
   // librariesData: any[] = []; Horaires depuis Open Street Map

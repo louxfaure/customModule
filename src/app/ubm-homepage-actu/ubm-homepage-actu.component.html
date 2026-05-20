@@ -1,137 +1,101 @@
 <main class="main-landing-page display-flex flex-column flex-layout-center-center">
 
   <div class="menu-container width-100">
-    <ul role="list" class="menu width-100">
-      <li role="listitem">
-        <a id="Opening_hours_link" aria-label="Opening hours" role="button"
+    <ul class="menu width-100">
+      <li>
+        <button id="Opening_hours_link" aria-label="Horaires d'ouverture" class="menu-trigger-btn"
           onclick="document.getElementById('hours-overlay').showModal()">
-          <div class="icon display-flex">
+          <span class="icon display-flex" aria-hidden="true">
             <svg width="61" height="61" viewBox="0 0 61 61" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="30.2988" cy="30.5" r="30" fill="#FBFAF7" />
-              <path
-                d="M30.5 43.8C23.1 43.8 17.2 37.9 17.2 30.5C17.2 23.1 23.1 17.2 30.5 17.2C37.9 17.2 43.8 23.1 43.8 30.5C43.8 37.9 37.9 43.8 30.5 43.8ZM30.5 20.5C25 20.5 20.5 25 20.5 30.5C20.5 36 25 40.5 30.5 40.5C36 40.5 40.5 36 40.5 30.5C40.5 25 36 20.5 30.5 20.5ZM31.3 30.5V23.8H28.8V32.1L35.5 36.3L36.8 34.3L31.3 30.5Z"
-                fill="#750849" />
+              <path d="M30.5 43.8C23.1 43.8 17.2 37.9 17.2 30.5C17.2 23.1 23.1 17.2 30.5 17.2C37.9 17.2 43.8 23.1 43.8 30.5C43.8 37.9 37.9 43.8 30.5 43.8ZM30.5 20.5C25 20.5 20.5 25 20.5 30.5C20.5 36 25 40.5 30.5 40.5C36 40.5 40.5 36 40.5 30.5C40.5 25 36 20.5 30.5 20.5ZM31.3 30.5V23.8H28.8V32.1L35.5 36.3L36.8 34.3L31.3 30.5Z" fill="#750849" />
             </svg>
-          </div>
-          <span>Horaires d'ouverture</span>
-        </a>
-
+          </span>
+          <span class="btn-text">Horaires d'ouverture</span>
+        </button>
 
         <dialog id="hours-overlay" class="hours-dialog">
           <div class="dialog-header">
             <h2>Horaires des bibliothèques</h2>
-            <button class="close-btn" onclick="document.getElementById('hours-overlay').close()">×</button>
+            <button class="close-btn" aria-label="Fermer la fenêtre" onclick="document.getElementById('hours-overlay').close()">×</button>
           </div>
-
-          <div class="libraries-grid">
-            <div class="library-card" *ngFor="let lib of librariesData">
-              <div class="card-header">
-                <h3>{{ lib.Name }}</h3>
-                <a [attr.href]="lib.Url" target="_blank" class="external-link"
-                  aria-label="Voir le site de la bibliothèque">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
-                    <polyline points="15 3 21 3 21 9"></polyline>
-                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                  </svg>
-                </a>
-              </div>
-
-              <div class="card-body">
-                <div class="hours-row">
-                  <span class="label">Lun - Jeu :</span>
-                  <span class="value">{{ 'homepage.horaires.semaine.' + lib.Code | translate }}</span>
+          <ul class="libraries-grid">
+            <li class="horaires-card" *ngFor="let lib of librariesData">
+              <a [attr.href]="lib.Url" target="_blank" class="card-link" rel="noopener noreferrer">
+                <img [src]="lib.Image" alt="" class="card-bg-img">
+                <div class="card-overlay">
+                  <h3 class="library-title">{{ lib.Name }}</h3>
+                  <span class="card-action-hint" aria-hidden="true">Voir les horaires →</span>
+                  <span class="sr-only">Voir les horaires de la bibliothèque {{ lib.Name }} (ouvre un nouvel onglet)</span>
                 </div>
-                <div class="hours-row">
-                  <span class="label">Vendredi :</span>
-                  <span class="value">{{ 'homepage.horaires.vendredi.' + lib.Code | translate }}</span>
-                </div>
-                <div class="hours-row saturday">
-                  <span class="label">Samedi :</span>
-                  <span class="value">{{ 'homepage.horaires.samedi.' + lib.Code | translate }}</span>
-                </div>
-              </div>
-
-              <div class="card-alert">
-                <div class="alert-content">
-                  <span class="alert-icon">⚠️</span>
-                  <span class="alert-text">{{ 'homepage.horaires.fermetures.' + lib.Code | translate }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
+              </a>
+            </li>
+          </ul>
         </dialog>
       </li>
-      <li role="listitem">
-        <a id="Group_study_link" aria-label="Réservation de salle" role="button"
+
+      <li>
+        <button id="Group_study_link" aria-label="Réservation de salle de travail" class="menu-trigger-btn"
           onclick="document.getElementById('study-rooms-overlay').showModal()">
-          <div class="icon display-flex">
+          <span class="icon display-flex" aria-hidden="true">
             <svg width="61" height="61" viewBox="0 0 61 61" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="30.5" cy="30.5" r="30" fill="#FBFAF7" />
-
               <g transform="translate(30.5, 30.5) scale(0.06) translate(-320, -256)">
-                <path
-                  d="M320 16a104 104 0 1 1 0 208 104 104 0 1 1 0-208zM96 88a72 72 0 1 1 0 144 72 72 0 1 1 0-144zM0 416c0-70.7 57.3-128 128-128 12.8 0 25.2 1.9 36.9 5.4-32.9 36.8-52.9 85.4-52.9 138.6l0 16c0 11.4 2.4 22.2 6.7 32L32 480c-17.7 0-32-14.3-32-32l0-32zm521.3 64c4.3-9.8 6.7-20.6 6.7-32l0-16c0-53.2-20-101.8-52.9-138.6 11.7-3.5 24.1-5.4 36.9-5.4 70.7 0 128 57.3 128 128l0 32c0 17.7-14.3 32-32 32l-86.7 0zM472 160a72 72 0 1 1 144 0 72 72 0 1 1 -144 0zM160 432c0-88.4 71.6-160 160-160s160 71.6 160 160l0 16c0 17.7-14.3 32-32 32l-256 0c-17.7 0-32-14.3-32-32l0-16z"
-                  fill="#750849" />
+                <path d="M320 16a104 104 0 1 1 0 208 104 104 0 1 1 0-208zM96 88a72 72 0 1 1 0 144 72 72 0 1 1 0-144zM0 416c0-70.7 57.3-128 128-128 12.8 0 25.2 1.9 36.9 5.4-32.9 36.8-52.9 85.4-52.9 138.6l0 16c0 11.4 2.4 22.2 6.7 32L32 480c-17.7 0-32-14.3-32-32l0-32zm521.3 64c4.3-9.8 6.7-20.6 6.7-32l0-16c0-53.2-20-101.8-52.9-138.6 11.7-3.5 24.1-5.4 36.9-5.4 70.7 0 128 57.3 128 128l0 32c0 17.7-14.3 32-32 32l-86.7 0zM472 160a72 72 0 1 1 144 0 72 72 0 1 1 -144 0zM160 432c0-88.4 71.6-160 160-160s160 71.6 160 160l0 16c0 17.7-14.3 32-32 32l-256 0c-17.7 0-32-14.3-32-32l0-16z" fill="#750849" />
               </g>
             </svg>
-          </div>
-          <span>Salles de travail</span>
-        </a>
+          </span>
+          <span class="btn-text">Salles de travail</span>
+        </button>
+
         <dialog id="study-rooms-overlay" class="hours-dialog study-rooms-dialog mat-elevation-z8">
           <div class="dialog-header display-flex flex-layout-space-between flex-layout-center">
             <h2 class="mat-headline-small text-prune">Réserver une salle de travail en groupe</h2>
-            <button class="close-btn" onclick="document.getElementById('study-rooms-overlay').close()">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <button class="close-btn" aria-label="Fermer la fenêtre" onclick="document.getElementById('study-rooms-overlay').close()">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
               </svg>
             </button>
           </div>
-<div class="reservation-cards-grid mt-20">
-  
-  <div class="reservation-card">
-    <img src="assets/images/bibliotheque-brm.png" alt="" class="card-bg-img">
-    
-    <div class="card-content">
-      <div class="card-text-section">
-        <h3 class="library-title">Bibliothèque Rigoberta Menchú</h3>
-        <p class="library-subtitle">Salles de travail (2-10 places) & Carrels individuels</p>
-      </div>
-      <a href="https://affluences.com/..." target="_blank" class="btn-reserver">
-        Réserver
-        </a>
-    </div>
-  </div>
+          <ul class="reservation-cards-grid mt-20">
+            <li class="reservation-card">
+              <img src="assets/images/bibliotheque-brm.png" alt="" class="card-bg-img">
+              <div class="card-content">
+                <div class="card-text-section">
+                  <h3 class="library-title">Bibliothèque Rigoberta Menchú</h3>
+                  <p class="library-subtitle">Salles de travail (2-10 places) & Carrels individuels</p>
+                </div>
+                <a href="https://affluences.com/..." target="_blank" class="btn-reserver" rel="noopener noreferrer">
+                  Réserver <span class="sr-only">une salle à la Bibliothèque Rigoberta Menchú (nouvel onglet)</span>
+                </a>
+              </div>
+            </li>
 
-  <div class="reservation-card">
-    <img src="assets/images/bibliotheque-bulsh.png" alt="" class="card-bg-img">
-    
-    <div class="card-content">
-      <div class="card-text-section">
-        <h3 class="library-title">Bibliothèque Lettres et Sciences Humaines</h3>
-        <p class="library-subtitle">Salles de travail (2-10 places)</p>
-      </div>
-      <a href="https://affluences.com/..." target="_blank" class="btn-reserver">
-        Réserver
-      </a>
-    </div>
-  </div>
-
-</div>
+            <li class="reservation-card">
+              <img src="assets/images/bibliotheque-bulsh.png" alt="" class="card-bg-img">
+              <div class="card-content">
+                <div class="card-text-section">
+                  <h3 class="library-title">Bibliothèque Lettres et Sciences Humaines</h3>
+                  <p class="library-subtitle">Salles de travail (2-10 places)</p>
+                </div>
+                <a href="https://affluences.com/..." target="_blank" class="btn-reserver" rel="noopener noreferrer">
+                  Réserver <span class="sr-only">une salle à la Bibliothèque Lettres et Sciences Humaines (nouvel onglet)</span>
+                </a>
+              </div>
+            </li>
+          </ul>
         </dialog>
       </li>
-      <li role="listitem">
-        <a id="PEB_link" aria-label="Prêt entre bibliothèques" role="link"
-          href="https://www.u-bordeaux-montaigne.fr/fr/documentation/informations-pratiques/service_peb_pret_entre_bibliotheques.html">
-          <div class="icon display-flex">
+
+      <!-- Les autres liens standards restent inchangés mais nettoyés de leurs rôles redondants -->
+      <li>
+        <a id="PEB_link" href="https://www.u-bordeaux-montaigne.fr/fr/documentation/informations-pratiques/service_peb_pret_entre_bibliotheques.html">
+          <div class="icon display-flex" aria-hidden="true">
             <svg width="61" height="61" viewBox="0 0 61 61" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="30.5" cy="30.5" r="30" fill="#FBFAF7" />
-
               <g transform="translate(30.5, 30.5) scale(0.07) translate(-224, -256)">
-                <path
-                  d="M384 512L96 512c-53 0-96-43-96-96L0 96C0 43 43 0 96 0L400 0c26.5 0 48 21.5 48 48l0 288c0 20.9-13.4 38.7-32 45.3l0 66.7c17.7 0 32 14.3 32 32s-14.3 32-32 32l-32 0zM96 384c-17.7 0-32 14.3-32 32s14.3 32 32 32l256 0 0-64-256 0zm32-232c0 13.3 10.7 24 24 24l176 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-176 0c-13.3 0-24 10.7-24 24zm24 72c-13.3 0-24 10.7-24 24s10.7 24 24 24l176 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-176 0z"
-                  fill="#750849" />
+                <path d="M384 512L96 512c-53 0-96-43-96-96L0 96C0 43 43 0 96 0L400 0c26.5 0 48 21.5 48 48l0 288c0 20.9-13.4 38.7-32 45.3l0 66.7c17.7 0 32 14.3 32 32s-14.3 32-32 32l-32 0zM96 384c-17.7 0-32 14.3-32 32s14.3 32 32 32l256 0 0-64-256 0zm32-232c0 13.3 10.7 24 24 24l176 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-176 0c-13.3 0-24 10.7-24 24zm24 72c-13.3 0-24 10.7-24 24s10.7 24 24 24l176 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-176 0z" fill="#750849" />
               </g>
             </svg>
           </div>
@@ -139,17 +103,13 @@
         </a>
       </li>
 
-      <li role="listitem">
-        <a id="Suggest_purchase_link" aria-label="Suggérer un achat" role="link"
-          href="https://extranet.u-bordeaux-montaigne.fr/rita_fo/?num_cg=59&num_form=3">
-          <div class="icon display-flex">
+      <li>
+        <a id="Suggest_purchase_link" href="https://extranet.u-bordeaux-montaigne.fr/rita_fo/?num_cg=59&num_form=3">
+          <div class="icon display-flex" aria-hidden="true">
             <svg width="61" height="61" viewBox="0 0 61 61" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="30.5" cy="30.5" r="30" fill="#FBFAF7" />
-
               <g transform="translate(30.5, 30.5) scale(0.06) translate(-320, -256)">
-                <path
-                  d="M288 0c6.6 0 12.9 2.7 17.4 7.5l144 152 .5 .5 78.1 0c17.7 0 32 14.3 32 32 0 14.5-9.6 26.7-22.8 30.7L491.1 429.9c-6.5 29.3-32.5 50.1-62.5 50.1l-281.3 0c-30 0-56-20.8-62.5-50.1l-46-207.2c-13.2-3.9-22.8-16.2-22.8-30.7 0-17.7 14.3-32 32-32l78.1 0 .5-.5 144-152C275.1 2.7 281.4 0 288 0zm0 58.9L192.2 160 383.8 160 288 58.9zM208 264c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 112c0 13.3 10.7 24 24 24s24-10.7 24-24l0-112zm80-24c-13.3 0-24 10.7-24 24l0 112c0 13.3 10.7 24 24 24s24-10.7 24-24l0-112c0-13.3-10.7-24-24-24zm128 24c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 112c0 13.3 10.7 24 24 24s24-10.7 24-24l0-112z"
-                  fill="#750849" />
+                <path d="M288 0c6.6 0 12.9 2.7 17.4 7.5l144 152 .5 .5 78.1 0c17.7 0 32 14.3 32 32 0 14.5-9.6 26.7-22.8 30.7L491.1 429.9c-6.5 29.3-32.5 50.1-62.5 50.1l-281.3 0c-30 0-56-20.8-62.5-50.1l-46-207.2c-13.2-3.9-22.8-16.2-22.8-30.7 0-17.7 14.3-32 32-32l78.1 0 .5-.5 144-152C275.1 2.7 281.4 0 288 0zm0 58.9L192.2 160 383.8 160 288 58.9zM208 264c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 112c0 13.3 10.7 24 24 24s24-10.7 24-24l0-112zm80-24c-13.3 0-24 10.7-24 24l0 112c0 13.3 10.7 24 24 24s24-10.7 24-24l0-112c0-13.3-10.7-24-24-24zm128 24c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 112c0 13.3 10.7 24 24 24s24-10.7 24-24l0-112z" fill="#750849" />
               </g>
             </svg>
           </div>
@@ -157,17 +117,13 @@
         </a>
       </li>
 
-      <li role="listitem">
-        <a id="Databases_link" aria-label="Bases de données" role="link"
-          href="https://scd.u-bordeaux-montaigne.fr/contenus/tout">
-          <div class="icon display-flex">
+      <li>
+        <a id="Databases_link" href="https://scd.u-bordeaux-montaigne.fr/contenus/tout">
+          <div class="icon display-flex" aria-hidden="true">
             <svg width="61" height="61" viewBox="0 0 61 61" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="30.5" cy="30.5" r="30" fill="#FBFAF7" />
-
               <g transform="translate(30.5, 30.5) scale(0.07) translate(-224, -256)">
-                <path
-                  d="M448 205.8c-14.8 9.8-31.8 17.7-49.5 24-47 16.8-108.7 26.2-174.5 26.2S96.4 246.5 49.5 229.8c-17.6-6.3-34.7-14.2-49.5-24L0 288c0 44.2 100.3 80 224 80s224-35.8 224-80l0-82.2zm0-77.8l0-48C448 35.8 347.7 0 224 0S0 35.8 0 80l0 48c0 44.2 100.3 80 224 80s224-35.8 224-80zM398.5 389.8C351.6 406.5 289.9 416 224 416S96.4 406.5 49.5 389.8c-17.6-6.3-34.7-14.2-49.5-24L0 432c0 44.2 100.3 80 224 80s224-35.8 224-80l0-66.2c-14.8 9.8-31.8 17.7-49.5 24z"
-                  fill="#750849" />
+                <path d="M448 205.8c-14.8 9.8-31.8 17.7-49.5 24-47 16.8-108.7 26.2-174.5 26.2S96.4 246.5 49.5 229.8c-17.6-6.3-34.7-14.2-49.5-24L0 288c0 44.2 100.3 80 224 80s224-35.8 224-80l0-82.2zm0-77.8l0-48C448 35.8 347.7 0 224 0S0 35.8 0 80l0 48c0 44.2 100.3 80 224 80s224-35.8 224-80zM398.5 389.8C351.6 406.5 289.9 416 224 416S96.4 406.5 49.5 389.8c-17.6-6.3-34.7-14.2-49.5-24L0 432c0 44.2 100.3 80 224 80s224-35.8 224-80l0-66.2c-14.8 9.8-31.8 17.7-49.5 24z" fill="#750849" />
               </g>
             </svg>
           </div>
@@ -175,15 +131,12 @@
         </a>
       </li>
 
-      <li role="listitem">
-        <a id="Selections_link" aria-label="Sélections" role="link"
-          [attr.href]="'/nde/collectionDiscovery?vid=' + vue + '&lang=' + langue">
-          <div class="icon display-flex">
+      <li>
+        <a id="Selections_link" [attr.href]="'/nde/collectionDiscovery?vid=' + vue + '&lang=' + langue">
+          <div class="icon display-flex" aria-hidden="true">
             <svg width="61" height="61" viewBox="0 0 61 61" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="30.5" cy="30.5" r="30" fill="#FBFAF7" />
-              <path
-                d="M30.5 17.5L33.9 24.4L41.5 25.5L36 30.8L37.3 38.4L30.5 34.8L23.7 38.4L25 30.8L19.5 25.5L27.1 24.4L30.5 17.5Z"
-                fill="#750849" />
+              <path d="M30.5 17.5L33.9 24.4L41.5 25.5L36 30.8L37.3 38.4L30.5 34.8L23.7 38.4L25 30.8L19.5 25.5L27.1 24.4L30.5 17.5Z" fill="#750849" />
             </svg>
           </div>
           <span>Sélections</span>
@@ -192,25 +145,25 @@
     </ul>
   </div>
 
-  <div class="flex-row flex-layout-space-between width-100 welcome-announcements-container">
-    
-<div class="news-card-container">
-  <a [attr.href]="'/nde/collectionDiscovery?collectionId=81147549810004674&lang=' + langue + '&vid=' + vue" 
-     class="news-card-overlay-style"
-     aria-label="Voir nos sélections de nouveautés">
-     
-    <img src="https://eu02.alma.exlibrisgroup.com/view/delivery/thumbnail/33PUDB_UBM/81147549810004674/1" 
-         alt="Nouveautés thumbnail" 
-         class="news-bg-img">
+<div class="welcome-announcements-container">
+    <div class="news-card-container">
+      <a [attr.href]="'/nde/collectionDiscovery?collectionId=81147549810004674&lang=' + langue + '&vid=' + vue"
+        class="news-card-overlay-style" aria-label="Voir nos sélections de nouveautés">
 
-    <div class="news-text-badge">
-      <svg class="news-folder-icon" width="16" height="12" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M2.33366 13.6666C1.87533 13.6666 1.48296 13.5035 1.15658 13.1771C0.830187 12.8507 0.666992 12.4583 0.666992 12V1.99998C0.666992 1.54165 0.830187 1.14929 1.15658 0.822896C1.48296 0.496507 1.87533 0.333313 2.33366 0.333313H7.33366L9.00033 1.99998H15.667C16.1253 1.99998 16.5177 2.16317 16.8441 2.48956C17.1705 2.81595 17.3337 3.20831 17.3337 3.66665V12C17.3337 12.4583 17.1705 12.8507 16.8441 13.1771C16.5177 13.5035 16.1253 13.6666 15.667 13.6666H2.33366Z" fill="#FFFFFF"/>
-      </svg>
-      <span class="news-title-text">Nouveautés</span>
+        <img src="https://eu02.alma.exlibrisgroup.com/view/delivery/thumbnail/33PUDB_UBM/81147549810004674/1"
+          alt="Nouveautés thumbnail" class="news-bg-img">
+
+        <div class="news-text-badge">
+          <svg class="news-folder-icon" width="16" height="12" viewBox="0 0 18 14" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M2.33366 13.6666C1.87533 13.6666 1.48296 13.5035 1.15658 13.1771C0.830187 12.8507 0.666992 12.4583 0.666992 12V1.99998C0.666992 1.54165 0.830187 1.14929 1.15658 0.822896C1.48296 0.496507 1.87533 0.333313 2.33366 0.333313H7.33366L9.00033 1.99998H15.667C16.1253 1.99998 16.5177 2.16317 16.8441 2.48956C17.1705 2.81595 17.3337 3.20831 17.3337 3.66665V12C17.3337 12.4583 17.1705 12.8507 16.8441 13.1771C16.5177 13.5035 16.1253 13.6666 15.667 13.6666H2.33366Z"
+              fill="#FFFFFF" />
+          </svg>
+          <span class="news-title-text">Nouveautés</span>
+        </div>
+      </a>
     </div>
-  </a>
-</div>
 
 
     <div class="announcements display-flex flex-column">

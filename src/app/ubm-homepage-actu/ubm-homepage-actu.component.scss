@@ -1,64 +1,107 @@
 /* --- Variables & Configuration --- */
 $color-prune: #750849;
 $color-prune-dark: #8c0a57;
+$shadow-light: 0 4px 12px rgba(0, 0, 0, 0.05);
+$shadow-heavy: 0 4px 15px rgba(0, 0, 0, 0.1);
+$transition-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
+
+/* --- Styles Communs & Mixins Utiles --- */
+%card-hover-effect {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  .card-bg-img { transform: scale(1.08); }
+}
+
+%absolute-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 
 .main-landing-page {
-  margin: 0 auto;
+  margin: 0 auto 100px;
   gap: 3rem;
-  margin-block-end: 100px;
   padding-top: 3rem;
 
+ /* Menu Principal */
   .menu-container .menu {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
     gap: 1.5rem 1rem;
-    
-    li a {
-      background-color: var(--whiteBG);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-      border-radius: .5rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      text-decoration: none !important;
-      color: var(--mat-app-text-color);
-      height: 100%;
+    list-style: none;
+    padding: 0;
 
-      .icon {
-        background-color: var(--sys-inverse-on-surface);
-        border-radius: 50%;
-        width: 3.75rem;
-        height: 3.75rem;
+    li {
+      /* On applique exactement le même style aux liens ET aux balises boutons du menu */
+      a, .menu-trigger-btn {
+        background-color: var(--whiteBG);
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-      }
+        padding: 1rem;
+        border-radius: .5rem;
+        box-shadow: $shadow-light;
+        text-decoration: none !important;
+        color: var(--mat-app-text-color);
+        height: 100%;
+        width: 100%;
+        
+        /* Réinitialisation complète des styles par défaut des boutons */
+        border: none;
+        margin: 0;
+        font: inherit; /* Force le bouton à utiliser la police globale de l'application */
+        cursor: pointer;
+        -webkit-appearance: none;
+        -moz-appearance: none;
 
-      span {
-        margin-top: .3125rem;
-        display: flex;
-        align-items: center;
-        min-height: 2.5rem;
-        text-align: center;
+        .icon {
+          background-color: var(--sys-inverse-on-surface);
+          border-radius: 50%;
+          width: 3.75rem;
+          height: 3.75rem;
+          display: flex; /* Assure le centrage du SVG */
+          align-items: center;
+          justify-content: center;
+        }
+
+        /* Style pour le texte sous l'icône (le <span> classique ou la classe .btn-text) */
+        span, .btn-text {
+          margin-top: .3125rem;
+          display: flex;
+          align-items: center;
+          justify-content: center; /* Aligne le texte au milieu horizontalement */
+          min-height: 2.5rem;
+          text-align: center;
+          font-size: 1rem; /* Ajustez selon vos besoins */
+          color: var(--mat-app-text-color);
+          font-weight: 500;
+        }
+      }
+      
+      /* Effet au survol / focus pour l'ensemble des éléments du menu */
+      a:hover, .menu-trigger-btn:hover {
+        background-color: var(--sys-surface-variant, #f0f0f0); 
       }
     }
   }
 
-  /* Section Nouveautés (1/3) & Messages (2/3) */
+/* Section Nouveautés & Messages */
   .welcome-announcements-container {
-    display: flex;
-    gap: 2rem;
-    align-items: stretch;
-    width: 100%;
+    display: grid !important; 
+    grid-template-columns: 1fr 2fr !important; /* Découpage strict 1/3 et 2/3 */
+    gap: 2rem !important; 
+    align-items: stretch !important;
     margin-top: 0.5rem;
+    width: 100% !important;
 
     .news-card-container {
-      display: flex;
-      flex: 1 1 0%; 
-      min-width: 0;
+      display: flex !important;
       min-height: 300px;
+      width: 100% !important;
+      max-width: 100% !important; /* Sécurité anti-débordement */
       
       .news-card-overlay-style {
         position: relative;
@@ -66,20 +109,15 @@ $color-prune-dark: #8c0a57;
         width: 100%;
         border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        box-shadow: $shadow-heavy;
         transition: transform 0.3s, box-shadow 0.3s;
 
         &:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-          .news-bg-img { transform: scale(1.05); }
+          @extend %card-hover-effect;
         }
 
         .news-bg-img {
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
+          @extend %absolute-cover;
           object-fit: cover;
           transition: transform 0.5s ease;
         }
@@ -93,8 +131,8 @@ $color-prune-dark: #8c0a57;
           align-items: center;
           gap: 8px;
           padding: 10px 18px;
-          background-color: rgba(117, 8, 73, 0.9);
-          color: #FFFFFF;
+          background-color: rgba($color-prune, 0.9);
+          color: #fff;
           border-radius: 25px;
           backdrop-filter: blur(4px);
           
@@ -108,17 +146,17 @@ $color-prune-dark: #8c0a57;
       }
     }
 
+    /* Le bloc de messages */
     .announcements {
-      flex: 2 1 0%; 
-    min-width: 0;
-      background-color: var(--sys-inverse-on-surface);
-      padding: 2rem;
-      border-radius: .75rem;
-      border: .0625rem solid var(--sys-primary);
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      max-width: none !important;
+      background-color: var(--sys-inverse-on-surface) !important;
+      padding: 2rem !important;
+      border-radius: .75rem !important;
+      border: .0625rem solid var(--sys-primary) !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 1.5rem !important;
+      width: 100% !important; /* Force à occuper tout l'espace des 2/3 restants */
+      max-width: 100% !important;
 
       .announcement-header {
         display: flex;
@@ -145,18 +183,8 @@ $color-prune-dark: #8c0a57;
   width: 90%;
   margin: 0.5rem auto;
 
-  .actu-section-title {
-    font-size: 1.8rem;
-    font-weight: 500;
-    margin-bottom: 1.5rem;
-  }
-
-  .actu-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-bottom: 30px;
-  }
+  .actu-section-title { font-size: 1.8rem; font-weight: 500; margin-bottom: 1.5rem; }
+  .actu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 30px; }
 
   .actu-card {
     background: #fff;
@@ -191,74 +219,107 @@ $color-prune-dark: #8c0a57;
   }
 }
 
-/* --- Dialogs & Horaires --- */
+/* --- Dialogs Modales (Horaires & Réservations) --- */
 .hours-dialog {
   border: none;
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 0;
   width: 90%;
-  max-width: 950px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  max-width: 1050px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+  background: #fafafa;
 
   .dialog-header {
-    background-color: #f5f5f7;
+    background-color: #fff;
     padding: 1.5rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #e5e5e7;
-    h2 { color: $color-prune; margin: 0; font-size: 1.5rem; }
-    .close-btn { background: none; border: none; font-size: 2rem; cursor: pointer; color: $color-prune; }
+    border-bottom: 1px solid #eaeaea;
+    
+    h2 { color: $color-prune; margin: 0; font-size: 1.6rem; font-weight: 700; letter-spacing: -0.5px; }
+    .close-btn { background: none; border: none; font-size: 2.2rem; cursor: pointer; color: #999; transition: color 0.2s; &:hover { color: $color-prune; } }
   }
 }
 
-.libraries-grid {
+/* Grilles Internes des Modales */
+.libraries-grid, .reservation-cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
+  gap: 20px;
   padding: 2rem;
+  list-style: none;
 }
+.reservation-cards-grid { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); padding: 20px; }
 
-.library-card {
-  border: 1px solid #eee;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  &:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+/* Cartes Immersives (Factorisation Horaires & Réservations) */
+.horaires-card, .reservation-card {
+  position: relative;
+  height: 220px; 
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  background-color: #000;
+  transition: transform 0.3s $transition-smooth, box-shadow 0.3s ease;
 
-  .card-header {
-    padding: 1rem;
+  .card-link, .card-content {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    position: relative;
+    z-index: 3;
+  }
+
+  .card-bg-img {
+    @extend %absolute-cover;
+    object-fit: cover;
+    z-index: 1;
+    transform: scale(1.01);
+    transition: transform 0.6s $transition-smooth;
+  }
+
+  .card-overlay, &::before {
+    @extend %absolute-cover;
+    z-index: 2;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 45%, rgba(0, 0, 0, 0) 100%);
+  }
+
+  .card-overlay {
+    padding: 20px;
+    box-sizing: border-box;
     display: flex;
-    justify-content: space-between;
-    h3 { margin: 0; font-size: 1rem; color: $color-prune; }
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 4px;
   }
 
-  .card-body {
-    padding: 1rem;
-    .hours-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.9rem;
-      margin-bottom: 0.5rem;
-      &.saturday { border-top: 1px dashed #eee; padding-top: 0.5rem; font-weight: bold; }
-    }
+  .library-title { color: #fff !important; font-size: 1.1rem !important; font-weight: 600 !important; margin: 0 !important; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6); }
+  .card-action-hint { color: rgba(255, 255, 255, 0.85) !important; font-size: 0.85rem; font-weight: 500; transform: translateY(4px); opacity: 0; transition: transform 0.3s $transition-smooth, opacity 0.3s ease; }
+
+  /* Hover & Focus State */
+  &:hover, &:focus-within {
+    @extend %card-hover-effect;
+    .card-action-hint { opacity: 1; transform: translateY(0); }
   }
 
-  .card-alert {
-    background-color: #fff0f6;
-    padding: 0.8rem 1rem;
-    .alert-text { font-size: 0.85rem; color: $color-prune; font-weight: 600; }
+  .card-link:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: -4px;
+    border-radius: 14px;
   }
 }
 
-/* --- Réservations --- */
+/* --- Grille des cartes de réservation --- */
 .reservation-cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 24px;
   padding: 20px;
+  list-style: none; /* Nettoie les puces du <ul> */
 }
 
+/* --- Structure de la Carte --- */
 .reservation-card {
   position: relative;
   height: 280px;
@@ -266,84 +327,118 @@ $color-prune-dark: #8c0a57;
   overflow: hidden;
   display: flex;
 
-  // L'image qui fait office de fond
+  /* Image de fond */
   .card-bg-img {
     position: absolute;
-    inset: 0; // top, left, width, height à 100%
+    inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; // L'image remplit la zone sans se déformer
+    object-fit: cover;
     z-index: 0;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Transition fluide pour le zoom */
   }
 
-  // L'overlay sombre (toujours en CSS pour le style)
-  &::before {
+  /* Effet d'ombrage dégradé d'origine */
+  &:before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.8) 100%);
-    z-index: 1; // Au dessus de l'image
+    background: linear-gradient(to bottom, #0000001a, #000000cc);
+    z-index: 1;
   }
-  
+
+  /* Contenu textuel et bouton */
   .card-content {
     position: relative;
-    z-index: 2; // Au dessus de l'overlay
+    z-index: 2;
     width: 100%;
     padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    
-    .library-title { color: #fff !important; font-weight: 700; margin: 0; }
-    .library-subtitle { color: rgba(255, 255, 255, 0.9) !important; }
+    box-sizing: border-box;
+
+    .library-title {
+      color: #fff !important;
+      font-weight: 700 !important;
+      font-size: 36px !important;
+      margin: 0;
+    }
+
+    .library-subtitle {
+      color: #ffffffe6 !important;
+    }
+  }
+
+  /* --- Effet de zoom au survol et au focus clavier --- */
+  &:hover, &:focus-within {
+    .card-bg-img {
+      transform: scale(1.06); /* Zoom léger et élégant de l'image */
+    }
   }
 }
 
+/* --- Bouton Réserver --- */
 .btn-reserver {
-  // 1. On annule les contraintes de hauteur héritées
-  height: auto !important; 
-  min-height: 0 !important; 
-  line-height: 1.2 !important; // Réduit l'espace vertical du texte
-
-  // 2. On définit la taille par le padding (Vertical Horizontal)
-  padding: 8px 24px !important; 
-  
-  // 3. Alignement
+  height: auto !important;
+  min-height: 0 !important;
+  line-height: 1.2 !important;
+  padding: 8px 24px !important;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  align-self: flex-end; // Garde le bouton à droite
-  
-  // 4. Style visuel
+  align-self: flex-end; /* Aligne le bouton en bas à droite */
   background-color: #750849 !important;
-  color: white !important;
+  color: #fff !important;
   border-radius: 20px;
   text-decoration: none;
   font-weight: 600;
-  font-size: 0.95rem; // Un poil plus petit pour plus d'élégance
+  font-size: .95rem;
   gap: 8px;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: all .2s ease;
+  box-shadow: 0 4px 10px #0000004d;
+  width: auto !important;
 
-  &:hover {
+  &:hover, &:focus-visible {
     background-color: #8c0a57 !important;
-    transform: translateY(-2px); // Petit effet de levée au lieu de scale
+    transform: translateY(-2px);
   }
-  
-  // svg {
-  //   width: 16px !important;
-  //   height: 16px !important;
-  //   flex-shrink: 0; // Empêche l'icône de s'écraser
-  // }
 }
 
-
+/* Utility Class Accessibilité */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 /* --- Responsive --- */
 @media (max-width: 768px) {
-  .welcome-announcements-container {
-    flex-direction: column !important;
-    .news-card-container { height: 250px; flex: none !important; }
-    .announcements { flex: none !important; width: 100%; }
+  .main-landing-page {
+    // On réduit l'espace global de la page sur mobile
+    gap: 1.5rem;
+    padding-top: 1rem;
+
+    .welcome-announcements-container {
+      grid-template-columns: 1fr !important; /* Force l'affichage sur une seule colonne */
+      gap: 1.5rem !important; /* Réduit l'espace entre l'actu et l'annonce */
+      
+      .news-card-container { 
+        height: 250px !important; 
+        min-height: 250px !important; /* Évite que l'image ne devienne trop écrasée */
+        width: 100% !important;
+      }
+
+      .announcements {
+        width: 100% !important;
+        padding: 1.5rem !important; /* On réduit un peu le rembourrage interne sur mobile */
+      }
+    }
   }
 }
