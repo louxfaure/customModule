@@ -1,0 +1,117 @@
+.external-search-card {
+  position: relative;
+  margin: 16px 0;
+  padding: 16px;
+}
+
+/* Aligne le bouton de fermeture en haut à droite de la carte */
+.banner-actions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+}
+
+
+/* Conteneur principal de la carte */
+.external-search-card {
+  position: relative;
+  background-color: #ffffff;
+  border: 1px solid #e0dbd5;
+  border-radius: 12px;
+  padding: 20px 30px 16px 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  max-width: 700px;
+  margin: 16px auto;
+}
+
+.banner-actions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+}
+
+/* Contenu centré */
+.external-search-card mat-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+/* Zone des titres */
+.external-search-card .alert-titles h3 {
+  color: #333333;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+}
+
+.external-search-card .alert-titles p {
+  color: #555555;
+  font-size: 0.95rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Pillule de la recherche actuelle */
+.external-search-card .query-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background-color: rgba(163, 51, 109, 0.1);
+  color: #a3336d;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+.external-search-card .query-pill mat-icon {
+  font-size: 14px;
+  height: 14px;
+  width: 14px;
+}
+
+/* Alignement des logos (plus compact, sur une seule ligne) */
+.external-search-card .logos-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+/* Style des liens/images de logos */
+.external-search-card .logo-chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: all 0.2s ease-in-out;
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+}
+
+.external-search-card .logo-chip img {
+  height: 32px; /* Hauteur harmonisée et compacte pour les logos */
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* Effet au survol des logos */
+.external-search-card .logo-chip:hover,
+.external-search-card .logo-chip:focus {
+  border-color: #a3336d; /* Ta couleur principale */
+  box-shadow: 0 4px 8px rgba(163, 51, 109, 0.15);
+  transform: translateY(-2px);
+  outline: none;
+}

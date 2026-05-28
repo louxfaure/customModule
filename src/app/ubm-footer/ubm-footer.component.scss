@@ -1,0 +1,237 @@
+// Variables de design (à ajuster selon votre charte graphique globale)
+$color-bg-dark: #1e1e1e;       // Fond principal sombre du footer
+$color-bg-legal: #151515;      // Fond de la petite zone de copyright tout en bas
+$color-ubm-prune: #750849;     // Le bordeaux de l'université
+$color-text-muted: #ffffffe6;
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.custom-ubm-footer {
+  background-color: $color-bg-dark;
+  color: #ffffff;
+  font-family: inherit;
+  width: 100% !important;
+  box-sizing: border-box;
+  
+
+  /* --- PARTIE EN-TÊTE DU FOOTER (4 Colonnes) --- */
+  .footer-top-container {
+    padding: 3.5rem 2rem 2.5rem 2rem;
+    max-width: 1300px;
+    margin: 0 auto;
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .footer-column {
+      h2 {
+        color: #ffffff;
+        font-size: 1.1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin: 0 0 1.25rem 0;
+        position: relative;
+        padding-bottom: 8px;
+
+        // Petite ligne décorative sous les titres comme sur le web moderne
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 35px;
+          height: 2px;
+          background-color: $color-ubm-prune;
+        }
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          margin-bottom: 0.75rem;
+
+          a {
+            color: $color-text-muted;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s ease, padding-left 0.2s ease;
+
+            &:hover {
+              color: #ffffff;
+              padding-left: 4px; // Léger décalage au survol
+              text-shadow: 0 0 10px rgba(255,255,255,0.2);
+            }
+          }
+        }
+      }
+    }
+
+    /* Spécificités de la colonne logo institutionnel */
+    .brand-column {
+      .ubm-logo-link {
+        display: inline-block;
+        margin-bottom: 1.25rem;
+        transition: transform 0.2s ease;
+
+        &:hover {
+          transform: scale(1.03);
+        }
+      }
+
+      .ubm-main-logo {
+        max-width: 200px;
+        height: auto;
+        display: block;
+      }
+
+      .brand-text {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        color: $color-text-muted;
+        margin: 0 0 1.25rem 0;
+      }
+
+      .contact-link {
+        color: #ffffff;
+        text-decoration: none;
+        border-bottom: 2px solid $color-ubm-prune;
+        padding-bottom: 2px;
+        transition: background-color 0.2s ease, color 0.2s ease;
+
+        &:hover {
+          background-color: $color-ubm-prune;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+
+  /* --- PARTIE INFÉRIEURE (Message + Alignement des Logos) --- */
+  .footer-bottom-container {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--ubm-bg-color);
+
+    .network-instruction {
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 1.5rem;
+      color: var(--sys-primary);
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    /* Grille et Alignement des logos du réseau */
+    .footer-logo-alignment {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.25rem;
+      padding: 0 2rem 2.5rem 2rem;
+      max-width: 1200px;
+
+      .footer-logo-card {
+        background-color: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 130px;
+        height: 60px;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+        .network-logo-img {
+          max-height: 40px;
+          max-width: 100%;
+          object-fit: contain;
+          filter: grayscale(40%) brightness(0.9); // Unifie légèrement les rendus initiaux
+          transition: filter 0.2s ease;
+        }
+
+        /* Beaux effets de Hover au survol d'un logo du réseau */
+        &:hover {
+          transform: translateY(-4px); // Élévation
+          background-color: rgba(255, 255, 255, 0.95); // Devient blanc brillant pour faire ressortir l'image
+          border-color: #ffffff;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba($color-ubm-prune, 0.4);
+
+          .network-logo-img {
+            filter: grayscale(0%) brightness(1); // Le logo retrouve ses couleurs éclatantes d'origine
+          }
+        }
+      }
+    }
+
+    /* Zone Mentions Légales tout en bas */
+    .footer-legal {
+      background-color: $color-bg-legal;
+      width: 100%;
+      padding: 1.25rem 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-sizing: border-box;
+
+      a {
+        color: rgba(255, 255, 255, 0.5);
+        text-decoration: none;
+        margin: 0 8px;
+        transition: color 0.2s ease;
+
+        &:hover {
+          color: #ffffff;
+        }
+      }
+      
+      span {
+        display: inline-block;
+      }
+    }
+  }
+}
+
+
+
+/* --- RESPONSIVE TABLETTE & MOBILE --- */
+@media (max-width: 768px) {
+  .custom-ubm-footer {
+    .footer-top-container {
+      padding: 2rem 1.25rem 1.5rem 1.25rem;
+      
+      .footer-grid {
+        gap: 2rem;
+      }
+    }
+    
+    .footer-bottom-container {
+      .footer-logo-alignment {
+        gap: 0.75rem;
+        padding: 0 1.25rem 2rem 1.25rem;
+
+        .footer-logo-card {
+          min-width: 110px;
+          height: 50px;
+          padding: 0.5rem 1rem;
+        }
+      }
+    }
+  }
+}

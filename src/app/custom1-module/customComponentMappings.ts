@@ -4,6 +4,8 @@ import { UbmResourceTypeBarHookComponent } from '../ubm-resource-type-bar-hook/u
 import { UbmCustomAvailabilityComponent } from '../ubm-custom-availability-component/ubm-custom-availability.component';
 import {UbmHomepageActuComponent} from '../ubm-homepage-actu/ubm-homepage-actu.component'
 import {UbmHelpOverlayComponent} from '../ubm-help-overlay/ubm-help-overlay.component'
+import {UbmFooterComponent} from '../ubm-footer/ubm-footer.component'
+import {UbmCustomResultListAfterComponent} from '../ubm-custom-result-list-after/ubm-custom-result-list-after.component'
 
 // Define the map
 export const selectorComponentMap = new Map<string, any>([
@@ -11,6 +13,8 @@ export const selectorComponentMap = new Map<string, any>([
     ['nde-search-results-resource-type-bar-before', UbmResourceTypeBarHookComponent],
     ['nde-physical-availability-line-bottom', UbmCustomAvailabilityComponent],
     ['nde-landing-page',UbmHomepageActuComponent],
-    ['nde-footer-after',UbmHelpOverlayComponent]
+    ['nde-footer-bottom',UbmFooterComponent],
+    ['nde-search-results-after',UbmCustomResultListAfterComponent]
+    //['nde-footer-after',UbmHelpOverlayComponent]
     // ['nde-main-actions-before', UbmRecordActionsComponent]
 ]);

@@ -1,0 +1,128 @@
+@if (displayFooter) {
+<footer class="custom-ubm-footer">
+    <!-- Partie Haute : Colonnes d'informations -->
+    <div class="footer-top-container">
+        <div class="footer-grid">
+
+            <!-- Colonne 1 : Votre Institution (UBM) -->
+            <section class="footer-column brand-column">
+                <div class="brand-content">
+                    <a href="https://www.u-bordeaux-montaigne.fr" target="_blank" rel="noopener noreferrer"
+                        class="ubm-logo-link">
+                        <img src="assets/images/logos-etabs/33PUDB_UBM_LOGO_NB.png"
+                            alt="Logo Université Bordeaux Montaigne" class="ubm-main-logo">
+                    </a>
+                    <p class="brand-text">
+                        <strong>Université Bordeaux Montaigne</strong><br>
+                        Service Commun de Documentation<br>
+                        Domaine Universitaire<br>
+                        33607 Pessac Cedex
+                    </p>
+                    <p class="contact-link-wrapper">
+                        <a class="contact-link" href="https://extranet.u-bordeaux-montaigne.fr/rita_fo/?num_cg=59&num_form=1"
+                            target="_blank" rel="noopener noreferrer">
+                            <strong>Nous contacter</strong>
+                        </a>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Colonne 2 : Les Bibliothèques UBM -->
+            <section class="footer-column menu-column">
+                <h2>Vos Bibliothèques</h2>
+                <ul>
+                    <li>
+                        <a href="https://www.u-bordeaux-montaigne.fr/fr/bibliotheques/la-bibliotheque-lettres-et-sciences-humaines.html"
+                            target="_blank" rel="noopener noreferrer">
+                            Bibliothèque Lettres et SH
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.u-bordeaux-montaigne.fr/fr/bibliotheques/la-bibliotheque-rigoberta-menchu.html"
+                            target="_blank" rel="noopener noreferrer">
+                            Bibliothèque Rigoberta Menchú
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.u-bordeaux-montaigne.fr/fr/bibliotheques/la-bibliotheque-robert-etienne.html"
+                            target="_blank" rel="noopener noreferrer">
+                            Bibliothèque Robert Étienne
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.u-bordeaux-montaigne.fr/fr/bibliotheques/la-bibliotheque-universitaire-du-campus-du-pin-agen.html"
+                            target="_blank" rel="noopener noreferrer">
+                            BU du Campus du Pin (Agen)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.u-bordeaux-montaigne.fr/fr/bibliotheques/les-centres-de-ressources.html"
+                            target="_blank" rel="noopener noreferrer">
+                            Centres de ressources (CRM / IKER / GeoDock)
+                        </a>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Colonne 3 : Aide & Outils -->
+            <section class="footer-column menu-column">
+                <h2>Aide & Services</h2>
+                <ul>
+                    <li><a href="https://www.u-bordeaux-montaigne.fr/fr/documentation/informations-pratiques.html"
+                            target="_blank" rel="noopener noreferrer">Informations pratiques</a></li>
+                    <li><a href="https://www.u-bordeaux-montaigne.fr/fr/documentation/informations-pratiques/aide-sur-babord.html"
+                            target="_blank" rel="noopener noreferrer">Aide à la recherche</a></li>
+                    <li><a href="https://www.u-bordeaux-montaigne.fr/fr/documentation/informations-pratiques/reserver-une-salle-de-travail-en-bibliotheque-avec-affluences.html"
+                            target="_blank" rel="noopener noreferrer">Salles de travail & Réservations</a></li>
+                    <li><a href="https://www.u-bordeaux-montaigne.fr/fr/documentation/informations-pratiques/service_peb_pret_entre_bibliotheques.html"
+                            target="_blank" rel="noopener noreferrer">Prêt Entre Bibliothèques (PEB)</a></li>
+                    <li><a href="https://extranet.u-bordeaux-montaigne.fr/rita_fo/?num_cg=59&num_form=3"
+                            target="_blank" rel="noopener noreferrer">Suggestion d'achat</a></li>
+                </ul>
+            </section>
+
+            <!-- Colonne 4 : Réseau & Liens -->
+            <section class="footer-column menu-column">
+                <h2>Accès rapide</h2>
+                <ul>
+                    <li><a href="https://etu.u-bordeaux-montaigne.fr/fr/index.html" target="_blank" rel="noopener noreferrer">E.N.T.
+                            Etudiants</a></li>
+                    <li><a href="https://entp.u-bordeaux-montaigne.fr/fr/index.html" target="_blank" rel="noopener noreferrer">E.N.T.
+                            Personnesl</a></li>
+                    <li><a href="https://www.u-bordeaux-montaigne.fr/fr/actualites/bibliotheques.html"
+                            target="_blank" rel="noopener noreferrer">Actualités des bibliothèques</a></li>
+                    <li><a href="https://openagenda.com/fr/bibliotheques-universite-bordeaux-montaigne"
+                            target="_blank" rel="noopener noreferrer">Agenda culturel</a></li>
+                </ul>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Partie Basse : Le Message Réseau + Alignement des Logos avec effets -->
+    <div class="footer-bottom-container">
+        <div class="network-instruction">
+            {{ message }}
+        </div>
+
+        <div class="footer-logo-alignment">
+            @for (almaInst of institutionsList; track almaInst.code) {
+            <a class="footer-logo-card" [attr.href]="almaInst.url" [title]="almaInst.name" target="_blank"
+                rel="noopener noreferrer">
+                <img [src]="'assets/images/logos-etabs/33PUDB_' + almaInst.code + '_Logo.png'" [alt]="almaInst.name"
+                    class="network-logo-img" />
+            </a>
+            }
+        </div>
+
+        <div class="footer-legal">
+            <div>
+                <span><a href="https://scd.u-bordeaux-montaigne.fr/contenus/rgpd">Protection des données personnelles</a></span> -
+                <span><a href="#">Mentions légales</a></span> -
+                <span>© Copyright Université Bordeaux Montaigne</span>
+            </div>
+        </div>
+    </div>
+</footer>
+}
+<custom-ubm-help-overlay></custom-ubm-help-overlay>

@@ -1,0 +1,40 @@
+<mat-card class="external-search-card" *ngIf="showExternalSiteList">
+  
+  <!-- Bouton de fermeture aligné à droite -->
+  <div class="banner-actions">
+    <button mat-icon-button aria-label="Fermer et ne plus afficher ce message" (click)="externalSearchMsgOnClick()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <mat-card-content>
+    <div class="alert-titles">
+      <h3>{{ titleText || 'Vous ne trouvez pas le document que vous cherchez dans Babord+ ?' }}</h3>
+      <p>
+        {{ contentText || "N'hésitez pas à relancer votre recherche sur les sites suivants pour élargir les possibilités :" }}
+        <span class="query-pill" *ngIf="queryDisplay">
+          <mat-icon>label</mat-icon>
+          {{ queryDisplay }}
+        </span>
+      </p>
+    </div>
+    
+    <div class="logos-row">
+      <a [attr.href]="'http://www.sudoc.abes.fr/cbs/DB=2.1/SET=1/TTL=1/CMD?ACT=SRCHA&IKT=1016&SRT=RLV&TRM=' + queryTerm"
+         class="logo-chip" target="_blank" rel="noopener" aria-label="Rechercher sur le site Sudoc (ouvre un nouvel onglet)">
+        <img src="assets/images/logos-catalogues/logo_sudoc.png" alt="Sudoc" />
+      </a>
+      
+      <a [attr.href]="'https://isidore.science/s?q=' + queryTerm"
+         class="logo-chip" target="_blank" rel="noopener" aria-label="Rechercher sur le site Isidore (ouvre un nouvel onglet)">
+        <img src="assets/images/logos-catalogues/logo_isidore.png" alt="Isidore" />
+      </a>
+      
+      <a [attr.href]="'https://mediatheques.bordeaux-metropole.fr/osiros/result/resultat.php?type_rech=rs&index%5B%5D=fulltext&bool%5B%5D=&value%5B%5D=' + queryTerm + '&op=Ok&spec_expand=1'"
+         class="logo-chip" target="_blank" rel="noopener" aria-label="Rechercher sur le site Médiathèques Bordeaux Métropole (ouvre un nouvel onglet)">
+        <img src="assets/images/logos-catalogues/logo_metropole.png" alt="Médiathèques Bordeaux Métropole" />
+      </a>
+    </div>
+  </mat-card-content>
+
+</mat-card>

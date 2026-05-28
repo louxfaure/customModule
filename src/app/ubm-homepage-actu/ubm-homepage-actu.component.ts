@@ -19,31 +19,31 @@ import { Observable, map } from 'rxjs'; // Ajoute map dans tes imports rxjs
 export class UbmHomepageActuComponent implements OnInit {
   librariesData = [
     {"Name" : "Bibliothèque de Lettres et Sciences humaines",
-      "Image" : "assets/images/bibliotheque-bulsh.png",
+      "Image" : "assets/images/photos-bibs/bibliotheque-bulsh.png",
       "Url" : "https://www.u-bordeaux-montaigne.fr/fr/documentation/vos-bibliotheques/bibliotheque-de-lettres-et-sciences-humaines.html"
     },
     {"Name" : "Bibliothèque Rigoberta Menchú",
-      "Image" : "assets/images/bibliotheque-brm.png",
+      "Image" : "assets/images/photos-bibs/bibliotheque-brm.png",
       "Url" : "https://www.u-bordeaux-montaigne.fr/fr/documentation/vos-bibliotheques/bibliotheque-rigoberta-menchu.html"
     },
     {"Name" : "Bibliothèque Robert Étienne",
-      "Image" : "assets/images/bibliotheque-bre.png",
+      "Image" : "assets/images/photos-bibs/bibliotheque-bre.png",
       "Url" : "https://www.u-bordeaux-montaigne.fr/fr/documentation/vos-bibliotheques/bibliotheque-robert-etienne.html"
     },
     {"Name" : "Bibliothèque universitaire du campus du Pin (Agen)",
-      "Image" : "assets/images/bibliotheque-campusPin.png",
+      "Image" : "assets/images/photos-bibs/bibliotheque-campusPin.png",
       "Url" : "https://www.u-bordeaux-montaigne.fr/fr/documentation/vos-bibliotheques/bibliotheque-universitaire-du-campus-du-pin-agen.html"
     },
     {"Name" : "Centre de ressources Montaigne IUT/IJBA",
-      "Image" : "assets/images/bibliotheque-crm.png",
+      "Image" : "assets/images/photos-bibs/bibliotheque-crm.png",
       "Url" : "https://www.u-bordeaux-montaigne.fr/fr/documentation/vos-bibliotheques/centre_de_ressources_montaigne.html"
     },
     {"Name" : "Centre Regards – Espace GeoDock",
-      "Image" : "assets/images/bibliotheque-regards.jpg",
+      "Image" : "assets/images/photos-bibs/bibliotheque-regards.jpg",
       "Url" : "https://www.u-bordeaux-montaigne.fr/fr/documentation/vos-bibliotheques/centre-regards-espace-geodock.html"
     },
     {"Name" : "Centre de documentation sur la langue et les textes basques IKER - UMR 5478",
-      "Image" : "assets/images/bibliotheque-iker.jpg",
+      "Image" : "assets/images/photos-bibs/bibliotheque-iker.jpg",
       "Url" : "https://www.u-bordeaux-montaigne.fr/fr/documentation/vos-bibliotheques/centre-de-documentation-iker.html"
     }
   ]

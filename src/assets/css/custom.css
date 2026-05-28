@@ -27,10 +27,6 @@ body.mat-app-background {
 /* Message d'accueil */
 div.custom-search-bar-container h1 {
   display: none !important;
-  /* text-align: center;
-  color: var(--sys-on-primary-container) !important;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.5); */
-  /* padding-bottom:.5em */
 }
 
 
@@ -49,15 +45,15 @@ input#main-search-bar:focus-visible {
 .search_box_container {
   display: flex !important;
   align-items: stretch !important; /* Force tous les enfants directs à la même hauteur */
-  height: 3.6rem; 
+  /*height: 3.6rem; */
 }
 
 /* 2. Ajuster l'input et le premier bouton (dropdown) */
 #main-search-bar, 
 #contain-search-dropdown button {
   height: 100% !important;
-  line-height: 3.6rem !important;
-  margin: 0 !important;
+  /*line-height: 3.6rem !important;*/
+  margin: auto !important;
   display: flex;
   align-items: center;
 }
@@ -157,7 +153,9 @@ nde-search-bar-presenter .flex-row.ng-star-inserted {
 .advanced-search-btn-home-page {
   height: 3.4rem !important; /* Légèrement plus petits pour l'esthétique, ou 100% pour la même taille */
 }
-
+.main-landing-page{
+  margin-bottom: 0px !important;
+}
 /*#######################
 # Menu                  #
 #########################*/
@@ -305,6 +303,13 @@ nde-quick-filters button.quick-filter-btn-unselected{
 nde-quick-filters button.quick-filter-btn-active{
   background-color: #e9e9ed !important;
 }
+/*expand my result*/
+#expand-results-options-line{
+  margin-block-start: 0rem !important;
+  label {
+    font: var(--sys-body-medium);
+  }
+}
 
 /* ------------------------------------------------------------------ */
 /*  Facettes                                                    */
@@ -315,9 +320,104 @@ nde-filters-group#tlevel {
   display:none;
 }
 
-
-
 /* ------------------------------------------------------------------ */
+/*  Resource recommander                                              */
+/* ------------------------------------------------------------------ */
+/* 1. Rendre la carte moderne et flexible */
+.carousel-resource-recommender-card {
+  display: flex !important;
+  flex-direction: row !important; /* Aligne l'image et le texte proprement */
+  align-items: center !important;
+  gap: 20px !important;
+  padding: 20px !important;;
+  border-radius: 12px !important;; /* Coins arrondis modernes */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;; /* Ombre très douce */
+  border: 1px solid #eef2f6 !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+/* Effet au survol de la carte */
+.carousel-resource-recommender-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+.resource-img {
+  width: 100px !important;
+  height: 100px !important;
+  flex-shrink: 0 !important;
+  object-fit: contain !important;
+  background-color: #f8fafc !important;
+  padding: 8px !important;
+  border-radius: 8px !important;
+}
+
+/* 3. Habillage du contenu textuel */
+.resource-details {
+  padding-top: 0px !important;
+}
+
+/*On masque le ttpe de recommandation. Nous utilisons que les bases de données*/
+h3.resource-header{
+  display:none !important;
+}
+
+/*Boite de dialogue "Lire plus"*/
+/* 1. Structure globale du Dialog */
+.resource-recommender-dialog .mat-mdc-dialog-component-host {
+  display: block;
+  max-width: 500px;         /* Largeur maximale pour que ce soit élégant */
+  width: 100%;
+  background: #ffffff;
+  border-radius: 16px;      /* Coins bien arrondis pour le côté moderne */
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+/* 2. Le contenu interne (Padding et gestion du float) */
+.resource-recommender-dialog .mat-mdc-dialog-content {
+  padding: 24px 24px 16px 24px !important; /* Espacement aéré */
+  margin: 0 !important;
+}
+
+.resource-recommender-dialog .mat-mdc-card-content {
+  display: block; /* Important pour que le float fonctionne */
+}
+
+/* 3. L'image (Logo) flottante */
+.resource-recommender-dialog .mat-mdc-dialog-content .resource-img {
+  display: none!important;
+}
+
+
+.resource-recommender-dialog .mat-mdc-dialog-content .link-container {
+  display: inline;
+}
+
+.resource-recommender-dialog .mat-mdc-dialog-content .link-container a {
+  font-size: 1.2rem;       /* Titre plus important dans le dialog */
+  font-weight: 700;
+  color: #0f172a;          /* Couleur presque noire, très qualitative */
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-right: 8px;       /* Espace avant que la description ne commence */
+}
+
+
+/* Sécurité anti-débordement du float */
+.resource-recommender-dialog .mat-mdc-card-content::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+
+
+
+/*------------------------------------------------------------------ */
 /*  Affichage bref                                                    */
 /* ------------------------------------------------------------------ */
 
@@ -531,10 +631,16 @@ nde-full-display-container div.search-result-item {
 - Demandes -
 -----------*/
 /* On masque les demandes */
-div#nde\.request\.title{
-  display: none !important;
+div#nde\.request\.title {
+  display:none !important;
 }
-
+/*---------
+- Liens -
+-----------*/
+/* On masque les liens */
+div#nui\.brief\.results\.tabs\.links {
+  display:none !important; 
+}
 /*---------
 - geitt et viewit + disponibilité dans une autre institution -
 -----------*/
