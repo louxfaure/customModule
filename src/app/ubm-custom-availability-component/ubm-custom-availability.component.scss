@@ -9,27 +9,6 @@ nde-physical-availability-line {
 // ------------------------------------------------------------------ //
 //  Variables de statut
 // ------------------------------------------------------------------ //
-:host {
-  --ubm-available-color:      #2e7d32;
-  --ubm-available-bg:         #f0f7f0;
-  --ubm-available-bg-hover:   #dff0df;
-  --ubm-available-border:     #a5d6a7;
-
-  --ubm-unavailable-color:    #b71c1c;
-  --ubm-unavailable-bg:       #fdf2f2;
-  --ubm-unavailable-bg-hover: #fde0e0;
-  --ubm-unavailable-border:   #ef9a9a;
-
-  --ubm-check-color:          #e65100;
-  --ubm-check-bg:             #fff8f0;
-  --ubm-check-bg-hover:       #fdecd8;
-  --ubm-check-border:         #ffcc80;
-
-  --ubm-unknown-color:        var(--sys-on-surface-variant, #554249);
-  --ubm-unknown-bg:           var(--sys-surface-container, #f5ebed);
-  --ubm-unknown-bg-hover:     var(--sys-surface-container-high, #efe6e8);
-  --ubm-unknown-border:       var(--sys-outline-variant, #dac0c8);
-}
 
 // ------------------------------------------------------------------ //
 //  Conteneur — flex wrap, les boutons ne s'étirent pas

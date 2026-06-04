@@ -6,6 +6,7 @@ import {UbmHomepageActuComponent} from '../ubm-homepage-actu/ubm-homepage-actu.c
 import {UbmHelpOverlayComponent} from '../ubm-help-overlay/ubm-help-overlay.component'
 import {UbmFooterComponent} from '../ubm-footer/ubm-footer.component'
 import {UbmCustomResultListAfterComponent} from '../ubm-custom-result-list-after/ubm-custom-result-list-after.component'
+import {UbmItemHookComponent} from '../ubm-item-hook/ubm-item-hook.component'
 
 // Define the map
 export const selectorComponentMap = new Map<string, any>([
@@ -14,7 +15,8 @@ export const selectorComponentMap = new Map<string, any>([
     ['nde-physical-availability-line-bottom', UbmCustomAvailabilityComponent],
     ['nde-landing-page',UbmHomepageActuComponent],
     ['nde-footer-bottom',UbmFooterComponent],
-    ['nde-search-results-after',UbmCustomResultListAfterComponent]
+    ['nde-search-results-after',UbmCustomResultListAfterComponent],
+    ['nde-location-item-top',UbmItemHookComponent]
     //['nde-footer-after',UbmHelpOverlayComponent]
     // ['nde-main-actions-before', UbmRecordActionsComponent]
 ]);

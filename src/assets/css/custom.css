@@ -429,12 +429,6 @@ h3.resource-header{
   /* transition: transform 0.2s ease; */
 }
 
-/* Effet au survol d'un résultat */
-.search-result-item:hover {
-  border-color: #8A1538;
-  transform: translateY(-2px);
-}
-
 /*Lien signalant les groupements FRBR*/
 .frbr-line-badge .mat-icon svg rect,
 mat-icon[data-mat-icon-name='frbr-list'] svg rect {
@@ -621,12 +615,17 @@ nde-full-display-navigation {
   padding-bottom:1rem;
   width:100%
 }
+
+
 /*---------
 - Affichage Bref -
 -----------*/
 nde-full-display-container div.search-result-item {
   border-radius: 8px !important;
 }
+nde-full-display-service-container>div>mat-divider{
+  display: none !important;
+} 
 /*---------
 - Demandes -
 -----------*/
@@ -645,17 +644,19 @@ div#nui\.brief\.results\.tabs\.links {
 - geitt et viewit + disponibilité dans une autre institution -
 -----------*/
 /* Proprités du conteneur */
-.getit-location-card, .view-it-card-container,.view-it-other-service-card {
+.getit-location-card, .view-it-card-container,.view-it-other-service-card, .full-display-details-container, .full-display-wrapper .search-result-item{
   border-radius: 8px !important;
   background-color: var(--whiteBG) !important;
+  border: 1px solid var(--border);
 }
 
 div.location-brief-properties-container,nde-holding-properties, .view-it-text, .other-location-details, .get-it-other-description{
   font-size: 14px !important;
 }
+/* ==========================================================================
+   Get it Ligne d'affichage Disponibilité, Localisation Cote
+   ========================================================================== */
 
-/*Get it Ligne d'affichage Disponibilité, Localisation Cote */
-/*On remplace le ; et la virgule par des > on préfixe la cote et la localisation*/
 /* Ajout du chevron après Disponible */
 div.location-brief-properties-container [data-qa="location-availability"]::after, div.other-location-details [data-qa="other-location-availability"]::after {
     content: " >";
@@ -691,8 +692,116 @@ div.location-brief-properties-container  .location-copies, div.other-location-de
     color: #666;
 }
 
-/*View it */
+/* ==========================================================================
+   Liste des Exemplaires
+   ========================================================================== */
+/* Masque le boutton qui permet de déplier l'accordéon */
+nde-location-items-container nde-expand-collapse{
+  display: none !important;
+   }
 
+body nde-location-item {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  background-color: #ffffff !important;
+  border-bottom: 1px solid #e0e0e0 !important;
+  padding: 8px 16px !important;
+}
+
+/* Ton composant custom à gauche */
+body nde-location-item ng-component {
+  flex: 1 !important;
+  display: block !important;
+  pointer-events: auto !important; /* On s'assure qu'on peut survoler ton texte */
+  
+  .custom-brief-properties {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 24px !important;
+  }
+}
+
+/*VERROUILLER L'ACCORDÉON (EMPÊCHER LE DÉPLIEMENT) */
+body nde-location-item mat-expansion-panel {
+  flex: 0 0 auto !important;
+  background: transparent !important;
+  box-shadow: none !important;
+
+  /*On bloque TOUS les clics sur l'entête de l'accordéon */
+  mat-expansion-panel-header {
+    pointer-events: none !important; 
+    cursor: default !important;
+    padding: 0 !important;
+    background: transparent !important;
+
+    /* RE-AUTORISER LES BOUTONS : On redonne le droit de cliquer UNIQUEMENT 
+       sur le conteneur des boutons (Demander / Numériser) */
+    nde-location-item-service-button,
+    button,
+    .grid-header {
+      pointer-events: auto !important; 
+    }
+  }
+
+  /* Nettoyage des anciens textes de B+ */
+ /* On cible tous les blocs de propriété... */
+.grid-header > div.getit-items-brief-property {
+  
+  /* ... et on masque UNIQUEMENT ceux qui ne contiennent PAS de bouton */
+  &:not(:has(button)):not(:has(nde-location-item-service-button)) {
+    display: none !important;
+  }
+}
+
+  .grid-header {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 12px !important; /* Espace entre les boutons s'il y en a plusieurs */
+    --columns: auto !important;
+    padding: 0 !important;
+  }
+}
+
+/*Surprrimer la flêche de l'accordéon */
+body nde-location-item .mat-expansion-indicator {
+  display: none !important; /* Fait disparaître la flèche native SVG */
+}
+
+
+/* ==========================================================================
+   Bouttons réserver et numériser
+   ========================================================================== */
+  
+  /* On cible l'élément de texte à l'intérieur du bouton */
+  button span.getit-service-button::before {
+    font-family: "Material Icons" !important;
+    font-size: 20px !important;
+    color: var(--sys-primary) !important;
+    margin-right: 6px !important;
+    vertical-align: middle !important;
+    display: inline-block !important;
+    line-height: 1 !important;
+  }
+
+  /* ==========================================================================
+     ICÔNE COMPORTEMENT 1 : BOUTON "DEMANDER" (AlmaItemRequest)
+     ========================================================================== */
+  button[data-qa="AlmaItemRequest"] span.getit-service-button::before, button[data-qa="alma-request-button-AlmaRequestOther"] span.getit-service-button::before, button[data-qa="alma-request-button-AlmaRequest"] span.getit-service-button::before  {
+    content: "event" !important; /* Icône de calendrier/planification */
+  }
+
+  /* ==========================================================================
+     ICÔNE COMPORTEMENT 2 : BOUTON "NUMÉRISATION" (AlmaItemDigitization)
+     ========================================================================== */
+  button[data-qa="AlmaItemDigitization"] span.getit-service-button::before, button[data-qa="alma-request-button-AlmaDigitization"] span.getit-service-button::before {
+    content: "document_scanner" !important; /* Icône de scanner (ou "monochrome_photos", "print") */
+  }
+
+/* ==========================================================================
+   View it
+   ========================================================================== */
 /* Indication visuelle d'un lien externe */
 .package-name::before {
   content: "";
@@ -731,6 +840,12 @@ nde-view-it-section:nth-child(2) .view-it-text h3 {
 /*---------
 - Notices -
 -----------*/
+
+.full-display-details-container{
+  padding: 16px;
+}
+
+
 /* TOC reprise ancienne CSS pur l'instant les balises css ne sont pas interprétées */
 .toc1,
 .toc1_alone {
@@ -804,3 +919,4 @@ nde-view-it-section:nth-child(2) .view-it-text h3 {
         padding-left: 45px;
     }
 }
+

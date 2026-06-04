@@ -1,5 +1,5 @@
 <!-- Cas no_inventory -->
-<div class="ubm-holdings-list" *ngIf="physicalAvailability === 'no_inventory'">
+<div class="ubm-holdings-list" *ngIf="!isFullDisplay && physicalAvailability === 'no_inventory'">
   <button class="ubm-holding-row ubm-holding--unknown" (click)="onHoldingClick($event)">
 
     <!-- Icône livre (colonne gauche) -->
@@ -24,7 +24,7 @@
 </div>
 
 <!-- Liste des holdings -->
-<div class="ubm-holdings-list" *ngIf="holdings.length > 0">
+<div class="ubm-holdings-list" *ngIf="!isFullDisplay && holdings.length > 0">
   <button
     *ngFor="let holding of holdings"
     class="ubm-holding-row"

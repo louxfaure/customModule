@@ -64,6 +64,8 @@ export class UbmCustomAvailabilityComponent {
   holdings: Holding[] = [];
   physicalAvailability: string | null = null;
   private originalAvailabilityEl: HTMLElement | null = null;
+  isFullDisplay: boolean = false;
+
 
   // ------------------------------------------------------------------ //
   //  Inputs Primo
@@ -75,6 +77,7 @@ export class UbmCustomAvailabilityComponent {
     this.physicalAvailability  = value.physicalAvailability;
     this.holdings = value.docDelivery?.holding ?? [];
     console.log('[UBM-Availability] holdings :', this.holdings);
+    this.isFullDisplay = window.location.href.includes('fulldisplay');
   }
 
   @Input() set parentElement(el: HTMLElement) {
@@ -128,27 +131,6 @@ export class UbmCustomAvailabilityComponent {
   console.error('[UBM-Availability] Impossible de trouver le bouton parent de cette notice');
 }
 
-
-
-  // 2. On remonte au conteneur de la notice (ex: prm-brief-result-container ou nde-availability-line)
-  // Remplace 'prm-brief-result-container' par le sélecteur du bloc qui englobe UNE notice
-  // if (originalBtn) {
-  //   console.log('[UBM-Availability] délégation clic → bouton original');
-  //   originalBtn.click();
-  //   return;
-  // }
-
-  // // Fallback : chercher dans tout le document si parentElement n'était pas bon
-  // console.warn('[UBM-Availability] bouton introuvable via originalAvailabilityEl, fallback document');
-  // const fallbackBtn = document
-  //   .querySelector<HTMLButtonElement>('nde-physical-availability-line button.available-at-button');
-
-  // if (fallbackBtn) {
-  //   fallbackBtn.click();
-  // } else {
-  //   console.error('[UBM-Availability] bouton .available-at-button introuvable dans tout le document');
-  // }
-// }
 
   // ------------------------------------------------------------------ //
   //  Clic carte → ne pas propager

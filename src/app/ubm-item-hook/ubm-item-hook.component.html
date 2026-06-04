@@ -1,0 +1,27 @@
+
+<div class="custom-brief-properties" *ngIf="itemData">
+  <div class="property-item ubm">
+    <span class="mat-body-medium" [ngClass]="{ 'item-available': isItemAvailable(), 'item-unavailable': !isItemAvailable() }">
+      {{ itemData.itemstatusname }}
+    </span>
+  </div>
+
+<div class="property-item ubm">
+    <a *ngIf="loginLink"
+       [attr.href]="authService.getLoginUrl()" 
+       class="login-link mat-body-medium" 
+       role="link">
+      {{ fieldTwo }}
+    </a>
+
+    <span *ngIf="!loginLink" class="mat-body-medium">
+      {{ fieldTwo }}
+    </span>
+  </div>
+
+  <div class="property-item ubm">
+    <span class="mat-body-medium">
+      {{ fieldThree }}
+    </span>
+  </div>
+</div>

@@ -86,7 +86,7 @@
         <div *ngIf="activeTab === 0" class="tab-pane fadeIn">
           <div class="content-header">
             5 raisons de
-            <a href="#" class="login-link">
+            <a [attr.href]="authService.getLoginUrl()" class="login-link" id="myLibraryCard" tabindex="0" aria-label="Go to my library card" role="link">
               <svg viewBox="0 0 24 24" class="login-icon">
                 <path
                   d="M10,17.25V14H3V10H10V6.75L15.25,12L10,17.25M8,2H17A2,2 0 0,1 19,4V20A2,2 0 0,1 17,22H8A2,2 0 0,1 6,20V16H8V20H17V4H8V8H6V4A2,2 0 0,1 8,2Z">
