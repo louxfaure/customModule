@@ -1,0 +1,110 @@
+/* Style du séparateur textuel */
+.or-separator {
+  text-align: center;
+  margin: 5px 0 15px 0;
+  position: relative;
+  
+  span {
+    color: #656a6e; /* Couleur discrète type Primo */
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background-color: #ffffff; /* Ajuster selon le fond du dialog pour masquer la ligne derrière */
+    padding: 0 10px;
+    z-index: 1;
+    position: relative;
+  }
+
+  // Petite ligne horizontale subtile qui traverse le "OU"
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    right: 1rem;
+    height: 1px;
+    background-color: #e0e0e0;
+    z-index: 0;
+  }
+}
+.other-login-label {
+  margin: 0 1rem 15px 1rem;
+  display: flex;
+  flex-direction: column; /* Aligne les deux balises span l'une en dessous de l'autre */
+  gap: 4px; /* Espace subtil entre les deux lignes de texte */
+  text-align: center;
+  
+  // Première ligne : la question
+  span.title {
+    color: var(--sys-primary);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  // Deuxième ligne : l'explication/invitation
+  span.text {
+    color: #5f6368; /* Gris plus doux */
+    font-size: 0.8rem;
+    font-weight: 400;
+  }
+}
+/* Conteneur global du select */
+.custom-select-container {
+  position: relative;
+  margin: 0 1rem 20px 1rem;
+  display: block;
+}
+
+/* Le Select Moderne */
+.modern-select {
+  width: 100%;
+  height: 50px; /* Aligné sur la hauteur standard des boutons Material */
+  padding: 0 40px 0 16px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: #1f1f1f;
+  background-color: #f8f9fa; /* Fond légèrement grisé type "Filled text field" */
+  border: 1px solid #c7c7c7;
+  border-radius: 8px; /* Angles arrondis modernes */
+  cursor: pointer;
+  appearance: none; /* Supprime la flèche par défaut du navigateur (Chrome/Safari/Firefox) */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: all 0.2s ease-in-out;
+
+  /* Effet au survol */
+  &:hover {
+    background-color: #f1f3f4;
+    border-color: #8e9193;
+  }
+
+  /* Effet quand on clique / focus dessus */
+  &:focus {
+    outline: none;
+    background-color: #ffffff;
+    border-color: var(--sys-primary); /* Bleu Material standard */
+    box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+  }
+}
+
+/* Flèche personnalisée */
+.select-arrow {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #5f6368; /* Couleur grise Material */
+  pointer-events: none; /* Permet de cliquer à travers la flèche */
+  transition: transform 0.2s ease;
+}
+
+/* Animation de la flèche quand le select est ouvert (optionnel sur certains navigateurs) */
+.modern-select:focus + .select-arrow {
+  border-top-color: var(--sys-primary);
+  transform: translateY(-50%) rotate(180deg);
+}

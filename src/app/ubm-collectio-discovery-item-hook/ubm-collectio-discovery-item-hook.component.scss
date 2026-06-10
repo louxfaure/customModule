@@ -1,0 +1,43 @@
+// 1. On cible le conteneur global de l'item Primo pour le rendre "référent"
+::ng-deep nde-collection-discovery-gallery-item {
+  position: relative; /* Indispensable pour servir d'ancre à notre bloc */
+  padding-bottom: 45px !important; /* On crée de la place artificielle en bas de la grille */
+}
+
+// 2. On configure l'hôte de votre composant
+:host {
+  display: block;
+  position: absolute; /* On sort le composant du flux normal */
+  bottom: 12px;       /* On le place à 12px du bord inférieur de la grille */
+  left: 16px;         /* Alignement horizontal aligné sur le titre */
+  right: 16px;        /* Largeur automatique calée sur les bords */
+  z-index: 10;        /* S'assure qu'il passe au-dessus des fonds */
+}
+
+// 3. Style de votre bloc d'informations
+.infoEx {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: transparent;
+
+  p {
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .firstLine {
+    font-weight: 600;
+    color: #212529; /* Couleur de l'auteur */
+  }
+
+  .secondLine {
+    font-weight: 400;
+    font-style: italic;
+    color: #6c757d; /* Couleur de l'éditeur */
+  }
+}

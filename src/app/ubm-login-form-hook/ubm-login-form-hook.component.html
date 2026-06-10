@@ -1,0 +1,17 @@
+<div class="or-separator">
+  <span>OU</span>
+</div>
+<div class="other-login-label">
+  <span class="title">Vous êtes membre d'un autre établissement du réseau bordelais ?</span> 
+    <span class="text">Connectez vous au Babord + de votre institution. </span>
+</div>
+    
+<div class="custom-select-container">
+  <select (change)="SurChangementInstitution($event)" class="modern-select">
+    <option value="" disabled selected>Choisir mon Babord +...</option>
+    <option *ngFor="let inst of filteredInstitutions" [value]="inst.redirectUrl">
+      {{ inst.name }}
+    </option>
+  </select>
+  <div class="select-arrow"></div>
+</div>

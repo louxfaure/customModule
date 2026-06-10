@@ -480,10 +480,7 @@ nde-online-availability .availability-container {
 /* ------------------------------------------------------------------ */
 /*  Card de base — commune aux deux cas                                 */
 /* ------------------------------------------------------------------ */
- /* --ubm-available-color:      #2e7d32;
-  --ubm-available-bg:         #f0f7f0;
-  --ubm-available-bg-hover:   #dff0df;
-  --ubm-available-border:     #a5d6a7; */
+
 nde-online-availability .quicklink-button {
   display: inline-grid !important;
   grid-template-columns: 36px 1fr auto !important;
@@ -498,9 +495,9 @@ nde-online-availability .quicklink-button {
 
   padding: 8px 10px 8px 8px !important;
   border-radius: 8px !important;
-  border: 1px solid #a5d6a7 !important;
-  color:#2e7d32 !important;
-  background: #f0f7f0 !important;
+  border: 1px solid var(--ubm-available-border) !important;
+  color:var(--ubm-available-color) !important;
+  background: var(--ubm-available-bg) !important;
   box-shadow: 0 1px 2px rgba(0, 0, 0, .06) !important;
   transition: background 0.18s ease, box-shadow 0.18s ease !important;
   text-align: left !important;
@@ -520,7 +517,7 @@ nde-online-availability .quicklink-button::before {
   width: 36px;
   height: 36px;
   border-radius: 6px;
-  color:#2e7d32 !important;
+  color:var(--ubm-available-color) !important;
   background-color: #dff0df;
   background-repeat: no-repeat;
   background-position: center;
@@ -544,7 +541,7 @@ nde-online-availability .quicklink-button .mdc-button__label > span {
   font-family: var(--sys-body-medium-font, 'Noto Sans Display', sans-serif) !important;
   font-size: var(--sys-label-medium-size, .75rem) !important;
   font-weight: var(--sys-label-medium-weight, 500) !important;
-  color:#2e7d32 !important;
+  color:var(--ubm-available-color) !important;
   white-space: normal !important;
   word-break: break-word !important;
   line-height: 1.3 !important;
@@ -571,7 +568,7 @@ nde-online-availability .quicklinks-expand-button {
   width: 32px !important;
   height: 32px !important;
   border-radius: 8px !important;
-  border: 1px solid var(--sys-outline-variant, #a5d6a7) !important;
+  border: 1px solid var(--sys-outline-variant, var(--ubm-available-border)) !important;
   background: var(--sys-surface-container-low, #dff0df) !important;
   box-shadow: 0 1px 2px rgba(0, 0, 0, .06) !important;
   transition: background 0.18s ease, box-shadow 0.18s ease !important;
@@ -593,7 +590,7 @@ nde-online-availability .quicklinks-expand-button .mat-icon {
   display: inline-block;
   width: 61px;  /* La taille de tes icônes originales */
   height: 61px;
-  fill: #2e7d32; /* Pour être sûr que la couleur est appliquée */
+  fill: var(--ubm-available-color); /* Pour être sûr que la couleur est appliquée */
 }
 
 /* Très important pour que le contenu du symbole soit visible */
@@ -920,3 +917,94 @@ nde-view-it-section:nth-child(2) .view-it-text h3 {
     }
 }
 
+/*====================
+=== Compte lecteur ===
+======================*/
+
+/* On masque la rubrique Amende & frais */
+
+li:has(mat-icon[data-mat-icon-name="accountFines"]),
+div.account-card-wrapper:has(nde-fines-overview) {
+    display: none !important;
+}
+
+/**/
+.account-badge-warn{
+  background-color: var(--sys-primary) !important;
+}
+/* Liste document emprunté Couleur pastille */
+a:has(.loan-due-indication)>.mat-icon svg path,
+.loan-due-line .loan-due-indication svg path{
+    fill: var(--sys-primary) !important;
+}
+
+
+/*====================
+===      AtoZ      ===
+======================*/
+/* On réduit la taille des boutons pour la recherche par première lettre */
+.atoz-component .alphabet-grid .atoz-button {
+  min-width: 20px !important;
+  height: 32px !important;
+  color : var(--sys-primary) !important;
+}
+
+.collection-discovery-header {
+  background: var(--sys-primary) !important;
+  color: var(--whiteText);
+}
+
+.collection-discovery-header-title {
+  font-size : 1.8em !important;
+}
+
+.collection-discovery-gallery-container{
+  margin-block-start:1rem;
+}
+
+#collectionTitle{
+  font-size: 2.5em !important;
+}
+
+/* Fil d'ariane */
+
+/* --- Liens du Fil d'Ariane --- */
+a.collection-path {
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  /* Préparation pour l'animation de zoom */
+  display: inline-block; /* Nécessaire pour appliquer 'transform' */
+  /* Animation douce du zoom (0.2s) avec la courbe 'ease-out' pour plus de réactivité */
+  transition: transform 0.2s ease-out; 
+  will-change: transform; /* Optimisation pour le navigateur */
+}
+
+/* --- Effet au survol (Hover) --- */
+a.collection-path:hover {
+  /* Le cœur de votre demande : un léger zoom (5%) */
+  transform: scale(1.05); 
+  /* Optionnel : vous pouvez ajouter un très léger éclaircissement/ombre
+     pour renforcer l'effet si vous le souhaitez.
+     Exemple : filter: brightness(1.1); */
+}
+
+/* --- Gestion du Séparateur (Le "/" natif) --- */
+/* On cache le texte brut "/" pour le remplacer par une icône CSS plus moderne */
+.collection-path-container > span {
+  font-size: 0px; /* Cache le "/" textuel */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 4px;
+}
+
+/* Création de la flèche moderne (>) en pur CSS */
+.collection-path-container > span::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid #adb5bd; /* Couleur de la flèche */
+  border-top: 2px solid #adb5bd;
+  transform: rotate(45deg); /* Rotation pour faire une flèche vers la droite */
+}

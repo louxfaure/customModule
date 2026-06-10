@@ -38,17 +38,18 @@ if (prop === 'get') {
               };
 
               const creators: string[] = (pnxDisplay?.creator || []).map(cleanField);
+               console.log("auteurs. :",creators); 
               const contributors: string[] = (pnxDisplay?.contributor || []).map(cleanField);
-              
+              console.log("Contrib. :",contributors);  
               // Combiner les deux listes
               const allAuthors = [...creators, ...contributors];
+            
               
-              // Si on a des auteurs, retourner la liste formatée
+              // Si on a des auteurs, retourner un string formatée
               if (allAuthors.length > 0) {
-                return allAuthors.map(author => ({
-                  text: author,
-
-                }));
+                return [{
+                  text: allAuthors.join('; ')
+                }];
               }
             }
             
