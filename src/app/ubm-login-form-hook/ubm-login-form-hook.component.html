@@ -1,14 +1,14 @@
 <div class="or-separator">
-  <span>OU</span>
+  <span>{{ 'login-form.separator' | translate }}</span>
 </div>
 <div class="other-login-label">
-  <span class="title">Vous êtes membre d'un autre établissement du réseau bordelais ?</span> 
-    <span class="text">Connectez vous au Babord + de votre institution. </span>
+  <span class="title">{{ 'login-form.title' | translate }}</span> 
+    <span class="text">{{ 'login-form.text' | translate }}</span>
 </div>
     
 <div class="custom-select-container">
   <select (change)="SurChangementInstitution($event)" class="modern-select">
-    <option value="" disabled selected>Choisir mon Babord +...</option>
+    <option value="" disabled selected>{{ 'login-form.invitelist' | translate }}</option>
     <option *ngFor="let inst of filteredInstitutions" [value]="inst.redirectUrl">
       {{ inst.name }}
     </option>

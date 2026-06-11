@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+
 
 // Définition d'une interface pour typer proprement les institutions
 interface Institution {
@@ -13,7 +15,7 @@ interface Institution {
 @Component({
   selector: 'custom-ubm-login-form-hook',
   standalone: true,
-  imports: [CommonModule], // Obligatoire pour le *ngFor
+  imports: [CommonModule,TranslateModule], // Obligatoire pour le *ngFor
   templateUrl: './ubm-login-form-hook.component.html',
   styleUrl: './ubm-login-form-hook.component.scss'
 })

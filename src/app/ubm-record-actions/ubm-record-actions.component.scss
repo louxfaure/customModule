@@ -1,0 +1,11 @@
+/* S'aligne sur la classe .mat-icon.nde-mat-icon-size de votre CSS global */
+.nde-mat-icon-size {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Force l'icône à hériter de la couleur définie par le thème de Primo */
+.action-button mat-icon {
+  color: var(--secondaryActionIcon) !important;
+}
