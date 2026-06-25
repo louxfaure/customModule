@@ -311,18 +311,85 @@ nde-quick-filters button.quick-filter-btn-active{
   }
 }
 
-/* ------------------------------------------------------------------ */
-/*  Facettes                                                    */
-/* ------------------------------------------------------------------ */
+/*##############################################
+# Facettes                                     #
+################################################*/
+
+  /* AFA20260315Tlevel 
+   Masquer spécifiquement les filtres "Articles évalués par les pairs" et "Open Access"
+   dans le bloc de facettes tlevel */
+
+    nde-filters-group#tlevel button[data-qa="tlevel.peer_reviewed"],
+    nde-filters-group#tlevel button[data-qa="tlevel.peer_reviewed"] + button.exclude-btn,
+    nde-filters-group#tlevel h4:has(+ mat-checkbox [data-qa="tlevel.peer_reviewed"]) {
+      display: none !important;
+    }
+
+    nde-filters-group#tlevel button[data-qa="tlevel.open_access"],
+    nde-filters-group#tlevel button[data-qa="tlevel.open_access"] + button.exclude-btn,
+    nde-filters-group#tlevel h4:has(+ mat-checkbox [data-qa="tlevel.open_access"]) {
+      display: none !important;
+    }
+
+    /* Masquer le conteneur global (la checkbox et son libellé) pour ne pas laisser d'espace vide */
+    nde-filters-group#tlevel nde-filters-value:has(button[data-qa="tlevel.peer_reviewed"]),
+    nde-filters-group#tlevel nde-filters-value:has(button[data-qa="tlevel.open_access"]) {
+      display: none !important;
+    }
+
 /* AFA20260315Tlevel La tlevel est affichée à la fois sous le masque de recherche et dans la liste des facettes
-Si on la désactive dans la configuration de la vue, elle disparait partout. On la masque donc en css*/
-nde-filters-group#tlevel {
-  display:none;
+Si on la désactive dans la configuration de la vue, elle disparait partout. On la masque donc en css. On la conserve sur mobile car les boutons aparaissent*/
+@media (min-width: 960px) {
+  nde-filters-group#tlevel {
+    display: none;
+  }
+
 }
 
-/* ------------------------------------------------------------------ */
-/*  Resource recommander                                              */
-/* ------------------------------------------------------------------ */
+/* ==========================================================================
+   Gestion de l'affichage conditionnel des cases à cocher (Facettes)
+   ========================================================================== */
+
+/* 1. Par défaut : on masque le fond et la bordure de la checkbox */
+nde-filters-group .mdc-checkbox__background {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out !important;
+}
+
+/* 2. Au survol de la ligne (la valeur de la facette) : on fait apparaître la checkbox */
+nde-filters-group nde-filters-value:hover .mdc-checkbox__background {
+  opacity: 0.4; /* Légèrement transparent au survol pour inciter au clic */
+  transform: scale(1);
+}
+
+/* Au survol direct de la zone de la checkbox : opacité pleine */
+nde-filters-group .mdc-checkbox:hover .mdc-checkbox__background {
+  opacity: 1 !important;
+}
+
+/* ==========================================================================
+   Si au moins UNE case est cochée dans ce groupe de filtres
+   ========================================================================== */
+
+/* Si le groupe de filtres contient un input nativement coché (:checked) 
+   alors TOUTES les checkboxes du groupe redeviennent visibles par défaut */
+nde-filters-group:has(input.mdc-checkbox__native-control:checked) .mdc-checkbox__background {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* 3. Sécurité : On s'assure que la checkbox REELLEMENT cochée reste visible à 100% 
+   (même si on ne survole pas la ligne) */
+nde-filters-group input.mdc-checkbox__native-control:checked + .mdc-checkbox__background {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+}
+
+
+/*##############################################
+# Resource Recommander                         #
+################################################*/
 /* 1. Rendre la carte moderne et flexible */
 .carousel-resource-recommender-card {
   display: flex !important;
@@ -623,12 +690,36 @@ nde-full-display-container div.search-result-item {
 nde-full-display-service-container>div>mat-divider{
   display: none !important;
 } 
+/* On masque auqssi le bloc de disponibilité pour la doc elec */
+.full-display-wrapper nde-online-availability{
+  display: none !important;
+} 
 /*---------
 - Demandes -
 -----------*/
 /* On masque les demandes */
-div#nde\.request\.title {
+/* div#nde\.request\.title {
   display:none !important;
+} */
+/* ==========================================================================
+   Masquage du bloc de demandes si aucune option n'est disponible
+   ========================================================================== */
+
+/* Masque le composant parent des requêtes s'il est vide de cartes (i.e. pas de requête disponible pour le titre)*/
+
+div[id="nde.request.title"]:not(:has(nde-request-card)) {
+  display: none !important;
+}
+::ng-deep div[id="nde.request.title"]:not(:has(nde-request-card)) {
+  display: none !important;
+}
+.item-level-request-msg-container {
+  display: none !important;
+}
+
+/* Si le bouton connecté est présent dans la page, on masque DIRECTEMENT l'alerte en CSS */
+body:has(#user-area-button.user-area-logged-in) #ubm-magasin-warning {
+  display: none !important;
 }
 /*---------
 - Liens -
@@ -948,6 +1039,22 @@ a:has(.loan-due-indication)>.mat-icon svg path,
   height: 32px !important;
   color : var(--sys-primary) !important;
 }
+.atoz-component .alphabet-grid .atoz-button.selected{
+  color : var(--whiteText) !important;
+}
+
+button#quick-filter-peer_reviewed{
+  display:none !important;
+}
+
+button#quick-filter-open_access{
+  display:none !important;
+}
+
+
+/*====================
+===      Collection      ===
+======================*/
 
 .collection-discovery-header {
   background: var(--sys-primary) !important;
@@ -1008,3 +1115,5 @@ a.collection-path:hover {
   border-top: 2px solid #adb5bd;
   transform: rotate(45deg); /* Rotation pour faire une flèche vers la droite */
 }
+
+

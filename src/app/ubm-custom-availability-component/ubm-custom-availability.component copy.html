@@ -1,41 +1,8 @@
-<div class="ubm-alerts-container" *ngIf="isFullDisplay">
-
-  <div *ngIf="hasMagasin && !isLogin && !isUnavailable" class="ubm-alert">
-    <span class="material-icons ubm-alert__icon">event</span>
-    <div class="ubm-alert__content">
-      <strong class="ubm-alert__title">{{ 'ubm.delivery.alerts.magasin.titre' | translate }}</strong> 
-      {{ 'ubm.delivery.alerts.magasin.message' | translate }}
-      <a href="#" (click)="triggerLogin($event)" class="ubm-alert__link">
-        <span class="material-icons ubm-alert__icon">login</span>{{ 'ubm.delivery.alerts.login_action' | translate }}.
-      </a>.
-    </div>
-  </div>
-
-  <div *ngIf="isUnavailable && !isLogin" class="ubm-alert">
-    <span class="material-icons ubm-alert__icon">event</span>
-    <div class="ubm-alert__content">
-      <strong class="ubm-alert__title">{{ 'ubm.delivery.alerts.indisponible.titre' | translate }}</strong> 
-      {{ 'ubm.delivery.alerts.indisponible.message' | translate }}
-      <a href="#" (click)="triggerLogin($event)" class="ubm-alert__link">
-        <span class="material-icons ubm-alert__icon">login</span>{{ 'ubm.delivery.alerts.login_action' | translate }}
-      </a>.
-    </div>
-  </div>
-
-  <div *ngIf="isNoInventory && hasAlmaInstitutions" class="ubm-alert">
-    <span class="material-icons ubm-alert__icon">account_balance</span>
-    <div class="ubm-alert__content">
-      {{ 'ubm.delivery.alerts.reseau.message' | translate }} 
-      <a href="#" (click)="scrollToAndExpandNetwork($event)" class="ubm-alert__link">
-        {{ 'ubm.delivery.alerts.reseau.action' | translate }}
-      </a>.
-    </div>
-  </div>
-
-</div>
-
+<!-- Cas no_inventory -->
 <div class="ubm-holdings-list" *ngIf="!isFullDisplay && physicalAvailability === 'no_inventory'">
   <button class="ubm-holding-row ubm-holding--unknown" (click)="onHoldingClick($event)">
+
+    <!-- Icône livre (colonne gauche) -->
     <span class="ubm-holding-icon ubm-holding-icon--unknown">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M4 4C4 2.9 4.9 2 6 2H18C19.1 2 20 2.9 20 4V20C20 21.1 19.1 22 18 22H6C4.9 22 4 21.1 4 20V4Z" fill="currentColor" opacity="0.15"/>
@@ -45,14 +12,18 @@
         <line x1="8" y1="15" x2="13" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
     </span>
+
+    <!-- Texte (colonne centrale) -->
     <span class="ubm-holding-body">
-      <span class="ubm-holding-status">{{ 'ubm.delivery.holdings.status.reseau' | translate }}</span>
-      <span class="ubm-holding-library">{{ 'ubm.delivery.code.no_inventory' | translate }}</span>
-      <span class="ubm-holding-sublocation">{{ 'ubm.delivery.holdings.details.reseau' | translate }}</span>
+      <span class="ubm-holding-status">Dans le réseau</span>
+      <span class="ubm-holding-library">{{ 'delivery.code.no_inventory' | translate }}</span>
+      <span class="ubm-holding-sublocation">Consulter les modalités d'accès ou de prêt</span>
     </span>
+
   </button>
 </div>
 
+<!-- Liste des holdings -->
 <div class="ubm-holdings-list" *ngIf="!isFullDisplay && holdings.length > 0">
   <button
     *ngFor="let holding of holdings"
@@ -61,6 +32,8 @@
     [attr.aria-label]="getAriaLabel(holding)"
     (click)="onHoldingClick($event)"
   >
+
+    <!-- Icône livre (colonne gauche, centrée verticalement) -->
     <span class="ubm-holding-icon" [ngClass]="'ubm-holding-icon--' + holding.availabilityStatus">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M4 4C4 2.9 4.9 2 6 2H18C19.1 2 20 2.9 20 4V20C20 21.1 19.1 22 18 22H6C4.9 22 4 21.1 4 20V4Z" fill="currentColor" opacity="0.15"/>
@@ -70,19 +43,23 @@
         <line x1="8" y1="15" x2="13" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
     </span>
+
+    <!-- Texte (colonne centrale) -->
     <span class="ubm-holding-body">
       <span class="ubm-holding-status">{{ getConfig(holding).label | translate }}</span>
       <span class="ubm-holding-library">{{ holding.mainLocation }}</span>
       <span class="ubm-holding-sublocation" *ngIf="holding.subLocation">{{ holding.subLocation }}</span>
       <span class="ubm-holding-callnumber" *ngIf="holding.callNumber">{{ holding.callNumber }}</span>
     </span>
+
+    <!-- Lien carte (coin haut droite) -->
     <a
       *ngIf="holding.stackMapUrl"
       class="ubm-holding-map-link"
       [href]="holding.stackMapUrl"
       target="_blank"
       rel="noopener noreferrer"
-      [attr.aria-label]="('ubm.delivery.holdings.map.aria' | translate) + ' ' + holding.mainLocation"
+      [attr.aria-label]="'Voir la carte pour ' + holding.mainLocation"
       (click)="onMapClick($event)"
     >
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -90,5 +67,6 @@
         <circle cx="12" cy="9" r="2.5" fill="white"/>
       </svg>
     </a>
+
   </button>
 </div>

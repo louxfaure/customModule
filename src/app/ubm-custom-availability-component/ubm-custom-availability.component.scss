@@ -196,3 +196,64 @@ nde-physical-availability-line {
   word-break: break-word;
   overflow-wrap: break-word;
 }
+
+// ------------------------------------------------------------------ //
+//  Message pour inciter le lecteur à s'uathentifier qunad le document
+// est réservable
+// ------------------------------------------------------------------ //
+
+.ubm-alerts-container {
+  margin: 16px 0 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+// Style unique et sobre pour TOUTES les alertes
+.ubm-alert {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  padding: 14px 16px;
+  background-color: var(--lightBG);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--sys-primary); // L'accent discret de la charte
+  border-radius: 4px;
+  color: var(--darkText);
+  font-size: 14px;
+  line-height: 1.5;
+  box-sizing: border-box;
+
+  // Alignement et harmonisation des icônes Material Design
+  &__icon {
+    font-family: 'Material Icons';
+    font-size: 20px;
+    line-height: 1;
+    color: var(--sys-primary); // Icônes unifiées sur la couleur primaire
+    margin-right: 12px;
+    flex-shrink: 0;
+    user-select: none;
+  }
+
+  &__content {
+    flex-grow: 1;
+  }
+
+  &__title {
+    font-weight: 600;
+  }
+
+  // Liens d'action intégrés
+  &__link {
+    color: var(--sys-primary);
+    font-weight: 600;
+    text-decoration: underline;
+    transition: color 0.15s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      color: color-mix(in srgb, var(--sys-primary) 85%, black);
+      text-decoration: none;
+    }
+  }
+}
