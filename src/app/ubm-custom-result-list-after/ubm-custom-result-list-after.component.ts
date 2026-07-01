@@ -17,32 +17,30 @@ import { AssetsPublicPathDirective } from '../services/assets-public-path.direct
 export class UbmCustomResultListAfterComponent implements OnInit {
 
   showExternalSiteList: boolean = false;
-  queryTerm: string = '';
   queryDisplay: string = '';
   titleText: string = '';
   contentText: string = '';
+  searchMode: string | null = null;
+  searchQuery: string | null = null;
+  queryTerms: string = '';
 
   private readonly STORAGE_KEY = 'ubm_external_search_dismissed';
 
   constructor() {}
 
+
   @Input() set hostComponent(value: any) {
-    if (!value) return;
-    // Fallback via hostComponent si disponible (optionnel)
-    const mainSearch =
-      value.searchService?.searchFieldsService?._mainSearch ||
-      value.parentCtrl?.searchService?.searchFieldsService?._mainSearch;
-    if (mainSearch) {
-      this.queryTerm = encodeURIComponent(mainSearch);
-      this.queryDisplay = mainSearch;
-    }
   }
+
+
 
   ngOnInit(): void {
     // Priorité à l'URL — fonctionne dans tous les cas
-    if (!this.queryTerm) {
-      this.extractQueryFromUrl();
-    }
+    this.searchMode = this.getUrlParameter('mode');
+    this.searchQuery = this.getUrlParameter('query');
+    const terms = this.processText(this.searchQuery ?? '');
+    this.queryTerms = encodeURIComponent(terms);
+    this.queryDisplay = terms.length > 40 ? terms.slice(0, 38) + '…' : terms;
     this.checkSessionStorage();
     this.detectLanguage();
   }
@@ -50,31 +48,20 @@ export class UbmCustomResultListAfterComponent implements OnInit {
   // ------------------------------------------------------------------ //
   //  Extraction du terme depuis l'URL (simple + avancé)
   // ------------------------------------------------------------------ //
-  private extractQueryFromUrl(): void {
-    const url = new URL(window.location.href);
-    const raw = url.searchParams.get('query') || '';
-    if (!raw) return;
+  
+  // Récupère la valeur derrière un paramètre dans une URL.
+  private getUrlParameter(parameterName: string): string | null {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(parameterName);
+  }
 
-    let term = '';
-
-    // Cas simple : "grizzly jam"  (pas de virgule = pas de préfixe de champ)
-    if (!raw.includes(',')) {
-      term = decodeURIComponent(raw.trim());
+  private processText(input: string): string {
+    if (this.searchMode === 'advanced') {
+      const arrays = input.split(";").map(segment => segment.split(","));
+      const thirdElements = arrays.map(arr => arr[2]).filter(Boolean);
+      return thirdElements.join(" ");
     } else {
-      // Cas avancé : "title,contains,grizzly jam" ou "any,contains,grizzly jam"
-      // Le format Primo est : field,operator,value
-      const parts = raw.split(',');
-      // La valeur est toujours la 3ème partie (index 2)
-      // Plusieurs critères sont séparés par " AND " ou concatenés
-      if (parts.length >= 3) {
-        term = decodeURIComponent(parts.slice(2).join(',').trim());
-      }
-    }
-
-    if (term) {
-      this.queryTerm = encodeURIComponent(term);
-      // Tronquer l'affichage si trop long
-      this.queryDisplay = term.length > 40 ? term.slice(0, 38) + '…' : term;
+      return this.searchQuery ?? '';
     }
   }
 

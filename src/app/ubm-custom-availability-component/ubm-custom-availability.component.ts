@@ -52,6 +52,7 @@ export class UbmCustomAvailabilityComponent implements OnInit, OnDestroy {
   hasMagasin: boolean = false;
   isUnavailable: boolean = false;
   isNoInventory: boolean = false;
+  inReserve: boolean = false;
 
   private urlCheckIntervalId: any = null;
   private lastUrl: string = '';
@@ -90,10 +91,12 @@ export class UbmCustomAvailabilityComponent implements OnInit, OnDestroy {
   }
 
   private resetState(): void {
+    
     this.hasMagasin = false;
     this.isUnavailable = false;
     this.isNoInventory = false;
     this.hasAlmaInstitutions = false;
+    this.inReserve = false;
     this.cdr.detectChanges(); // Force l'effacement visuel instantané dans le template
   }
 
@@ -125,15 +128,24 @@ export class UbmCustomAvailabilityComponent implements OnInit, OnDestroy {
         this.isUnavailable = this.physicalAvailability === 'unavailable';
         this.isNoInventory = this.physicalAvailability === 'no_inventory';
       }
-      if (this.hostComponent.docDelivery?.holding) {
-        this.holdings = this.hostComponent.docDelivery.holding;
-        const holdingsText = JSON.stringify(this.holdings).toLowerCase();
-        if (holdingsText.includes('magasin')) {
-          this.hasMagasin = true;
-        }
-      }
+    if (this.hostComponent.docDelivery?.holding) {
+  this.holdings = this.hostComponent.docDelivery.holding;
+  console.log("Holdings", this.holdings);
+
+  // 1. Vérifie si au moins une subLocation contient "magasin" (insensible à la casse)
+  this.hasMagasin = this.holdings.some(h => 
+    h.subLocation?.toLowerCase().includes('magasin')
+  );
+
+  // 2. Vérifie si au moins un subLocationCode correspond aux codes de la réserve
+  const reserveCodes = ['3100400111', '3100400184'];
+    this.inReserve = this.holdings.some(h => 
+      reserveCodes.includes(h.subLocationCode ?? '')
+    );
+}
       this.hasAlmaInstitutions = !!(this.hostComponent.docDelivery?.almaInstitutionsList && this.hostComponent.docDelivery.almaInstitutionsList.length > 0);
     }
+
 
     console.log(`[UBM-Availability] 📊 État appliqué -> Magasin: ${this.hasMagasin}, Indispo: ${this.isUnavailable}, Hors-Murs: ${this.isNoInventory}`);
     

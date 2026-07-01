@@ -1,32 +1,46 @@
 <div class="ubm-alerts-container" *ngIf="isFullDisplay">
 
-  <div *ngIf="hasMagasin && !isLogin && !isUnavailable" class="ubm-alert">
-    <span class="material-icons ubm-alert__icon">event</span>
-    <div class="ubm-alert__content">
-      <strong class="ubm-alert__title">{{ 'ubm.delivery.alerts.magasin.titre' | translate }}</strong> 
+
+  <div *ngIf="inReserve" class="ubm-alert">
+    <span class="material-icons ubm-alert-icon">library_books</span>
+    <div class="ubm-alert-content">
+      <strong class="ubm-alert-title"> Document patrimonial</strong> 
+      <p>Ce document fait partie des collections patrimoniales. Sa consultation nécessite une <strong>validation préalable</strong> par les bibliothécaires.</p>
+            <p>Adressez-vous à un <strong>bureau de prêt</strong> ou 
+            <a href="https://extranet.u-bordeaux-montaigne.fr/rita_fo/?num_cg=59&num_form=1">contactez-nous<span class="material-icons ubm-alert-icon">open_in_new</span></a> pour réserver et consulter ce document.</p>
+            <p style="margin-top:0.4em;"><a href="https://www.u-bordeaux-montaigne.fr/fr/documentation/collections-patrimoniales/collections-patrimoniales-imprimees-de-l-universite.html">
+            En savoir plus sur les collections patrimoniales<span class="material-icons ubm-alert-icon">open_in_new</span>
+            </a></p>
+    </div>
+  </div>
+
+  <div *ngIf="hasMagasin && !isLogin && !isUnavailable && !inReserve" class="ubm-alert">
+    <span class="material-icons ubm-alert-icon">event</span>
+    <div class="ubm-alert-content">
+      <strong class="ubm-alert-title">{{ 'ubm.delivery.alerts.magasin.titre' | translate }}</strong> 
       {{ 'ubm.delivery.alerts.magasin.message' | translate }}
-      <a href="#" (click)="triggerLogin($event)" class="ubm-alert__link">
-        <span class="material-icons ubm-alert__icon">login</span>{{ 'ubm.delivery.alerts.login_action' | translate }}.
+      <a href="#" (click)="triggerLogin($event)" class="ubm-alert-link">
+        <span class="material-icons ubm-alert-icon">login</span>{{ 'ubm.delivery.alerts.login_action' | translate }}.
       </a>.
     </div>
   </div>
 
-  <div *ngIf="isUnavailable && !isLogin" class="ubm-alert">
-    <span class="material-icons ubm-alert__icon">event</span>
-    <div class="ubm-alert__content">
-      <strong class="ubm-alert__title">{{ 'ubm.delivery.alerts.indisponible.titre' | translate }}</strong> 
+  <div *ngIf="isUnavailable && !isLogin && !inReserve" class="ubm-alert">
+    <span class="material-icons ubm-alert-icon">event</span>
+    <div class="ubm-alert-content">
+      <strong class="ubm-alert-title">{{ 'ubm.delivery.alerts.indisponible.titre' | translate }}</strong> 
       {{ 'ubm.delivery.alerts.indisponible.message' | translate }}
-      <a href="#" (click)="triggerLogin($event)" class="ubm-alert__link">
-        <span class="material-icons ubm-alert__icon">login</span>{{ 'ubm.delivery.alerts.login_action' | translate }}
+      <a href="#" (click)="triggerLogin($event)" class="ubm-alert-link">
+        <span class="material-icons ubm-alert-icon">login</span>{{ 'ubm.delivery.alerts.login_action' | translate }}
       </a>.
     </div>
   </div>
 
-  <div *ngIf="isNoInventory && hasAlmaInstitutions" class="ubm-alert">
-    <span class="material-icons ubm-alert__icon">account_balance</span>
-    <div class="ubm-alert__content">
+  <div *ngIf="isNoInventory && hasAlmaInstitutions && !inReserve" class="ubm-alert">
+    <span class="material-icons ubm-alert-icon">account_balance</span>
+    <div class="ubm-alert-content">
       {{ 'ubm.delivery.alerts.reseau.message' | translate }} 
-      <a href="#" (click)="scrollToAndExpandNetwork($event)" class="ubm-alert__link">
+      <a href="#" (click)="scrollToAndExpandNetwork($event)" class="ubm-alert-link">
         {{ 'ubm.delivery.alerts.reseau.action' | translate }}
       </a>.
     </div>

@@ -225,7 +225,7 @@ nde-physical-availability-line {
   box-sizing: border-box;
 
   // Alignement et harmonisation des icônes Material Design
-  &__icon {
+  &-icon {
     font-family: 'Material Icons';
     font-size: 20px;
     line-height: 1;
@@ -235,16 +235,16 @@ nde-physical-availability-line {
     user-select: none;
   }
 
-  &__content {
+  &-content {
     flex-grow: 1;
   }
 
-  &__title {
+  &-title {
     font-weight: 600;
   }
 
   // Liens d'action intégrés
-  &__link {
+  &-link {
     color: var(--sys-primary);
     font-weight: 600;
     text-decoration: underline;

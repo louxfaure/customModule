@@ -1,38 +1,54 @@
 <mat-card class="external-search-card" *ngIf="showExternalSiteList">
   
-  <!-- Bouton de fermeture aligné à droite -->
+  <!-- Bouton de fermeture discret -->
   <div class="banner-actions">
-    <button mat-icon-button aria-label="Fermer et ne plus afficher ce message" (click)="externalSearchMsgOnClick()">
+    <button mat-icon-button aria-label="Fermer ce message" (click)="externalSearchMsgOnClick()">
       <mat-icon>close</mat-icon>
     </button>
   </div>
 
   <mat-card-content>
     <div class="alert-titles">
-      <h3>{{ titleText || 'Vous ne trouvez pas le document que vous cherchez dans Babord+ ?' }}</h3>
+      <h3>{{ titleText || 'Document introuvable dans Babord+ ?' }}</h3>
       <p>
-        {{ contentText || "N'hésitez pas à relancer votre recherche sur les sites suivants pour élargir les possibilités :" }}
+        {{ contentText || "Relancez votre recherche sur ces bases pour élargir les possibilités :" }}
         <span class="query-pill" *ngIf="queryDisplay">
-          <mat-icon>label</mat-icon>
+          <mat-icon>search</mat-icon>
           {{ queryDisplay }}
         </span>
       </p>
     </div>
     
-    <div class="logos-row">
-      <a [attr.href]="'http://www.sudoc.abes.fr/cbs/DB=2.1/SET=1/TTL=1/CMD?ACT=SRCHA&IKT=1016&SRT=RLV&TRM=' + queryTerm"
-         class="logo-chip" target="_blank" rel="noopener" aria-label="Rechercher sur le site Sudoc (ouvre un nouvel onglet)">
-        <img src="assets/images/logos-catalogues/logo_sudoc.png" alt="Sudoc" />
+    <!-- Liste des liens sous forme de puces épurées -->
+    <div class="external-links-row">
+      <a [attr.href]="'https://mediatheques.bordeaux-metropole.fr/osiros/result/resultat.php?type_rech=rs&index%5B%5D=fulltext&bool%5B%5D=&value%5B%5D=' + queryTerms + '&op=Ok&spec_expand=1'"
+         class="search-link-chip" target="_blank" rel="noopener">
+        <mat-icon>location_city</mat-icon>
+        Médiathèques Bordeaux Métropole
       </a>
-      
-      <a [attr.href]="'https://isidore.science/s?q=' + queryTerm"
-         class="logo-chip" target="_blank" rel="noopener" aria-label="Rechercher sur le site Isidore (ouvre un nouvel onglet)">
-        <img src="assets/images/logos-catalogues/logo_isidore.png" alt="Isidore" />
+
+      <a [attr.href]="'https://scholar.google.com/scholar?hl=fr&as_sdt=0%252C5&q=' + queryTerms"
+         class="search-link-chip" target="_blank" rel="noopener">
+        <mat-icon>school</mat-icon>
+        Google Scholar
       </a>
-      
-      <a [attr.href]="'https://mediatheques.bordeaux-metropole.fr/osiros/result/resultat.php?type_rech=rs&index%5B%5D=fulltext&bool%5B%5D=&value%5B%5D=' + queryTerm + '&op=Ok&spec_expand=1'"
-         class="logo-chip" target="_blank" rel="noopener" aria-label="Rechercher sur le site Médiathèques Bordeaux Métropole (ouvre un nouvel onglet)">
-        <img src="assets/images/logos-catalogues/logo_metropole.png" alt="Médiathèques Bordeaux Métropole" />
+
+      <a [attr.href]="'https://openalex.org/works?search.title_and_abstract=' + queryTerms"
+         class="search-link-chip" target="_blank" rel="noopener">
+        <mat-icon>auto_stories</mat-icon>
+        OpenAlex
+      </a>
+
+      <a [attr.href]="'http://www.sudoc.abes.fr/cbs/DB=2.1/SET=1/TTL=1/CMD?ACT=SRCHA&IKT=1016&SRT=RLV&TRM=' + queryTerms"
+         class="search-link-chip" target="_blank" rel="noopener">
+        <mat-icon>library_books</mat-icon>
+        Sudoc
+      </a>
+
+      <a [attr.href]="'https://search.worldcat.org/fr/search?q=' + queryTerms"
+         class="search-link-chip" target="_blank" rel="noopener">
+        <mat-icon>language</mat-icon>
+        WordlCat
       </a>
     </div>
   </mat-card-content>

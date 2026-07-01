@@ -1,117 +1,115 @@
+/* Conteneur principal adouci */
 .external-search-card {
   position: relative;
-  margin: 16px 0;
-  padding: 16px;
+  background-color: #faf9f8; /* Un fond très légèrement grisé/chaud pour se distinguer du fond blanc */
+  border: 1px solid #e6e1da;
+  border-radius: 8px;
+  padding: 16px 24px;
+  max-width: 100%; /* S'aligne sur la largeur des résultats de recherche */
+  margin: 20px 0;
+  box-shadow: none; /* On évite l'effet flottant de l'ombre portée */
 }
 
-/* Aligne le bouton de fermeture en haut à droite de la carte */
+/* Bouton fermer */
 .banner-actions {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 12px;
+  right: 12px;
   z-index: 2;
+  
+  button {
+    color: #888888;
+    &:hover { color: #333333; }
+  }
 }
 
-
-/* Conteneur principal de la carte */
-.external-search-card {
-  position: relative;
-  background-color: #ffffff;
-  border: 1px solid #e0dbd5;
-  border-radius: 12px;
-  padding: 20px 30px 16px 30px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  max-width: 700px;
-  margin: 16px auto;
-}
-
-.banner-actions {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  z-index: 2;
-}
-
-/* Contenu centré */
+/* Organisation du contenu */
 .external-search-card mat-card-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
   gap: 16px;
 }
 
-/* Zone des titres */
-.external-search-card .alert-titles h3 {
-  color: #333333;
-  font-size: 1.15rem;
-  font-weight: 700;
-  margin: 0 0 8px 0;
-  line-height: 1.4;
+/* Zone des titres alignée à gauche pour suivre le flux de lecture de la liste */
+.external-search-card .alert-titles {
+  text-align: left;
+
+  h3 {
+    color: #222222;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 6px 0;
+  }
+
+  p {
+    color: #666666;
+    font-size: 0.9rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
 }
 
-.external-search-card .alert-titles p {
-  color: #555555;
-  font-size: 0.95rem;
-  margin: 0;
-  line-height: 1.4;
-}
-
-/* Pillule de la recherche actuelle */
+/* Pillule du mot-clé recherché */
 .external-search-card .query-pill {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  background-color: rgba(163, 51, 109, 0.1);
+  background-color: rgba(163, 51, 109, 0.08); /* Utilisation fine de ta primary color */
   color: #a3336d;
-  padding: 2px 8px;
-  border-radius: 12px;
+  padding: 2px 10px;
+  border-radius: 16px;
   font-size: 0.85rem;
   font-weight: 600;
-  margin-left: 4px;
+
+  mat-icon {
+    font-size: 14px;
+    height: 14px;
+    width: 14px;
+  }
 }
 
-.external-search-card .query-pill mat-icon {
-  font-size: 14px;
-  height: 14px;
-  width: 14px;
-}
-
-/* Alignement des logos (plus compact, sur une seule ligne) */
-.external-search-card .logos-row {
+/* Ligne des nouveaux boutons / chips */
+.external-search-card .external-links-row {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 24px;
+  gap: 12px;
   flex-wrap: wrap;
-  margin-top: 4px;
 }
 
-/* Style des liens/images de logos */
-.external-search-card .logo-chip {
-  display: flex;
+/* Style des boutons-liens épurés */
+.external-search-card .search-link-chip {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  padding: 6px;
-  border-radius: 8px;
-  border: 1px solid transparent;
-  transition: all 0.2s ease-in-out;
+  gap: 8px;
+  text-decoration: none;
+  color: #555555;
   background-color: #ffffff;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.03);
-}
+  border: 1px solid #dcd6cd;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
 
-.external-search-card .logo-chip img {
-  height: 32px; /* Hauteur harmonisée et compacte pour les logos */
-  width: auto;
-  object-fit: contain;
-  display: block;
-}
+  mat-icon {
+    font-size: 16px;
+    height: 16px;
+    width: 16px;
+    color: #888888; /* Icône discrète par défaut */
+    transition: color 0.2s ease-in-out;
+  }
 
-/* Effet au survol des logos */
-.external-search-card .logo-chip:hover,
-.external-search-card .logo-chip:focus {
-  border-color: #a3336d; /* Ta couleur principale */
-  box-shadow: 0 4px 8px rgba(163, 51, 109, 0.15);
-  transform: translateY(-2px);
-  outline: none;
+  /* Effet "Primary Color" au survol */
+  &:hover, &:focus {
+    color: #a3336d;
+    border-color: #a3336d;
+    background-color: rgba(163, 51, 109, 0.02);
+    outline: none;
+
+    mat-icon {
+      color: #a3336d; /* L'icône prend aussi la couleur principale */
+    }
+  }
 }
