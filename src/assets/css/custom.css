@@ -781,6 +781,66 @@ div.location-brief-properties-container  .location-copies, div.other-location-de
 }
 
 /* ==========================================================================
+   Affichage pour les numéros isolés
+   ========================================================================== */
+  /* Conteneur principal façon encart/alerte Primo */
+  .custom-revue-container {
+    display: flex;
+    align-items: flex-start;  /* Aligne l'icône en haut du texte s'il passe sur 2 lignes */
+    gap: 16px;                /* Espace généreux entre l'icône et le texte */
+    
+    background-color: #f5f5f5; /* Fond gris clair identique à votre capture */
+    border-left: 4px solid var(--sys-primary, #9c27b0); /* Bordure gauche calquée sur votre charte */
+    border-radius: 4px;
+    
+    padding: 16px;            /* Espacement interne confortable */
+    margin: 12px 0;           /* Espace pour détacher le bloc du reste de la page */
+    box-sizing: border-box;
+  }
+
+  /* Style de l'icône Material */
+  .custom-revue-icon-svg {
+    color: var(--sys-primary, #9c27b0); /* Utilise la même couleur que la bordure */
+    font-size: 24px;
+    height: 24px;
+    width: 24px;
+    flex-shrink: 0;           /* Empêche l'icône de s'écraser si le texte est long */
+  }
+
+  /* Conteneur de la phrase fluide */
+  .custom-revue-content {
+    display: inline;          /* Rend le flux de texte complètement continu */
+    font-size: 14px;
+    color: #333333;
+    line-height: 1.5;
+  }
+
+  /* Éléments internes de la phrase */
+  .custom-revue-intro, 
+  .custom-revue-separator {
+    font-weight: normal;
+  }
+
+  .custom-revue-title {
+    font-weight: 700;
+    color: var(--sys-primary, #1976d2);
+    font-style: italic;
+    display: inline;
+  }
+
+  .custom-revue-refs {
+    font-weight: 700;
+    color: #2c3e50;
+    display: inline;          /* Plus de badge avec fond pour éviter l'effet "bloc cassé" */
+  }
+
+  /* Nettoyage des interférences Primo sur la liste parente */
+  .related-titles-list > div {
+    display: block !important; 
+    font-size: inherit !important;
+  }
+
+/* ==========================================================================
    Liste des Exemplaires
    ========================================================================== */
 /* Masque le boutton qui permet de déplier l'accordéon */

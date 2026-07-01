@@ -22,6 +22,6 @@ export const selectorComponentMap = new Map<string, any>([
     ['nde-location-item-top',UbmItemHookComponent],
     ['nde-login-form-content-bottom',UbmLoginFormHookComponent],
     ['nde-personal-settings-bottom',UbmChangePasswordMessageComponent],
-    //['nde-entity-related-docs-list-top',RequestServicesComponent],
+    ['nde-get-it-top',RequestServicesComponent],
     ['nde-actions-presenter-before', UbmRecordActionsComponent]
 ]);
