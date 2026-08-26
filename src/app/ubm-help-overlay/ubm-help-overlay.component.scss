@@ -144,7 +144,7 @@
   padding: 15px 10px;
   border-radius: 10px;
   text-decoration: none;
-  color: #333;
+  color: var(--sys-primary);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -154,7 +154,7 @@
     .s-icon {
   width: 35px;
   height: 35px;
-  color: var(--sys-on-primary-container);
+  color: var(--sys-primary);
   margin-bottom: 12px;
   }
   .s-icon svg {
@@ -167,7 +167,7 @@
   .s-label {
     font-weight: 700;
     font-size: 0.9rem;
-    color: var(--sys-on-primary-container);
+    color: var(--sys-primary);
     margin-bottom: 8px;
     text-transform: uppercase;
   }

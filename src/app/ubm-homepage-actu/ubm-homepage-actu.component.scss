@@ -1,5 +1,5 @@
 /* --- Variables & Configuration --- */
-$color-prune: #750849;
+$color-prune: var(--sys-primary);
 $color-prune-dark: #8c0a57;
 $shadow-light: 0 4px 12px rgba(0, 0, 0, 0.05);
 $shadow-heavy: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -388,7 +388,7 @@ $transition-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
   align-items: center;
   justify-content: center;
   align-self: flex-end; /* Aligne le bouton en bas à droite */
-  background-color: #750849 !important;
+  background-color: var(--sys-primary) !important;
   color: #fff !important;
   border-radius: 20px;
   text-decoration: none;
@@ -441,4 +441,33 @@ $transition-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
       }
     }
   }
+}
+@media only screen and (min-width: 1920px) {
+  .main-landing-page .menu-container .menu li a:hover, .main-landing-page .menu-container .menu li a:focus, .main-landing-page .menu-container .menu li button:hover, .main-landing-page .menu-container .menu li button:focus {
+    transition: box-shadow .3s,transform .3s ease-in-out;
+    box-shadow: 0 0 .625rem #0000001a;
+    transform: translateY(-1.1875rem);
+  }
+}
+.announcement-button {
+  align-self: flex-end; /* Évite que le bouton prenne toute la largeur */
+  padding: 8px 16px;
+  background-color: var(--sys-primary);
+  color: #ffffff;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  cursor: pointer !important; /* Force le curseur en mode "main/clique" */
+}
+
+.announcement-button:hover {
+  background-color: var(--sys-primary-container) !important;
+    color: var(--sys-on-primary-container) !important;
+    border-color: var(--sys-primary-container) !important;
+    box-shadow:
+      0 2px 8px rgba(138, 21, 56, 0.2),
+      0 0 0 3px rgba(138, 21, 56, 0.08) !important;
+    transform: translateY(-1px) !important;
+    text-decoration: none !important;
 }

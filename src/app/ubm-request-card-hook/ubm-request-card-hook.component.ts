@@ -49,7 +49,7 @@ this.relationText = `
     </svg>
     
     <div class="custom-revue-content">
-      <span class="custom-revue-intro">Ce document est un numéro isolé de la revue</span>
+      <span class="custom-revue-intro">Ce document est un numéro de la revue</span>
       <span class="custom-revue-title">${titreRevue}</span>
       <span class="custom-revue-separator">. Voici les références du fascicule :</span>
       <span class="custom-revue-refs">${numeroFascicule} (${anneeFascicule})</span>

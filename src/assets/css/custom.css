@@ -471,7 +471,7 @@ h3.resource-header{
   gap: 4px;
   margin-right: 8px;       /* Espace avant que la description ne commence */
 }
-
+banner-name, .banner-title,
 
 /* Sécurité anti-débordement du float */
 .resource-recommender-dialog .mat-mdc-card-content::after {
@@ -480,7 +480,23 @@ h3.resource-header{
   clear: both;
 }
 
-
+/*-------------------------------------------------------
+Bannière Messsage
+-------------------------------------------------------------*/
+.resource-recommender-banner-overlay {
+  min-width: 60%;
+  margin-left: 1.2em;
+  border-radius: .5rem;
+  
+}
+@media screen and (min-width: 1279px) {
+  .resource-recommender-banner-overlay {
+      background:none !important;    
+  }
+  .resource-recommender-banner-overlay .banner-title, .resource-recommender-banner-overlay .banner-name, .resource-recommender-banner-overlay .banner-description {
+      color: #0f172a !important;
+    }
+}
 
 
 

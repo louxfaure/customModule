@@ -1,5 +1,5 @@
-import { Component, Input, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Input, ChangeDetectorRef, ViewEncapsulation,Inject } from '@angular/core';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { UbmAuthService } from '../ubm-services/ubm-auth.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { UbmAuthService } from '../ubm-services/ubm-auth.service';
 export class UbmItemHookComponent {
   public itemData: any = null;
   public fieldTwo: string = "";
-  public fieldThree: string = "";
+  public fieldThree: string[] = [];
   public loginLink: boolean = false;
 
   // Propriétés prêtes pour les conditions (évite les répétitions de toLowerCase)
@@ -21,7 +21,12 @@ export class UbmItemHookComponent {
   private cleanedCategory: string = "";
   private cleanedLoc: string = "";
 
-  constructor(private cdr: ChangeDetectorRef, public authService: UbmAuthService) { }
+  constructor(private cdr: ChangeDetectorRef, public authService: UbmAuthService,
+        @Inject(DOCUMENT) private document: Document
+    
+  ) { 
+    
+  }
 
   @Input() set hostComponent(value: any) {
     if (!value || !value.item) return;
@@ -65,27 +70,24 @@ export class UbmItemHookComponent {
        ========================================================================== */
     // 1. On commence par la description de l'item (vol., n°...) si elle existe
     let descriptionPart = this.itemData.itemdescription || '';
-
     // Nettoyage éventuel (comme le NOT_DEFINED que tu avais dans le HTML)
     descriptionPart = descriptionPart.replace('NOT_DEFINED:', '').trim();
 
     // 2. Si callnumber2 existe, on prépare le préfixe "cote exemplaire :"
     let cotePart = '';
     if (this.itemData.callnumber2 && this.itemData.callnumber2.trim() !== '') {
-      cotePart = `> ${this.itemData.callnumber2.trim()}`;
+      cotePart = `Cote de l'exemplaire : ${this.itemData.callnumber2.trim()}`;
     }
 
     // 3. Si itempublicnote existe, on la prépare entre parenthèses
     let notePart = '';
     if (this.itemData.itempublicnote && this.itemData.itempublicnote.trim() !== '') {
-      notePart = `(${this.itemData.itempublicnote.trim()})`;
+      notePart = `Note ${this.itemData.itempublicnote.trim()}`;
     }
 
     // 4. On assemble les morceaux proprement en filtrant les chaînes vides
     // afin d'éviter les espaces superflus s'il manque une info
-    this.fieldThree = [descriptionPart, cotePart, notePart]
-      .filter(part => part !== '')
-      .join(' ');
+    this.fieldThree = [descriptionPart, cotePart, notePart].filter(part => part !== '');
 
     this.cdr.detectChanges();
   }
@@ -126,5 +128,11 @@ export class UbmItemHookComponent {
     return this.cleanedLoc.includes('réserver en ligne') ||
       this.cleanedLoc.includes('log in to make a request') ||
       this.cleanedLoc.includes('en préstamo');
+  }
+
+  triggerLogin(event: Event): void {
+    event.preventDefault();
+    const loginButton = this.document.querySelector<HTMLButtonElement>('nde-login button');
+    if (loginButton) loginButton.click();
   }
 }

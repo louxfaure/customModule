@@ -4,3 +4,22 @@
 .item-unavailable{
     color: var(--ubm-unavailable-color); 
 }
+.custom-brief-properties {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 colonnes strictement égales */
+  gap: 16px;
+  align-items: center; /* Aligne verticalement au centre les colonnes */
+  width: 100%;
+}
+
+.property-item.third-column {
+  display: flex;
+  flex-direction: column;
+  gap: 4px; /* Un petit espace entre les lignes dans la cellule */
+  
+  // Optionnel : si vous souhaitez aligner le texte à droite dans la cellule
+  // text-align: right; 
+}
+.login-link {
+  cursor: pointer !important; /* Force le curseur en mode "main/clique" */
+}
