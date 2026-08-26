@@ -1,0 +1,23 @@
+.ubm-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: #F8EFF4;
+  border-radius: 999px;
+  width: fit-content;
+  
+
+  span {
+    font-size: 13px;
+    font-weight: 500;
+    color: #A3336D;
+  }
+
+  &__icon {
+    width: 16px;
+    height: auto;
+    flex-shrink: 0;
+    fill: #A3336D;
+  }
+}

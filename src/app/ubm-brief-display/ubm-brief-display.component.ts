@@ -1,16 +1,28 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'ubm-brief-display',
   standalone: true,
+  imports: [CommonModule],
   templateUrl: './ubm-brief-display.component.html',
   styleUrl: './ubm-brief-display.component.scss',
   encapsulation: ViewEncapsulation.None
 })
 export class UbmBriefDisplayComponent {
+  isUbmPublication = false;
   @Input() set hostComponent(value: any) {
     console.log('UbmBriefDisplayComponent hostComponent:', value);
-    const lds01 = value?.recordMainDetails?.pnx?.display?.lds01;
+    const pnxDisplay = value?.recordMainDetails?.pnx?.display;
+    const lds01 = pnxDisplay?.lds01;
+    const lds30 = pnxDisplay?.lds30;
+    console.log('lds30', lds30);
+
+    // Badge UBM : lds30 vaut 'publicationUBM'
+    // (lds30 peut être un tableau ou une string selon le champ PNX)
+    this.isUbmPublication = Array.isArray(lds30)
+      ? lds30.includes('publicationUBM')
+      : lds30 === 'publicationUBM';
      if (value?.recordMainDetails?.displayLinesCache && 
       (lds01 === undefined || lds01 === null || lds01.length === 0)) {
       console.log('UbmBriefDisplayComponent : Notice CDI, on affiche les auteurs');

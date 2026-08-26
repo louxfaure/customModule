@@ -13,7 +13,7 @@ import { RequestServicesComponent } from '../ubm-request-card-hook/ubm-request-c
 
 // Define the map
 export const selectorComponentMap = new Map<string, any>([
-    ['nde-record-main-details-before', UbmBriefDisplayComponent],
+    ['nde-record-main-details-after', UbmBriefDisplayComponent],
     ['nde-search-results-resource-type-bar-before', UbmResourceTypeBarHookComponent],
     ['nde-physical-availability-line-bottom', UbmCustomAvailabilityComponent],
     ['nde-landing-page',UbmHomepageActuComponent],
