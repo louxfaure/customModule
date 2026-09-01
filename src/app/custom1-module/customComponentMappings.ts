@@ -9,7 +9,7 @@ import {UbmItemHookComponent} from '../ubm-item-hook/ubm-item-hook.component'
 import { UbmLoginFormHookComponent } from '../ubm-login-form-hook/ubm-login-form-hook.component';
 import { UbmChangePasswordMessageComponent } from '../ubm-change-password-message/ubm-change-password-message.component';
 import { RequestServicesComponent } from '../ubm-request-card-hook/ubm-request-card-hook.component';
-
+import { UbmRebondFullDisplayComponent } from '../ubm-rebond-full-display/ubm-rebond-full-display.component';
 
 // Define the map
 export const selectorComponentMap = new Map<string, any>([
@@ -23,5 +23,6 @@ export const selectorComponentMap = new Map<string, any>([
     ['nde-login-form-content-bottom',UbmLoginFormHookComponent],
     ['nde-personal-settings-bottom',UbmChangePasswordMessageComponent],
     ['nde-get-it-top',RequestServicesComponent],
-    ['nde-actions-presenter-before', UbmRecordActionsComponent]
+    ['nde-actions-presenter-before', UbmRecordActionsComponent],
+    //['nde-full-display-service-container-before', UbmRebondFullDisplayComponent]
 ]);

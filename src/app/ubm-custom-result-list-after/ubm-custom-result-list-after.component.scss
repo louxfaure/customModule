@@ -58,7 +58,7 @@
   align-items: center;
   gap: 4px;
   background-color: rgba(163, 51, 109, 0.08); /* Utilisation fine de ta primary color */
-  color: #a3336d;
+  color: var(--sys-primary);
   padding: 2px 10px;
   border-radius: 16px;
   font-size: 0.85rem;
@@ -86,7 +86,7 @@
   text-decoration: none;
   color: #555555;
   background-color: #ffffff;
-  border: 1px solid #dcd6cd;
+  border: 1px solid var(--sys-primary);
   padding: 6px 14px;
   border-radius: 20px;
   font-size: 0.85rem;
@@ -97,19 +97,20 @@
     font-size: 16px;
     height: 16px;
     width: 16px;
-    color: #888888; /* Icône discrète par défaut */
+    color: var(--sys-primary); 
+    border-color: #888888; 
     transition: color 0.2s ease-in-out;
+        &:hover, &:focus {
+          color: #888888; 
+          border-color: var(--sys-primary);
+        }
   }
 
   /* Effet "Primary Color" au survol */
   &:hover, &:focus {
-    color: #a3336d;
-    border-color: #a3336d;
+    color: #888888; 
+    border-color: #888888;
     background-color: rgba(163, 51, 109, 0.02);
     outline: none;
-
-    mat-icon {
-      color: #a3336d; /* L'icône prend aussi la couleur principale */
-    }
   }
 }

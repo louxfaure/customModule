@@ -102,11 +102,11 @@
                 un document en accès indirect</a> (retrait à l'accueil de la bibliothèque)</li>
             <li>Accéder aux ressources en ligne en un clic sur le campus et depuis chez vous</li>
             <li><a
-                href='login?vid=33PUDB_UBM:NDE&toState=account/overview&searchHistory={"vid":"33PUDB_UBM:NDE","lang":"fr"}'
+                [attr.href]="authService.getLoginUrl('account/savedSearches')"
                 aria-label="Sauvegarder ses recherches" aria-hidden="false">Sauvegarder ses recherches</a></li>
             <li><a
-                href='login?vid=33PUDB_UBM:NDE&toState=account/overview&searchHistory={"vid":"33PUDB_UBM:NDE","lang":"fr"}'
-                aria-label="Sauvegarder ses recherches" aria-hidden="false">Accéder à son compte lecteur et prolonger un
+                href='login?vid=33PUDB_UBM:NDE&toState=account/overview&toParams={"vid":"33PUDB_UBM:NDE","lang":"fr"}'
+                aria-label="Consulter ou prolonger ses emprunts" aria-hidden="false">Accéder à son compte lecteur et prolonger un
                 emprunt</a></li>
             <li><a
                 href="https://www.u-bordeaux-montaigne.fr/fr/documentation/informations-pratiques/numerisation-a-la-demande.html">Faire

@@ -1,6 +1,5 @@
 import { Component, Input, ChangeDetectorRef, ViewEncapsulation,Inject } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { UbmAuthService } from '../ubm-services/ubm-auth.service';
 
 @Component({
   selector: 'custom-ubm-item-hook',
@@ -21,7 +20,7 @@ export class UbmItemHookComponent {
   private cleanedCategory: string = "";
   private cleanedLoc: string = "";
 
-  constructor(private cdr: ChangeDetectorRef, public authService: UbmAuthService,
+  constructor(private cdr: ChangeDetectorRef, 
         @Inject(DOCUMENT) private document: Document
     
   ) { 

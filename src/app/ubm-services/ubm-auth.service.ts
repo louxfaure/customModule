@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root' // Permet au service d'être accessible partout sans configuration supplémentaire
-})
+  providedIn: 'root'     
+}) 
 export class UbmAuthService {
 
   constructor() {}
@@ -10,12 +10,12 @@ export class UbmAuthService {
   /**
    * Génère l'URL de connexion Primo à partir de l'URL courante du navigateur
    */
-  getLoginUrl(): string {
+  getLoginUrl(page?: string): String {
     try {
       const currentUrlStr = window.location.href;
       const url = new URL(currentUrlStr);
 
-        const state = url.pathname.split('/nde/').pop() || 'account/overview';
+      const state = page ?? url.pathname.split('/nde/').pop() ?? "account/overview";
       const vid = url.searchParams.get('vid') || '33PUDB_UBM:NDE';
       
       const paramsObj: { [key: string]: string } = {};
@@ -32,10 +32,4 @@ export class UbmAuthService {
     }
   }
 
-  /**
-   * Redirige immédiatement l'utilisateur vers la page de connexion
-   */
-  redirectToLogin(): void {
-    window.location.href = this.getLoginUrl();
-  }
 }

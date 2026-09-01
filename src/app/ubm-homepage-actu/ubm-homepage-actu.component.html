@@ -66,7 +66,7 @@
                   <h3 class="library-title">Bibliothèque Rigoberta Menchú</h3>
                   <p class="library-subtitle">{{ 'homepage.menu.salles_sub_brm' | translate }}</p>
                 </div>
-                <a href="https://affluences.com/..." target="_blank" class="btn-reserver" rel="noopener noreferrer">
+                <a href="https://affluences.com/fr/sites/bibliotheque-rigoberta-menchu" target="_blank" class="btn-reserver" rel="noopener noreferrer">
                   {{ 'homepage.menu.btn_reserver' | translate }} <span class="sr-only">{{ 'homepage.menu.sr_brm' | translate }}</span>
                 </a>
               </div>
@@ -79,7 +79,7 @@
                   <h3 class="library-title">Bibliothèque Lettres et Sciences Humaines</h3>
                   <p class="library-subtitle">{{ 'homepage.menu.salles_sub_bulsh' | translate }}</p>
                 </div>
-                <a href="https://affluences.com/..." target="_blank" class="btn-reserver" rel="noopener noreferrer">
+                <a href="https://affluences.com/fr/sites/bu-droit-lettres-pessac" target="_blank" class="btn-reserver" rel="noopener noreferrer">
                   {{ 'homepage.menu.btn_reserver' | translate }} <span class="sr-only">{{ 'homepage.menu.sr_bulsh' | translate }}</span>
                 </a>
               </div>
@@ -184,7 +184,7 @@
       <article class="display-flex flex-column gap-1">
         <p class="mat-body-large">{{ 'homepage.annonce.message' | translate }}</p>
         
-        <a [href]="'homepage.annonce.lien' | translate" 
+        <a [attr.href]="lienAnnonce"
            target="_blank" 
            rel="noopener noreferrer" 
            class="announcement-button">
@@ -197,7 +197,8 @@
   <section class="actu-section">
     <h2 role="heading" aria-level="2" class="actu-section-title">{{ 'homepage.actu.titre_section' | translate }}</h2>
 
-    <!--<div class="actu-grid" *ngIf="!loading && !error">
+    <!--Recuperation des 3 dernières actus directement depuis le site de l'université  
+      <div class="actu-grid" *ngIf="!loading && !error">
       <a class="actu-card" *ngFor="let item of items" [href]="item.link" target="_blank">
         <div class="actu-img-container">
           <img *ngIf="item.imageUrl" [src]="item.imageUrl" [alt]="item.title" class="actu-img">

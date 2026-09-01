@@ -11,13 +11,13 @@
   span {
     font-size: 13px;
     font-weight: 500;
-    color: #A3336D;
+    color: var(--sys-primary);
   }
 
   &__icon {
     width: 16px;
     height: auto;
     flex-shrink: 0;
-    fill: #A3336D;
+    fill: var(--sys-primary);
   }
 }

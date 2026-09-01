@@ -6,7 +6,9 @@ import { RssItem, RssService, } from './ubm-rss.service';
 import {OaRssItem, OaRssService} from './ubm-oagenda-rss.service'
 import { AssetsPublicPathDirective } from '../services/assets-public-path.directive'; 
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Observable, map } from 'rxjs'; // Ajoute map dans tes imports rxjs
+import { ListKeyManager } from '@angular/cdk/a11y';
 // import { OsmService } from './osm.service'; Horaires depuis Open Street Map
 
 @Component({
@@ -55,7 +57,8 @@ export class UbmHomepageActuComponent implements OnInit {
   error   = false;
   vue: string | null = null;
   langue: string | null = null;
-
+  lienAnnonce!: SafeUrl; 
+  
    @Input() set hostComponent(value: any) {
       console.log('UbmHomePageComponent hostComponent:', value);
       if (!value) return;
@@ -66,6 +69,7 @@ export class UbmHomepageActuComponent implements OnInit {
     private rss: RssService, 
     private oarss: OaRssService,
     private translate: TranslateService,
+    private sanitizer: DomSanitizer,
     // private osmService: OsmService Horaires depuis Open Street Map
   ) {}
 
@@ -74,6 +78,10 @@ export class UbmHomepageActuComponent implements OnInit {
     const params = new URLSearchParams(window.location.search);
     this.vue = params.get('vid');
     this.langue = params.get('lang');
+    this.translate.get('homepage.annonce.lien').subscribe((res: string) => {
+      this.lienAnnonce = this.sanitizer.bypassSecurityTrustUrl(res);
+      console.log('Lien Annonce',this.lienAnnonce);
+    });
     console.log('Paramètres reçus :', { vue: this.vue, langue: this.langue });
     // this.osmService.getLibraryHours(this.libraryIds).subscribe(data => {
     //   this.librariesData = data;
