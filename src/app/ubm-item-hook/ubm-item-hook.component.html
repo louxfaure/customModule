@@ -19,9 +19,7 @@
   </div>
 
   <div class="property-item ubm third-column">
-    <div *ngFor="let line of fieldThree" class="mat-body-medium status-line">
-      {{ line }}
-    </div>
+    <div *ngFor="let line of fieldThree" class="mat-body-medium status-line" [innerHTML]="line"></div>
   </div>
 
 </div>

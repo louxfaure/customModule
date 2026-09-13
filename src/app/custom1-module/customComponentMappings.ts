@@ -24,5 +24,5 @@ export const selectorComponentMap = new Map<string, any>([
     ['nde-personal-settings-bottom',UbmChangePasswordMessageComponent],
     ['nde-get-it-top',RequestServicesComponent],
     ['nde-actions-presenter-before', UbmRecordActionsComponent],
-    //['nde-full-display-service-container-before', UbmRebondFullDisplayComponent]
+    ['nde-full-display-service-container-before', UbmRebondFullDisplayComponent]
 ]);

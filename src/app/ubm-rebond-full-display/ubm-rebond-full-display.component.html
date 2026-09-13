@@ -1,1 +1,29 @@
-<p>ubm-rebond-full-display works!</p>
+<div id="liens-autres-catalogues" *ngIf="showExternalSearch">
+    <div id="liens-autres-catalogues-header"
+         (click)="togglePanel()"
+         [attr.aria-expanded]="isPanelExpanded"
+         role="button"
+         tabindex="0"
+         (keydown.enter)="togglePanel()"
+         (keydown.space)="togglePanel()">
+        <span class="mat-title-medium">{{ 'ubm.rebondfulldisplay.titre' | translate }}</span>
+        <mat-icon>{{ isPanelExpanded ? 'remove' : 'add' }}</mat-icon>
+    </div>
+  <div class="mat-expansion-panel-body" *ngIf="isPanelExpanded">
+      <div class="flex-column full-display-details-container">
+          <div class="external-links-list">
+              <a [attr.href]="bmQuery" class="search-link-row" target="_blank" rel="noopener" title="Rechercher le document dans le catalogue des médiathèques de Bordeaux Métropole" aria-label="S'ouvre dans une nouvelle fenêtre">
+                  <img height="24" width="24" src="assets/images/logos-catalogues/MayAlsoBeHeldBy_CUB.png" alt="Logos de Bordeaux métropole">
+                  <span class="search-link-label mat-body-medium">Catalogue des médiathèques de Bordeaux Métropole</span>
+                  <mat-icon class="external-link-icon">open_in_new</mat-icon>
+              </a>
+
+              <a [attr.href]="sudocQuery" class="search-link-row mat-body-medium" target="_blank" rel="noopener" title="Rechercher le document dans le catalogue SUDOC" aria-label="S'ouvre dans une nouvelle fenêtre">
+                  <img height="24" width="24" src="assets/images/logos-catalogues/MayAlsoBeHeldBy_SUDOC.png" alt="Logos du SUDOC">
+                  <span class="search-link-label">Catalogue Sudoc</span>
+                  <mat-icon class="external-link-icon">open_in_new</mat-icon>
+              </a>
+          </div>
+      </div>
+  </div>
+</div>

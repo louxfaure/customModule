@@ -77,7 +77,14 @@ export class UbmHomepageActuComponent implements OnInit {
 
     const params = new URLSearchParams(window.location.search);
     this.vue = params.get('vid');
-    this.langue = params.get('lang');
+    // Valeur initiale : priorité au paramètre d'URL, sinon la langue courante du service
+    this.langue = params.get('lang') || this.translate.currentLang || this.translate.defaultLang;
+
+    // Mise à jour à chaque changement de langue en cours de session
+    this.translate.onLangChange.subscribe((event) => {
+      this.langue = event.lang;
+      console.log('Paramètres reçus :', { vue: this.vue, langue: this.langue });
+    });
     this.translate.get('homepage.annonce.lien').subscribe((res: string) => {
       this.lienAnnonce = this.sanitizer.bypassSecurityTrustUrl(res);
       console.log('Lien Annonce',this.lienAnnonce);

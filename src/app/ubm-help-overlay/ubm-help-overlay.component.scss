@@ -421,59 +421,52 @@
   
 }
 // Section tutos vidéos
+// Section tutos vidéos
 .video-grid {
-  display: grid;
-  /* Crée autant de colonnes de 250px minimum que possible */
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 12px;
-  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 15px 0;
 }
 
-.video-card {
-  display: flex;
-  align-items: center;
-  padding: 15px;
+.video-card-iframe {
   background-color: var(--ubm-bg-color);
   border-radius: 10px;
-  text-decoration: none;
+  overflow: hidden;
+  border-left: 4px solid var(--sys-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   transition: all 0.3s ease;
-  border-left: 4px solid transparent; 
 
   &:hover {
-    background-color: #ffffff;
-    border-left-color: var(--sys-primary); 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transform: translateX(5px); /* Glissement léger vers la droite */
-    
-    .video-icon {
-      transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+
+  /* Ratio 16/9 responsive pour s'adapter à la largeur du panneau */
+  .iframe-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* Ratio 16:9 */
+    height: 0;
+
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
     }
   }
 
-  .video-icon {
-    width: 35px;
-    height: 35px;
-    color: var(--sys-primary);
-    margin-right: 12px;
-    transition: transform 0.2s ease;
-    flex-shrink: 0;
-  }
-
-  .video-content {
-    display: flex;
-    flex-direction: column;
+  .video-caption {
+    padding: 10px 15px;
+    background: #ffffff;
     
     .video-title {
-      font-weight: 500;
-      color: #2c3e50;
+      font-weight: 600;
+      color: var(--sys-on-primary-container, #2c3e50);
       font-size: 0.95rem;
-      line-height: 1.2;
-    }
-    
-    .video-duration {
-      font-size: 0.8rem;
-      color: #7f8c8d;
-      margin-top: 4px;
     }
   }
 }

@@ -75,13 +75,13 @@ export class UbmItemHookComponent {
     // 2. Si callnumber2 existe, on prépare le préfixe "cote exemplaire :"
     let cotePart = '';
     if (this.itemData.callnumber2 && this.itemData.callnumber2.trim() !== '') {
-      cotePart = `Cote de l'exemplaire : ${this.itemData.callnumber2.trim()}`;
+      cotePart = `<b>Cote de l'exemplaire : </b>s${this.itemData.callnumber2.trim()}`;
     }
 
-    // 3. Si itempublicnote existe, on la prépare entre parenthèses
+    // 3. Si noteopac existe, on la prépare entre parenthèses
     let notePart = '';
-    if (this.itemData.itempublicnote && this.itemData.itempublicnote.trim() !== '') {
-      notePart = `Note ${this.itemData.itempublicnote.trim()}`;
+    if (this.itemData.noteopac && this.itemData.noteopac.trim() !== '') {
+      notePart = `📣 <b>Note :</b> ${this.itemData.noteopac.trim()}`;
     }
 
     // 4. On assemble les morceaux proprement en filtrant les chaînes vides
@@ -129,6 +129,7 @@ export class UbmItemHookComponent {
       this.cleanedLoc.includes('en préstamo');
   }
 
+  //Simule un clique sur le bouton de connexion.
   triggerLogin(event: Event): void {
     event.preventDefault();
     const loginButton = this.document.querySelector<HTMLButtonElement>('nde-login button');

@@ -2,6 +2,8 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
+
 
 interface ZoteroMeta {
   doi?: string;
@@ -14,7 +16,7 @@ interface ZoteroMeta {
 @Component({
   selector: 'custom-ubm-record-actions',
   standalone: true,
-  imports:[MatButtonModule,MatIconModule, MatTooltipModule],
+  imports:[MatButtonModule,MatIconModule, MatTooltipModule,TranslateModule],
   templateUrl: './ubm-record-actions.component.html',
   styleUrls: ['./ubm-record-actions.component.scss'],
   encapsulation: ViewEncapsulation.None // Permet de s'intégrer harmonieusement dans les styles globaux Primo

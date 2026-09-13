@@ -1,11 +1,15 @@
-/* --- Variables & Configuration --- */
+/* ==========================================================================
+   1. VARIABLES & CONFIGURATION
+   ========================================================================== */
 $color-prune: var(--sys-primary);
 $color-prune-dark: #8c0a57;
 $shadow-light: 0 4px 12px rgba(0, 0, 0, 0.05);
 $shadow-heavy: 0 4px 15px rgba(0, 0, 0, 0.1);
 $transition-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
 
-/* --- Styles Communs & Mixins Utiles --- */
+/* ==========================================================================
+   2. MIXINS / PLACEHOLDERS UTILITAIRES
+   ========================================================================== */
 %card-hover-effect {
   transform: translateY(-5px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
@@ -20,12 +24,15 @@ $transition-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
   height: 100%;
 }
 
+/* ==========================================================================
+   3. PAGE D'ACCUEIL — LAYOUT PRINCIPAL
+   ========================================================================== */
 .main-landing-page {
   margin: 0 auto 100px;
   gap: 3rem;
   padding-top: 3rem;
 
- /* Menu Principal */
+  /* --- 3.1 Menu Principal --- */
   .menu-container .menu {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
@@ -34,7 +41,7 @@ $transition-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
     padding: 0;
 
     li {
-      /* On applique exactement le même style aux liens ET aux balises boutons du menu */
+      /* Style commun aux liens <a> ET aux <button> du menu */
       a, .menu-trigger-btn {
         background-color: var(--whiteBG);
         display: flex;
@@ -48,11 +55,11 @@ $transition-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
         color: var(--mat-app-text-color);
         height: 100%;
         width: 100%;
-        
-        /* Réinitialisation complète des styles par défaut des boutons */
+
+        /* Réinitialisation des styles par défaut des boutons */
         border: none;
         margin: 0;
-        font: inherit; /* Force le bouton à utiliser la police globale de l'application */
+        font: inherit;
         cursor: pointer;
         -webkit-appearance: none;
         -moz-appearance: none;
@@ -62,37 +69,35 @@ $transition-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
           border-radius: 50%;
           width: 3.75rem;
           height: 3.75rem;
-          display: flex; /* Assure le centrage du SVG */
+          display: flex;
           align-items: center;
           justify-content: center;
         }
 
-        /* Style pour le texte sous l'icône (le <span> classique ou la classe .btn-text) */
         span, .btn-text {
           margin-top: .3125rem;
           display: flex;
           align-items: center;
-          justify-content: center; /* Aligne le texte au milieu horizontalement */
+          justify-content: center;
           min-height: 2.5rem;
           text-align: center;
-          font-size: 1rem; /* Ajustez selon vos besoins */
+          font-size: 1rem;
           color: var(--mat-app-text-color);
           font-weight: 500;
         }
       }
-      
-      /* Effet au survol / focus pour l'ensemble des éléments du menu */
+
       a:hover, .menu-trigger-btn:hover {
-        background-color: var(--sys-surface-variant, #f0f0f0); 
+        background-color: var(--sys-surface-variant, #f0f0f0);
       }
     }
   }
 
-/* Section Nouveautés & Messages */
+  /* --- 3.2 Section Nouveautés & Messages --- */
   .welcome-announcements-container {
-    display: grid !important; 
-    grid-template-columns: 1fr 2fr !important; /* Découpage strict 1/3 et 2/3 */
-    gap: 2rem !important; 
+    display: grid !important;
+    grid-template-columns: 1fr 2fr !important; /* 1/3 - 2/3 */
+    gap: 2rem !important;
     align-items: stretch !important;
     margin-top: 0.5rem;
     width: 100% !important;
@@ -101,8 +106,8 @@ $transition-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
       display: flex !important;
       min-height: 300px;
       width: 100% !important;
-      max-width: 100% !important; /* Sécurité anti-débordement */
-      
+      max-width: 100% !important;
+
       .news-card-overlay-style {
         position: relative;
         display: block;
@@ -135,7 +140,7 @@ $transition-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
           color: #fff;
           border-radius: 25px;
           backdrop-filter: blur(4px);
-          
+
           .news-title-text {
             font-size: 0.95rem;
             font-weight: 700;
@@ -146,7 +151,6 @@ $transition-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
       }
     }
 
-    /* Le bloc de messages */
     .announcements {
       background-color: var(--sys-inverse-on-surface) !important;
       padding: 2rem !important;
@@ -155,7 +159,7 @@ $transition-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
       display: flex !important;
       flex-direction: column !important;
       gap: 1.5rem !important;
-      width: 100% !important; /* Force à occuper tout l'espace des 2/3 restants */
+      width: 100% !important;
       max-width: 100% !important;
 
       .announcement-header {
@@ -177,14 +181,26 @@ $transition-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
   }
 }
 
-/* --- Section Actualités --- */
+/* ==========================================================================
+   4. SECTION ACTUALITÉS
+   ========================================================================== */
 .actu-section {
   max-width: 1200px;
   width: 90%;
   margin: 0.5rem auto;
 
-  .actu-section-title { font-size: 1.8rem; font-weight: 500; margin-bottom: 1.5rem; }
-  .actu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 30px; }
+  .actu-section-title {
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+
+  .actu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+  }
 
   .actu-card {
     background: #fff;
@@ -193,7 +209,7 @@ $transition-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
     flex-direction: column;
     text-decoration: none;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     transition: transform 0.2s, box-shadow 0.2s;
 
     &:hover {
@@ -211,6 +227,7 @@ $transition-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
       flex-direction: column;
       gap: 6px;
       flex: 1;
+
       .actu-date { font-size: 0.8rem; color: #777; }
       .actu-nom { font-size: 1.1rem; font-weight: 600; color: #222; }
       .actu-desc { font-size: 0.9rem; color: #555; line-height: 1.5; flex: 1; }
@@ -219,14 +236,16 @@ $transition-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
   }
 }
 
-/* --- Dialogs Modales (Horaires & Réservations) --- */
+/* ==========================================================================
+   5. DIALOGS MODALES (Horaires & Réservations)
+   ========================================================================== */
 .hours-dialog {
   border: none;
   border-radius: 16px;
   padding: 0;
   width: 90%;
   max-width: 1050px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
   background: #fafafa;
 
   .dialog-header {
@@ -236,33 +255,55 @@ $transition-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #eaeaea;
-    
-    h2 { color: $color-prune; margin: 0; font-size: 1.6rem; font-weight: 700; letter-spacing: -0.5px; }
-    .close-btn { background: none; border: none; font-size: 2.2rem; cursor: pointer; color: #999; transition: color 0.2s; &:hover { color: $color-prune; } }
+
+    h2 {
+      color: $color-prune;
+      margin: 0;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 2.2rem;
+      cursor: pointer;
+      color: #999;
+      transition: color 0.2s;
+      &:hover { color: $color-prune; }
+    }
   }
 }
 
-/* Grilles Internes des Modales */
-.libraries-grid, .reservation-cards-grid {
+/* --- 5.1 Grilles internes des modales --- */
+.libraries-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 20px;
   padding: 2rem;
   list-style: none;
 }
-.reservation-cards-grid { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); padding: 20px; }
 
-/* Cartes Immersives (Factorisation Horaires & Réservations) */
-.horaires-card, .reservation-card {
+.reservation-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  padding: 20px;
+  list-style: none;
+}
+
+/* --- 5.2 Carte "Horaires" (utilise .card-link / .card-overlay) --- */
+.horaires-card {
   position: relative;
-  height: 220px; 
+  height: 220px;
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
   background-color: #000;
   transition: transform 0.3s $transition-smooth, box-shadow 0.3s ease;
 
-  .card-link, .card-content {
+  .card-link {
     display: block;
     width: 100%;
     height: 100%;
@@ -279,13 +320,10 @@ $transition-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
     transition: transform 0.6s $transition-smooth;
   }
 
-  .card-overlay, &::before {
+  .card-overlay {
     @extend %absolute-cover;
     z-index: 2;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 45%, rgba(0, 0, 0, 0) 100%);
-  }
-
-  .card-overlay {
     padding: 20px;
     box-sizing: border-box;
     display: flex;
@@ -294,10 +332,23 @@ $transition-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
     gap: 4px;
   }
 
-  .library-title { color: #fff !important; font-size: 1.1rem !important; font-weight: 600 !important; margin: 0 !important; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6); }
-  .card-action-hint { color: rgba(255, 255, 255, 0.85) !important; font-size: 0.85rem; font-weight: 500; transform: translateY(4px); opacity: 0; transition: transform 0.3s $transition-smooth, opacity 0.3s ease; }
+  .library-title {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  }
 
-  /* Hover & Focus State */
+  .card-action-hint {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.85rem;
+    font-weight: 500;
+    transform: translateY(4px);
+    opacity: 0;
+    transition: transform 0.3s $transition-smooth, opacity 0.3s ease;
+  }
+
   &:hover, &:focus-within {
     @extend %card-hover-effect;
     .card-action-hint { opacity: 1; transform: translateY(0); }
@@ -310,44 +361,29 @@ $transition-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
   }
 }
 
-/* --- Grille des cartes de réservation --- */
-.reservation-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 24px;
-  padding: 20px;
-  list-style: none; /* Nettoie les puces du <ul> */
-}
-
-/* --- Structure de la Carte --- */
+/* --- 5.3 Carte "Réservation de salle" (utilise .card-content) --- */
 .reservation-card {
   position: relative;
   height: 280px;
   border-radius: 12px;
   overflow: hidden;
   display: flex;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
 
-  /* Image de fond */
   .card-bg-img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
+    @extend %absolute-cover;
     object-fit: cover;
     z-index: 0;
-    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Transition fluide pour le zoom */
+    transition: transform 0.4s $transition-smooth;
   }
 
-  /* Effet d'ombrage dégradé d'origine */
-  &:before {
+  &::before {
     content: "";
-    position: absolute;
-    inset: 0;
+    @extend %absolute-cover;
     background: linear-gradient(to bottom, #0000001a, #000000cc);
     z-index: 1;
   }
 
-  /* Contenu textuel et bouton */
   .card-content {
     position: relative;
     z-index: 2;
@@ -359,26 +395,23 @@ $transition-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
     box-sizing: border-box;
 
     .library-title {
-      color: #fff !important;
-      font-weight: 700 !important;
-      font-size: 36px !important;
+      color: #fff;
+      font-weight: 700;
+      font-size: 36px;
       margin: 0;
     }
 
     .library-subtitle {
-      color: #ffffffe6 !important;
+      color: #ffffffe6;
     }
   }
 
-  /* --- Effet de zoom au survol et au focus clavier --- */
   &:hover, &:focus-within {
-    .card-bg-img {
-      transform: scale(1.06); /* Zoom léger et élégant de l'image */
-    }
+    .card-bg-img { transform: scale(1.06); }
   }
 }
 
-/* --- Bouton Réserver --- */
+/* --- 5.4 Bouton "Réserver" --- */
 .btn-reserver {
   height: auto !important;
   min-height: 0 !important;
@@ -387,7 +420,7 @@ $transition-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  align-self: flex-end; /* Aligne le bouton en bas à droite */
+  align-self: flex-end;
   background-color: var(--sys-primary) !important;
   color: #fff !important;
   border-radius: 20px;
@@ -405,7 +438,35 @@ $transition-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
   }
 }
 
-/* Utility Class Accessibilité */
+/* ==========================================================================
+   6. BOUTON D'ANNONCE
+   ========================================================================== */
+.announcement-button {
+  align-self: flex-end;
+  padding: 8px 16px;
+  background-color: var(--sys-primary);
+  color: #ffffff;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  cursor: pointer !important;
+
+  &:hover {
+    background-color: var(--sys-primary-container) !important;
+    color: var(--sys-on-primary-container) !important;
+    border-color: var(--sys-primary-container) !important;
+    box-shadow:
+      0 2px 8px rgba(138, 21, 56, 0.2),
+      0 0 0 3px rgba(138, 21, 56, 0.08) !important;
+    transform: translateY(-1px) !important;
+    text-decoration: none !important;
+  }
+}
+
+/* ==========================================================================
+   7. ACCESSIBILITÉ
+   ========================================================================== */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -418,56 +479,48 @@ $transition-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
   border: 0;
 }
 
-/* --- Responsive --- */
+/* ==========================================================================
+   8. RESPONSIVE
+   ========================================================================== */
+
+/* --- Mobile (≤ 768px) --- */
 @media (max-width: 768px) {
   .main-landing-page {
-    // On réduit l'espace global de la page sur mobile
     gap: 1.5rem;
     padding-top: 1rem;
 
+    /* 2 boutons de menu par ligne */
+    .menu-container .menu {
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 1rem;
+    }
+
     .welcome-announcements-container {
-      grid-template-columns: 1fr !important; /* Force l'affichage sur une seule colonne */
-      gap: 1.5rem !important; /* Réduit l'espace entre l'actu et l'annonce */
-      
-      .news-card-container { 
-        height: 250px !important; 
-        min-height: 250px !important; /* Évite que l'image ne devienne trop écrasée */
+      grid-template-columns: 1fr !important;
+      gap: 1.5rem !important;
+
+      .news-card-container {
+        height: 250px !important;
+        min-height: 250px !important;
         width: 100% !important;
       }
 
       .announcements {
         width: 100% !important;
-        padding: 1.5rem !important; /* On réduit un peu le rembourrage interne sur mobile */
+        padding: 1.5rem !important;
       }
     }
   }
 }
+
+/* --- Grand écran (≥ 1920px) --- */
 @media only screen and (min-width: 1920px) {
-  .main-landing-page .menu-container .menu li a:hover, .main-landing-page .menu-container .menu li a:focus, .main-landing-page .menu-container .menu li button:hover, .main-landing-page .menu-container .menu li button:focus {
-    transition: box-shadow .3s,transform .3s ease-in-out;
+  .main-landing-page .menu-container .menu li a:hover,
+  .main-landing-page .menu-container .menu li a:focus,
+  .main-landing-page .menu-container .menu li button:hover,
+  .main-landing-page .menu-container .menu li button:focus {
+    transition: box-shadow .3s, transform .3s ease-in-out;
     box-shadow: 0 0 .625rem #0000001a;
     transform: translateY(-1.1875rem);
   }
-}
-.announcement-button {
-  align-self: flex-end; /* Évite que le bouton prenne toute la largeur */
-  padding: 8px 16px;
-  background-color: var(--sys-primary);
-  color: #ffffff;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: 500;
-  transition: background-color 0.2s ease;
-  cursor: pointer !important; /* Force le curseur en mode "main/clique" */
-}
-
-.announcement-button:hover {
-  background-color: var(--sys-primary-container) !important;
-    color: var(--sys-on-primary-container) !important;
-    border-color: var(--sys-primary-container) !important;
-    box-shadow:
-      0 2px 8px rgba(138, 21, 56, 0.2),
-      0 0 0 3px rgba(138, 21, 56, 0.08) !important;
-    transform: translateY(-1px) !important;
-    text-decoration: none !important;
 }

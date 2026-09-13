@@ -1,10 +1,12 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'ubm-brief-display',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,TranslateModule],
   templateUrl: './ubm-brief-display.component.html',
   styleUrl: './ubm-brief-display.component.scss',
   encapsulation: ViewEncapsulation.None

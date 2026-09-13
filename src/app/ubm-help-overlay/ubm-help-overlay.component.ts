@@ -2,11 +2,12 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UbmAuthService } from '../ubm-services/ubm-auth.service';
 import { AssetsPublicPathDirective } from '../services/assets-public-path.directive'; 
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'custom-ubm-help-overlay',
   standalone: true,
-  imports: [CommonModule, AssetsPublicPathDirective],
+  imports: [CommonModule, AssetsPublicPathDirective, TranslateModule],
   templateUrl:'./ubm-help-overlay.component.html',
   styleUrl:'./ubm-help-overlay.component.scss'
 })

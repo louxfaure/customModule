@@ -3,8 +3,8 @@
     <button (click)="exportToZotero($event)"
             mat-icon-button
             class="mat-mdc-tooltip-trigger center-actions-icons action-button mdc-icon-button mat-mdc-icon-button mat-unthemed mat-mdc-button-base"
-            matTooltip="Exporter vers ZoteroBib"
-            aria-label="Exporter vers ZoteroBib">
+            [attr.aria-label]="('ubmrecordactions.zoterobib.aria' | translate)"
+            [matTooltip]="('ubmrecordactions.zoterobib.aria' | translate)">
       
       <span class="mat-mdc-button-persistent-ripple mdc-icon-button__ripple"></span>
       

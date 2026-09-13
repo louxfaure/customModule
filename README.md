@@ -1,468 +1,163 @@
-# CustomModule
 
-## ✨ New Feature (9th November 2025): Support for all customization files in assets folder:
-All files that are you are able to customize through the assets folder of your customization package are now supported for preview when using the custom module in proxy mode.
+# Package de personnalisation de la vue Primo de l'Université Bordeaux Montaigne (33PUDB_UBM:NDE)
 
-For example to preview your brand logo you can now place your customized logo file in the following path in your local project:
-`src/assets/images/library-logo.png`
+## Prérequis et utilisation de l'interface de développement
+[Voir la documentation d'Ex Libris](DEPLOYMENT.md)
 
-To start proxy mode use the command:
-``` bash
-npm run start:proxy
-```
+## Liste des personnalisations Angular
 
----
+### UbmBriefDisplay
 
-### Overview
+Module de personnalisation de l'affichage des notices (affichage abrégé / Brief Display) dans la liste des résultats.
 
+#### 1. Affichage des 2ᵉ & 3ᵉ lignes dans le Brief Display pour les résultats provenant de CDI
 
-The NDE Customization package offers options to enhance and extend the functionality of Primo’s New Discovery Experience (NDE). You can add and develop your own components, customize theme templates, and tailor the discovery interface to your specific needs.
+Afin de personnaliser et d'améliorer l'affichage des résultats locaux selon le type de document, l'alimentation des 2ᵉ et 3ᵉ lignes du Brief Display s'appuie sur des champs locaux :
+- **2ᵉ ligne** : Auteurs construits à partir des champs `200$f` et `$g` de la notice pour une meilleure lisibilité et pour empêcher une surcharge d'information en cas d'auteurs multiples.
+- **3ᵉ ligne** : Affiche la zone `328` pour les travaux universitaires, ou les coordonnées pour les cartes géographiques.
 
-**Note:**
-<mark>This branch includes updates and other improvements that are compatible with the December 2025 release of NDE.</mark>
+![Affichage bref : Champs personnalisés](readme-files/UbmBriefDisplay1.png)
+Les champs par défaut **Auteurs** (`creator`) et **Éditeur** (`publisher`) ne sont plus remontés nativement pour CDI. Ce module extrait directement les données depuis les champs PNX locaux pour garantir un affichage fluide et coherent.
 
-**Note:**
-The NDE Customization package is currently available exclusively to Primo customers who have early access to the New Discovery Experience (NDE). Further availability will be announced in upcoming releases.
+#### 2. Badge « Publication / contribution d'un membre de l'Université Bordeaux Montaigne »
 
----
-
-## Prerequisites
-
-### Node.js and npm (Node Package Manager)
-1. **Verify Node.js and npm Installation:**
-    - Open a terminal.
-    - Run the following commands to check if Node.js and npm are installed:
-        ```bash
-        node -v
-        npm -v
-        ```
-    - If installed, you will see version numbers. If not, you will see an error.
-
-2. **Install Node.js and npm (if not installed):**
-    - Visit the [Node.js download page](https://nodejs.org/en/download/).
-    - Download the appropriate version for your operating system (npm is included with Node.js).
-    - Follow the installation instructions.
-
-### Angular CLI
-
-1. **Verify Angular CLI Installation:**
-    - Open a terminal.
-    - Run the following command:
-        ```bash
-        ng version
-        ```
-    - If Angular CLI is installed, you will see the version and installed Angular packages.
-
-2. **Install Angular CLI (if not installed):**
-    - After installing Node.js and npm, install Angular CLI globally by running:
-        ```bash
-        npm install -g @angular/cli
-        ```
-
----
-
-## Development server setup and startup
-
-### Step 1: Download the Project
-1. Navigate to the GitHub repository: [https://github.com/ExLibrisGroup/customModule](https://github.com/ExLibrisGroup/customModule).
-2. Download the ZIP file of the project.
-3. Extract the ZIP file to your desired development folder (e.g., `c:\env\custom-module\`).
-
-### Step 2: Install Dependencies
-1. Inside the `customModule` directory, install the necessary npm packages:
-    ```bash
-    npm install
-    ```
-
-### Step 3: Configuring proxy for and starting local development server
-
-There are two options for setting up your local development environment: configuring a proxy or using parameter on your NDE URL.
-
-- **Option 1: Update `proxy.const.mjs` Configuration**:
-  - Set the URL of the server you want to test your code with by modifying the proxy.const.mjs file in the ./proxy directory:
-    ```javascript
-    // Configuration for the development proxy
-    const environments = {
-      'example': 'https://myPrimoVE.com',
-    }
-
-    export const PROXY_TARGET = environments['example'];
-    ```
-  - Start the development server with the configured proxy by running:
-    ```bash
-    npm run start:proxy
-    ```
-  - Open your browser on port 4201 to see your changes. e.g: http://localhost:4201/nde/home?vid=EXLDEV1_INST:NDE&lang=en
-
-  
-- **Option 2: Parameter on NDE URL**:
-    - Start your development server by running
-      ```bash
-      npm run start
-      ```
-    -  Add the following query parameter to your NDE URL:
-      ```
-      useLocalCustomPackage=true
-      ```
-      For example: `https://sqa-na02.alma.exlibrisgroup.com/nde/home?vid=EXLDEV1_INST:NDE&useLocalCustomPackage=true`
-    - This setting assumes that your local development environment is running on the default port `4201`.
-
+Un badge distinctif est affiché dans la liste des résultats pour identifier les publications issues de l'université.
+![Affichage bref : Badge membre de l'université](readme-files/UbmBriefDisplay2.png)
+- **Condition d'affichage** : Présence du champ PNX `lds30` contenant la valeur exacte `publicationUBM`.
+- **Source des données** : Ce champ PNX est généré automatiquement lors de l'indexation lorsqu'un champ `970 $a` est présent dans la notice bibliographique MARC21 ou UNIMARC.
+- **Procédure de catalogage** : Ajout en masse. Se référer à la procédure interne de traitement des notices pour les consignes d'ajout du champ `970`.
+- **Code du libellé** (Table *NDE Custom Defined Labels*) : `ubmbriefdisplay.publicationUBM`
   
 ---
 
-## Step 4: Code Scaffolding and Customization
+### UbmChangePasswordMessage
 
-### Add Custom Components
-1. Create custom components by running:
-    ```bash
-    ng generate component <ComponentName>
-    ```
-    Example:
-    ```bash
-    ng generate component RecommendationsComponent
-    ``` 
+Injecte un message dans le compte lecteur, sous le lien de modification du mot de passe, pour informer que le service est limité aux lecteurs extérieurs.
+![Message changement de mot de passe](readme-files/UbmChangePassword.png)
+* **Codes libellés utilisés** (Table *NDE Custom Defined Labels*) : `ubmchangepassword.#####`
 
-2. Update `selectorComponentMap` in `customComponentMappings.ts` to connect the newly created components:
-    ```typescript
-    export const selectorComponentMap = new Map<string, any>([
-      ['nde-recommendations-before', RecommendationsComponentBefore],
-      ['nde-recommendations-after', RecommendationsComponentAfter],
-      ['nde-recommendations-top', RecommendationsComponentTop],
-      ['nde-recommendations-bottom', RecommendationsComponentBottom], 	  
-      ['nde-recommendations', RecommendationsComponent],
-      // Add more pairs as needed
-    ]);
-    ```
+---
 
-3. Customize the component’s `.html`, `.ts`, and `.scss` files as needed:
-    - `src/app/recommendations-component/recommendations-component.component.html`
-    - `src/app/recommendations-component/recommendations-component.component.ts`
-    - `src/app/recommendations-component/recommendations-component.component.scss`
+### UbmCustomAvailability
 
+Surcharge l'affichage de la disponibilité dans le Brief Display.
 
+#### Au niveau de la liste des résultats
 
-- All components in the NDE are intended to be customizable. However, if you encounter a component that does not support customization, please open a support case with us. This helps ensure that we can address the issue and potentially add customization support for that component in future updates.
+Affiche la disponibilité pour toutes les localisations de l'institution sous forme d'infocarte.
+![Localisations multiples dans la liste des  résultats](./readme-files/UbmCustomAvailability1.png)
 
-### Accessing host component instance
+#### Au niveau de l'affichage détaillé
 
-You can get the instance of the component your custom component is hooked to by adding this property to your component class:
+Affiche un message pour inciter l'usager à se connecter afin de :
 
-```angular2html
-@Input() private hostComponent!: any;
-```
+* Demander les documents qui se trouvent en magasin. *(TODO: Déplacer le message au niveau de la holding)*
+![Image](./readme-files/UbmCustomAvailability2_magasin.png)
+* Réserver un document emprunté.*(]TODO: Déplacer le message au niveau de la holding)*
+![Image](./readme-files/UbmCustomAvailability2_pasdispo.png)
+* Voir la disponibilité dans un autre établissement du réseau.
+![Image](./readme-files/UbmCustomAvailability2_autreetab.png)
+* Pour les documents de la réserve, invite l'usager à contacter le service des collections patrimoniales. *(TODO: Déplacer le message au niveau de la holding)*
+![Image](./readme-files/UbmCustomAvailability2_Reserve.png)
 
-### Accessing app state
+---
 
-- You can gain access to the app state which is stored on an NGRX store by injecting the Store service to your component:
+### UbmCustomResultListAfterComponent
 
-```angular2html
-private store = inject(Store);
-```
+Affiche un message sous la liste des résultats permettant de relancer la recherche sur :
 
-- Create selectors. For example: 
+* Le catalogue de Bordeaux Métropole
+* Le SUDOC
+* Google Scholar
+* OpenAlex
+* WorldCat
 
-```angular2html
-const selectUserFeature = createFeatureSelector<{isLoggedIn: boolean}>('user');
-const selectIsLoggedIn = createSelector(selectUserFeature, state => state.isLoggedIn);
-```
+![Rebonds requête](./readme-files/UbmCustomResultListAfterComponent.png)
 
-- Apply selector to the store to get state as Signal:
+*(TODO: Revoir l'internationalisation pour utiliser les tables de codes Alma)*
 
-```angular2html
-isLoggedIn = this.store.selectSignal(selectIsLoggedIn);
-```
+---
 
-Or as Observable:
+### UBMRecordActions
 
-```angular2html
-isLoggedIn$ = this.store.select(selectIsLoggedIn);
-```
-
-### Accessing app router
-
-- You can gain access to the app router service by injecting the SHELL_ROUTER  injection token to your component:
-
-```angular2html
-import {SHELL_ROUTER} from "../../injection-tokens"; //the import path may vary on your project
-private router = inject(SHELL_ROUTER);
-```
-
-- Listening for router navigation events. For example:
-
-```angular2html
-this.routerSubscription = this.router.events.subscribe((event) => {
-    if (event instanceof NavigationEnd) {
-        console.log('Tracking PageView: ', event.urlAfterRedirects);
-    }
-});
-```
-
-
-
-### Translating from code tables 
-
-You can translate codes in your custom component by using ngx-translate (https://github.com/ngx-translate/core).
-
-- If you are using a stand alone component you will need to add the TranslateModule to your component imports list.
-- In your components HTML you can translate a label like so:
-```angular2html
-<span>This is some translated code: {{'delivery.code.ext_not_restricted' | translate}}</span>
-```
+Ajoute un service d'export de la notice vers ZoteroBib.
+![Zotero](./readme-files/zoterobib.png)
 
 
 ---
 
-## Creating your own color theme
+### UbmHelpOverlay
 
-The NDE theming is based on Angular Material. 
-We allow via the view configuration to choose between a number of pre built themes.
-
-![prebuilt theme image](./readme-files/prebuilt-themes.png "prebuilt themes configuration")
-
-
-If you want to create your own theme instead of using one of our options follow these steps:
-
-1. Create a material 3 theme by running:
-    ```bash
-    ng generate @angular/material:m3-theme
-    ``` 
-   You will be prompted to answer a number of questions like so:
-  ```
-? What HEX color should be used to generate the M3 theme? It will represent your primary color palette. (ex. #ffffff) #1eba18
-? What HEX color should be used represent the secondary color palette? (Leave blank to use generated colors from Material)
-? What HEX color should be used represent the tertiary color palette? (Leave blank to use generated colors from Material)
-? What HEX color should be used represent the neutral color palette? (Leave blank to use generated colors from Material)
-? What is the directory you want to place the generated theme file in? (Enter the relative path such as 'src/app/styles/' or leave blank to generate at your project root) src/app/styles/
-? Do you want to use system-level variables in the theme? System-level variables make dynamic theming easier through CSS custom properties, but increase the bundle size. yes
-? Choose light, dark, or both to generate the corresponding themes light
-
-```
-- Note that it is imporant to answer yes when asked if you want to use system-level variables.
-
-- Also note that I'm only entering the primary color and not secondary or tertiary. They will be selected automatically based on my primary color.
-
-Once this script completes successfully you will recieve this message: 
-
-`CREATE src/app/styles/m3-theme.scss (2710 bytes)`
-
-To apply the theme go to `_customized-theme.scss` and uncomment the following lines:
-```
-.custom-nde-theme{
-  @include mat.all-component-colors(m3-theme.$light-theme);
-  @include mat.system-level-colors(m3-theme.$light-theme);
-}
-```
----
-
-
-
-## Developing an Add-On for the NDE UI
-
-The NDE UI supports loading of custom modules at runtime and also provides infrastructure to dynamically load add-ons developed by vendors, consortia, or community members. This enables seamless integration, allowing institutions to configure and deploy external add-ons through **Add-On Configuration in Alma**.
-
-The NDE UI add-on framework allows various stakeholders to develop and integrate custom functionality:
-
-- **Vendors** can create and host services that institutions can seamlessly incorporate into their environment.
-- **Institutions and consortia** can develop and share custom components, enabling consistency and collaboration across multiple libraries.
-
-Library staff can easily add, configure, and manage these add-ons through Alma, following guidelines provided by the stakeholders. These typically include:
-
-- **Add-on Name** – The identifier used in Alma’s configuration.
-- **Add-on URL** – The location where the add-on is hosted (static folder to load the add-on at runtime).
-- **Configuration Parameters** – JSON-based config parameters to be referenced at runtime by the add-on.
-
-![Add-on Overview](./readme-files/addon-overview.png)
+Crée une page d'aide sous la forme d'un *Overlay* accessible à tout moment de la navigation.
+*(TODO: Résoudre les problèmes de traduction dans la section « Trucs et astuces »)*
 
 ---
 
-## Guidelines for Developing an Add-On
+### UbmHomePageActu
 
-You can download the custom module and modify it to function as an add-on.
+Gère l'affichage de la page d'accueil.
+Le message de la section **Messages** peut être alimenté depuis la table *NDE Custom Defined Labels* :
 
-### Set Add-on Name
-
-This section below should remain the same.
-
-![Set Addon Name](./readme-files/set-addon-name.png)
-
-![Example Configuration JSON](./readme-files/example-config-json.png)
+* **Titre** : `homepage.annonce.titre`
+* **Message** : `homepage.annonce.message`
+* **Texte du bouton** : `homepage.annonce.bouton`
+* **Lien** : `homepage.annonce.lien`
 
 ---
 
-The add-on infrastructure provides a way to access institution-specific configuration parameters. Institutions can upload their configuration settings in JSON format, which your add-on can reference dynamically within its components.
+### UbmItemHook
 
-### 🔧 Accessing Add-On Configuration Parameters
+Refonte de l'affichage des exemplaires :
 
-Use Angular DI to inject the parameters directly into your component via the `MODULE_PARAMETERS` token:
+* Affichage de toutes les informations utiles sur une seule ligne (empêche le dépilement). Informations retenues :
+* Disponibilité
+* Règle de circulation
+* Description
+* Cote exemplaire
+* Note publique
 
-```ts
-import { Component, Inject } from '@angular/core';
 
-@Component({
-  selector: 'custom-test-bottom',
-  host: { 'data-component-id': 'custom-test-bottom-unique' },
-  templateUrl: './test-bottom.component.html',
-  styleUrls: ['./test-bottom.component.scss']
-})
-export class TestBottomComponent {
-  constructor(@Inject('MODULE_PARAMETERS') public moduleParameters: any) {
-    console.log('Module parameters TestBottomComponent:', this.moduleParameters);
-  }
+> [!IMPORTANT]
+> Nécessite d'empêcher le dépilement de la pile exemplaire (cf. [`custom.css`](./src/assets/css/custom.css) *"Liste des exemplaires"*).
 
-  getKeys(obj: any): string[] {
-    return Object.keys(obj || {});
-  }
-}
+* Calcul générique de la règle de circulation (Empruntable ou autre statut spécifique) sans que l'usager soit authentifié. À l'authentification, le système affiche la règle calculée.
 
-```
+> [!IMPORTANT]
+> Nécessite d'appliquer des exceptions de circulation à tous les exemplaires situés dans des localisations ayant des règles spécifiques (Consultation sur place, Prêt limité. Voir les traitements planifiés *"Change Physical items information - Exceptions de circulation pour Babord +"*).
 
-> 📘 `yourParamKey` should match the keys defined in your Alma Add-on JSON configuration.
+* Si le document est localisé en magasin, affiche un lien vers le formulaire d'authentification.
+
+#### UbmLoginFromHook
+
+Permet de rediriger les utilisateurs appartenant à un autre établissement du réseau vers le catalogue de leur institution. Redirige l'utilisateur vers le formulaire d'authentification. Une fois authentifié sur le catalogue de son université, il est redirigé vers la page en cours de consultation (sauf en cas d'affichage d'une notice détaillée, car les identifiants ne sont pas les mêmes).
+
+![Formulaire d'authentification redirection](./readme-files/UbmCustomLOginForm.png)
+---
+
+### UbmRebondFullDisplay
+
+Crée une section **« Rechercher le document dans une autre bibliothèque »** au niveau de l'affichage détaillé. Permet à l'usager de rechercher le document dans le SUDOC ou dans le catalogue des bibliothèques de Bordeaux Métropole.
+
+* **SUDOC** : La requête est construite en priorité sur le PPN, sinon l'ISBN ou l'ISSN, et enfin une clé Auteur/Titre.
+* **Bordeaux Métropole** : Seule la recherche Auteur/Titre est prise en charge.
+
+![Reond notice](./readme-files/UbmRebonFullDisplay.png)
+---
+
+### UbmRequestCardHook
+
+Lorsqu'une notice de numéro isolé est affichée et que le lien est fait au niveau de la notice (lien au PPN) au lieu de l'exemplaire, il est compliqué pour l'utilisateur de retrouver le fascicule qui l'intéresse.
+
+Ce composant extrait les informations du champ `pnx.display.relation`. Il identifie les relations mises en place via le champ `461` (via le subfield code du libellé en `$$C`) et affiche une note au-dessus de la *holding* du titre lié pour rappeler les informations nécessaires pour repérer le fascicule correspondant à la notice affichée.
+
+![Fascicule lié](./readme-files/UbmRequestCardHook.png)
+
+[Exemple de notice concernée](https://babordplus.u-bordeaux-montaigne.fr/nde/fulldisplay?query=113562020&tab=Everything&search_scope=DN_and_CI&lang=fr&vid=33PUDB_UBM:NDE&docid=alma991004285439704674&adaptor=Local%20Search%20Engine&context=L&isFrbr=false&isHighlightedRecord=false&state=)
 
 ---
 
-If your add-on includes assets such as images, you can ensure a complete separation between the frontend code and asset deployment. To achieve this, set `ASSET_BASE_URL` to point to your designated static folder, allowing your add-on to reference assets independently of the core application.
+### UbmResourceTypeBarHook
 
-![Access Assets via ASSET_BASE_URL](./readme-files/access-assets.png)
+Lorsqu'un préfiltre "Type de document" est utilisé, la barre d'état des filtres ne rappelle pas qu'un filtre de ce type a été appliqué à la requête. Ce composant invisible intercepte les clics sur la barre `nde-search-results-resource-type-bar` pour simuler l'utilisation d'une facette standard.
 
-
-The `autoAssetSrc` directive automatically prepends `ASSET_BASE_URL` to your `[src]` attribute.
-
-### Example:
-```html
-<img autoAssetSrc [src]="'assets/images/logo.png'" />
-```
-
-With:
-```env
-ASSET_BASE_URL=http://il-urm08.corp.exlibrisgroup.com:4202/
-```
-
-Results in:
-```html
-<img src="http://il-urm08.corp.exlibrisgroup.com:4202/assets/images/logo.png" />
-```
-
-### Supported Elements:
-- `<img>`
-- `<source>`
-- `<video>`
-- `<audio>`
-
-> ✅ Always use `[src]="'relative/path'"` to ensure proper asset URL injection.
-
----
-
-
-
-
----
-
-## Recommended Development Environment
-
-To ensure smooth development, debugging, and code management, we recommend setting up your environment with the following tools:
-
-### 🖥️ IDEs and Editors
-
-- **Visual Studio Code (VSCode)** – Highly recommended  
-  [Download VSCode](https://code.visualstudio.com/)
-  - Recommended Extensions:
-    - `Angular Language Service`
-    - `ESLint` or `TSLint`
-    - `Prettier - Code formatter`
-    - `Path Intellisense`
-    - `Material Icon Theme` (optional for better visuals)
-
-- **WebStorm**  
-  A powerful alternative with built-in Angular and TypeScript support.  
-  [Download WebStorm](https://www.jetbrains.com/webstorm/)
-
-- **IntelliJ IDEA**  
-  A full-featured IDE by JetBrains. Ideal if you’re also working with Java backend.  
-  [Download IntelliJ IDEA](https://www.jetbrains.com/idea/)
-
-- **Eclipse IDE**  
-  Suitable for full-stack development including Angular with the right plugins.  
-  [Download Eclipse](https://www.eclipse.org/downloads/)
-
----
-
-### 🔧 Tools & Utilities
-
-- **Node Version Manager (nvm)**  
-  Manage multiple versions of Node.js easily:
-  ```bash
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-  ```
-
-- **Angular CLI**
-  ```bash
-  npm install -g @angular/cli
-  ```
-
-- **Git GUI Clients**
-  - GitHub Desktop
-  - Sourcetree
-  - GitKraken
-
----
-
-### 🔍 Debugging & Testing
-
-- Use **Chrome Developer Tools** for runtime inspection.
-- Install **Augury Extension** (Angular DevTools) for inspecting Angular components.
-
----
-
-### 🧪 Optional Tools
-
-- **Postman** – For testing API requests.
-- **Docker** – For isolated build environments.
-- **Nx** – Monorepo tool (if planning multiple apps/libraries).
-
----
-## Build the Project
-
-### Step 5: Build the Project
-1. Compile the project:
-    ```bash
-    npm run build
-    ```
-
-2. After a successful build, the compiled code will be in the `dist/` directory.
-
-
-- **Automatic Packaging**:
-  - The build process automatically compiles and packages the project into a ZIP file named according to the `INST_ID` and `VIEW_ID` specified in the `build-settings.env` file located at:
-    ```
-    C:\env\nde\customModule-base\build-settings.env
-    ```
-  - Example configuration:
-    ```
-    INST_ID=DEMO_INST
-    VIEW_ID=Auto1
-    ```
-  - The ZIP file, e.g., `DEMO_INST-Auto1.zip`, is automatically created in the `dist/` directory after a successful build.
-
-
-### Step 6: Upload Customization Package to Alma
-1. In Alma, navigate to **Discovery > View List > Edit**.
-2. Go to the **Manage Customization Package** tab.
-3. Upload your zipped package in the **Customization Package** field and save.
-4. Refresh the front-end to see your changes.
-
-
----
-
-## Additional Resources
-
-### Live Demo Tutorial
-- **Customize Primo NDE UI**: Watch our live demo on YouTube for a visual guide on how to customize the Primo NDE UI:
-  [Customize Primo NDE UI: Live Demo](https://www.youtube.com/watch?v=j6jAYkawDSM)
-
-
-
----
-
-## Conclusion
-By following these steps, you can customize and extend the NDE interface using the `CustomModule` package. If you have any questions or run into issues, refer to the project documentation or the ExLibris support.
-
+![Imagge](./readme-files/UbmResourceTypeBarHook.png)

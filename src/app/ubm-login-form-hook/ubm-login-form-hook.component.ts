@@ -23,10 +23,10 @@ export class UbmLoginFormHookComponent implements OnInit {
   
   // Liste brute des institutions disponibles
   institutions: Institution[] = [
-    { id: "33PUDB_INP",  baseUrl: "https://pudb-inp.primo.exlibrisgroup.com/nde/login?", vid: "33PUDB_INP:NDE",  name: "Bordeaux INP" },
-    { id: "33PUDB_BXSA", baseUrl: "https://pudb-bxsa.primo.exlibrisgroup.com/nde/login?", vid: "33PUDB_BXSA:NDE", name: "Bordeaux Sciences Agro" },
-    { id: "33PUDB_IEP",  baseUrl: "https://pudb-iep.primo.exlibrisgroup.com/nde/login?", vid: "33PUDB_IEP:NDE",   name: "Bordeaux Sciences Po" },
-    { id: "33PUDB_UB",   baseUrl: "https://pudb-ub.primo.exlibrisgroup.com/nde/login?", vid: "33PUDB_UB:33PUDB_UB_VU5",    name: "Université de Bordeaux" },
+    { id: "33PUDB_INP",  baseUrl: "https://pudb-inp.primo.exlibrisgroup.com/nde/login?", vid: "33PUDB_INP:33PUDB_INP_VU3",  name: "Bordeaux INP" },
+    { id: "33PUDB_BXSA", baseUrl: "https://pudb-bxsa.primo.exlibrisgroup.com/nde/login?", vid: "33PUDB_BXSA:33PUDB_BXSA_NDE", name: "Bordeaux Sciences Agro" },
+    { id: "33PUDB_IEP",  baseUrl: "https://pudb-iep.primo.exlibrisgroup.com/nde/login?", vid: "33PUDB_IEP:33PUDB_IEP_NDE_VU1",   name: "Bordeaux Sciences Po" },
+    { id: "33PUDB_UB",   baseUrl: "https://pudb-ub.primo.exlibrisgroup.com/nde/login?", vid: "33PUDB_UB:33PUDB_UB_NDE",    name: "Université de Bordeaux" },
     { id: "33PUDB_UBM",  baseUrl: "https://pudb-ubm.primo.exlibrisgroup.com/nde/login?", vid: "33PUDB_UBM:NDE",  name: "Université Bordeaux Montaigne" }
   ];
 

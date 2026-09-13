@@ -8,6 +8,7 @@ import { AssetsPublicPathDirective } from '../services/assets-public-path.direct
 interface Institution {
   code: string;
   name: string;
+  vid:  string;
   url?: string;
 }
 
@@ -25,11 +26,11 @@ export class UbmFooterComponent implements OnInit {
   message: string = "Réseau des bibliothèques universitaires bordelaises";
   displayFooter: boolean = true;
   institutionsList: Institution[] = [
-    { 'code': 'BXSA', 'name': 'Babord + Bordeaux Sciences Agro' },
-    { 'code': 'IEP',  'name': 'Babord + Sciences Po Bordeaux' },
-    { 'code': 'INP',  'name': 'Babord + Institut National Polytechnique de Bordeaux' },
-    { 'code': 'UB',   'name': 'Babord + Université de Bordeaux' },
-    { 'code': 'UBM',  'name': 'Babord + Université Bordeaux Montaigne' }
+    { 'code': 'BXSA', 'name': 'Babord + Bordeaux Sciences Agro','vid': '33PUDB_BXSA:33PUDB_BXSA_NDE' },
+    { 'code': 'IEP',  'name': 'Babord + Sciences Po Bordeaux' , 'vid': '33PUDB_IEP:33PUDB_IEP_NDE_VU1'},
+    { 'code': 'INP',  'name': 'Babord + Institut National Polytechnique de Bordeaux', 'vid':'33PUDB_INP:33PUDB_INP_VU3' },
+    { 'code': 'UB',   'name': 'Babord + Université de Bordeaux', 'vid':'33PUDB_UB:33PUDB_UB_NDE' },
+    { 'code': 'UBM',  'name': 'Babord + Université Bordeaux Montaigne','vid':'33PUDB_UBM:NDE' }
   ];
 
   ngOnInit(): void {
@@ -54,7 +55,7 @@ export class UbmFooterComponent implements OnInit {
         modifiedHostname = `${url.protocol}//${url.host}`;
       }
 
-      institution.url = `${modifiedHostname}/discovery/search?vid=33PUDB_${institution.code}:33PUDB_${institution.code}_VU1`;
+      institution.url = `${modifiedHostname}/nde/home?vid=${institution.vid}`;
     });
 
     // Tri alphabétique correct par code (ex: BXSA, IEP, INP...)
