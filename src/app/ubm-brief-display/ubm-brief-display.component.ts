@@ -18,18 +18,26 @@ export class UbmBriefDisplayComponent {
     const pnxDisplay = value?.recordMainDetails?.pnx?.display;
     const lds01 = pnxDisplay?.lds01;
     const lds30 = pnxDisplay?.lds30;
-    console.log('lds30', lds30);
+    console.log('lds01', lds01);
 
     // Badge UBM : lds30 vaut 'publicationUBM'
     // (lds30 peut être un tableau ou une string selon le champ PNX)
     this.isUbmPublication = Array.isArray(lds30)
       ? lds30.includes('publicationUBM')
       : lds30 === 'publicationUBM';
-     if (value?.recordMainDetails?.displayLinesCache && 
-      (lds01 === undefined || lds01 === null || lds01.length === 0)) {
-      console.log('UbmBriefDisplayComponent : Notice CDI, on affiche les auteurs');
+      const delcategory = value?.recordMainDetails?.pnx?.delivery?.delcategory;
+
+    if (delcategory?.includes('Remote Search Resource')) {
+      console.log('UbmBriefDisplayComponent : Notice CDI (Remote Search Resource), on affiche les auteurs');
       this.wrapCacheWithProxy(value.recordMainDetails);
     }
+    // console.log('Alex delcategory',value?.recordMainDetails?.pnx?.delivery?.delcategory)
+    // console.log('Alex id',value?.recordMainDetails?.pnx?.control?.recordid)
+    // if (value?.recordMainDetails?.displayLinesCache && 
+    //   (lds01 === undefined || lds01 === null || lds01.length === 0)) {
+    //   console.log('UbmBriefDisplayComponent : Notice CDI, on affiche les auteurs');
+    //   this.wrapCacheWithProxy(value.recordMainDetails);
+    // }
   }
 
   private wrapCacheWithProxy(recordMainDetails: any) {

@@ -10,6 +10,7 @@ import { UbmLoginFormHookComponent } from '../ubm-login-form-hook/ubm-login-form
 import { UbmChangePasswordMessageComponent } from '../ubm-change-password-message/ubm-change-password-message.component';
 import { RequestServicesComponent } from '../ubm-request-card-hook/ubm-request-card-hook.component';
 import { UbmRebondFullDisplayComponent } from '../ubm-rebond-full-display/ubm-rebond-full-display.component';
+import { UbmLocationHookComponent } from '../ubm-location-hook/ubm-location-hook.component';
 
 // Define the map
 export const selectorComponentMap = new Map<string, any>([
@@ -24,5 +25,6 @@ export const selectorComponentMap = new Map<string, any>([
     ['nde-personal-settings-bottom',UbmChangePasswordMessageComponent],
     ['nde-get-it-top',RequestServicesComponent],
     ['nde-actions-presenter-before', UbmRecordActionsComponent],
-    ['nde-full-display-service-container-before', UbmRebondFullDisplayComponent]
+    ['nde-full-display-service-container-before', UbmRebondFullDisplayComponent],
+    ['nde-location-bottom',UbmLocationHookComponent]
 ]);

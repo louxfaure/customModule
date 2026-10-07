@@ -73,6 +73,50 @@ nde-search-bar-presenter .flex-row.ng-star-inserted {
   align-items: center !important;
 } 
 
+/*-----------------------------------------------------*/
+/* Rendre le bouton de recherche (loupe) plus visible   */
+/*-----------------------------------------------------*/
+.search-btn {
+  background-color: var(--sys-primary) !important;
+  border-radius: 50% !important;
+  width: 44px !important;
+  height: 44px !important;
+  margin: 6px !important;
+  box-shadow: 0 2px 8px rgba(138, 21, 56, 0.25) !important;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease !important;
+}
+
+/* On force la couleur de l'icône SVG en blanc pour contraster avec le fond coloré */
+.search-btn .mat-icon svg path {
+  fill: var(--sys-on-primary) !important;
+}
+
+.search-btn:hover {
+  background-color: var(--sys-primary-container) !important;
+  transform: translateY(-1px) scale(1.05) !important;
+  box-shadow: 0 4px 12px rgba(138, 21, 56, 0.35) !important;
+}
+
+.search-btn:active {
+  transform: translateY(0) scale(0.98) !important;
+}
+
+/* Optionnel : atténuer légèrement le bouton "recherche avancée" pour rééquilibrer 
+   la hiérarchie visuelle (le rendre secondaire, en outline plutôt qu'en plein) */
+.advanced-search-button {
+  /* background-color: white !important;
+  border: 1.5px solid var(--sys-primary) !important; */
+  color: var(--sys-primary) !important;
+}
+
+.advanced-search-button span {
+  color: var(--sys-primary) !important;
+}
+
+/* .advanced-search-button:hover {
+  background-color: var(--sys-primary-container) !important;
+} */
+
 /* 4. Ajuster les boutons de recherche avancée / question */
 .advanced-search-btn-home-page {
   height: 3.6rem !important; /* Légèrement plus petits pour l'esthétique, ou 100% pour la même taille */
@@ -81,7 +125,7 @@ nde-search-bar-presenter .flex-row.ng-star-inserted {
   justify-content: center !important;
 }
 
-.advanced-search-button {
+/*.advanced-search-button {
   background-color: var(--sys-primary) !important;
   color: var(--sys-on-primary) !important;
   border-radius: 2.5rem !important;
@@ -98,7 +142,6 @@ nde-search-bar-presenter .flex-row.ng-star-inserted {
 
   .mat-icon svg path,
   .mat-icon svg {
-    /* fill: var(--sys-on-secondary) !important; */
     stroke: var(--sys-on-primary) !important;
     transition: fill 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -121,7 +164,6 @@ nde-search-bar-presenter .flex-row.ng-star-inserted {
 
     .mat-icon svg path,
     .mat-icon svg {
-      /* fill: var(--sys-secondary) !important; */
       stroke: var(--sys-primary) !important;
     }
 
@@ -144,7 +186,7 @@ nde-search-bar-presenter .flex-row.ng-star-inserted {
     outline-offset: 3px !important;
     text-decoration: none !important;
   }
-}
+}*/
 
 /* Pour la page d'acceuil*/
 .landing-page-search-bar-wrapper .search_box_container {
@@ -1191,5 +1233,6 @@ a.collection-path:hover {
   border-top: 2px solid #adb5bd;
   transform: rotate(45deg); /* Rotation pour faire une flèche vers la droite */
 }
+
 
 

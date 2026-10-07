@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UbmCollectioDiscoveryItemHookComponent } from './ubm-collectio-discovery-item-hook.component';
+import { UbmLocationHookComponent } from './ubm-location-hook.component';
 
 describe('UbmCollectioDiscoveryItemHookComponent', () => {
-  let component: UbmCollectioDiscoveryItemHookComponent;
-  let fixture: ComponentFixture<UbmCollectioDiscoveryItemHookComponent>;
+  let component: UbmLocationHookComponent;
+  let fixture: ComponentFixture<UbmLocationHookComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UbmCollectioDiscoveryItemHookComponent]
+      imports: [UbmLocationHookComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(UbmCollectioDiscoveryItemHookComponent);
+    fixture = TestBed.createComponent(UbmLocationHookComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

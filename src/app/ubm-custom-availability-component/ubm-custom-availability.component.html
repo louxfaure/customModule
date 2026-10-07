@@ -1,41 +1,6 @@
 <div class="ubm-alerts-container" *ngIf="isFullDisplay">
 
 
-  <div *ngIf="inReserve" class="ubm-alert">
-    <span class="material-icons ubm-alert-icon">library_books</span>
-    <div class="ubm-alert-content">
-      <strong class="ubm-alert-title"> Document patrimonial</strong> 
-      <p>Ce document fait partie des collections patrimoniales. Sa consultation nécessite une <strong>validation préalable</strong> par les bibliothécaires.</p>
-            <p>Adressez-vous à un <strong>bureau de prêt</strong> ou 
-            <a href="https://extranet.u-bordeaux-montaigne.fr/rita_fo/?num_cg=59&num_form=1">contactez-nous<span class="material-icons ubm-alert-icon">open_in_new</span></a> pour réserver et consulter ce document.</p>
-            <p style="margin-top:0.4em;"><a href="https://www.u-bordeaux-montaigne.fr/fr/documentation/collections-patrimoniales/collections-patrimoniales-imprimees-de-l-universite.html">
-            En savoir plus sur les collections patrimoniales<span class="material-icons ubm-alert-icon">open_in_new</span>
-            </a></p>
-    </div>
-  </div>
-
-  <div *ngIf="hasMagasin && !isLogin && !isUnavailable && !inReserve" class="ubm-alert">
-    <span class="material-icons ubm-alert-icon">event</span>
-    <div class="ubm-alert-content">
-      <strong class="ubm-alert-title">{{ 'ubm.delivery.alerts.magasin.titre' | translate }}</strong> 
-      {{ 'ubm.delivery.alerts.magasin.message' | translate }}
-      <a href="#" (click)="triggerLogin($event)" class="ubm-alert-link">
-        <span class="material-icons ubm-alert-icon">login</span>{{ 'ubm.delivery.alerts.login_action' | translate }}.
-      </a>.
-    </div>
-  </div>
-
-  <div *ngIf="isUnavailable && !isLogin && !inReserve" class="ubm-alert">
-    <span class="material-icons ubm-alert-icon">event</span>
-    <div class="ubm-alert-content">
-      <strong class="ubm-alert-title">{{ 'ubm.delivery.alerts.indisponible.titre' | translate }}</strong> 
-      {{ 'ubm.delivery.alerts.indisponible.message' | translate }}
-      <a href="#" (click)="triggerLogin($event)" class="ubm-alert-link">
-        <span class="material-icons ubm-alert-icon">login</span>{{ 'ubm.delivery.alerts.login_action' | translate }}
-      </a>.
-    </div>
-  </div>
-
   <div *ngIf="isNoInventory && hasAlmaInstitutions && !inReserve" class="ubm-alert">
     <span class="material-icons ubm-alert-icon">account_balance</span>
     <div class="ubm-alert-content">
@@ -45,7 +10,41 @@
       </a>.
     </div>
   </div>
+  <div *ngIf="isDedup" class="ubm-alert">
+  <span class="material-icons ubm-alert-icon">library_books</span>
+  <div class="ubm-alert-content">
+    <p>Cette notice est issue de la fusion de plusieurs notices du même document. Elle regroupe les inventaires de toutes les versions.</p>
+    
+    <!-- Bloc des relations et notices liées -->
+    <div *ngIf="rebondRelations.length > 0" class="ubm-rebond-list">
+      <strong>Consulter les descriptions des autres versions :</strong>
+      <ul>
+        <li *ngFor="let item of rebondRelations">
+          <i>{{ item.typerelation }} :</i>
+          <ng-container *ngIf="item.url; else noUrl">
+            <a [href]="item.url" target="_blank" class="ubm-rebond-link">
+              {{ item.citation }}
+            </a>
+          </ng-container>
+          <ng-template #noUrl>
+            <span>{{ item.citation }}</span>
+          </ng-template>
+          <span *ngIf="item.identifiant" class="ubm-rebond-id"> (ID : {{ item.identifiant }})</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
 
+</div>
+<div *ngIf="isOpenUrlNoInventory" class="ubm-alert ubm-alert--peb">
+  <span class="material-icons ubm-alert-icon">local_shipping</span>
+  <div class="ubm-alert-content">
+    {{ 'ubm.delivery.openurl.no_inventory.text' | translate}}
+    <a [href]="PEB_FORM_URL" target="_blank" rel="noopener noreferrer" class="ubm-alert-link">
+      {{ 'ubm.delivery.openurl.no_inventory.textlink' | translate}}
+    </a>.
+  </div>
 </div>
 
 <div class="ubm-holdings-list" *ngIf="!isFullDisplay && physicalAvailability === 'no_inventory'">

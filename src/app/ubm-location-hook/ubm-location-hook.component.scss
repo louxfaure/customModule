@@ -1,0 +1,79 @@
+// ------------------------------------------------------------------ //
+//  Message pour inciter le lecteur à s'uathentifier qunad le document
+// est réservable
+// ------------------------------------------------------------------ //
+
+.ubm-alerts-container {
+  margin: 16px 0 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+// Style unique et sobre pour TOUTES les alertes
+.ubm-alert {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  padding: 14px 16px;
+  background-color: var(--lightBG);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--sys-primary); // L'accent discret de la charte
+  border-radius: 4px;
+  color: var(--darkText);
+  font-size: 14px;
+  line-height: 1.5;
+  box-sizing: border-box;
+
+  // Alignement et harmonisation des icônes Material Design
+  &-icon {
+    font-family: 'Material Icons';
+    font-size: 20px;
+    line-height: 1;
+    color: var(--sys-primary); // Icônes unifiées sur la couleur primaire
+    margin-right: 12px;
+    flex-shrink: 0;
+    user-select: none;
+  }
+
+  &-content {
+    flex-grow: 1;
+  }
+
+  &-title {
+    font-weight: 600;
+  }
+
+  // Liens d'action intégrés
+  &-link {
+    color: var(--sys-primary);
+    font-weight: 600;
+    text-decoration: underline;
+    transition: color 0.15s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      color: color-mix(in srgb, var(--sys-primary) 85%, black);
+      text-decoration: none;
+    }
+  }
+}
+/* Supprimer l'écart et fusionner les bordures */
+:host {
+  display: block;
+  margin-bottom: -1px; /* Colle l'alerte à la carte du dessous */
+}
+
+/* 1. Style de base pour l'alerte (arrondie uniquement en haut) */
+.ubm-alert {
+  border-radius: 0 0 8px 8px;
+  border-top: 1px dashed #e0e0e0;
+  margin: 0;
+}
+
+
+/* 2. Quand l'alerte EST présente, on retire les arrondis du haut de la carte */
+::ng-deep .getit-location-card:has(+ ng-component .ubm-alert) {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}

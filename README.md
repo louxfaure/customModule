@@ -51,9 +51,16 @@ Affiche la disponibilité pour toutes les localisations de l'institution sous fo
 
 Affiche un message pour inciter l'usager à se connecter afin de :
 
-* Demander les documents qui se trouvent en magasin. *(TODO: Déplacer le message au niveau de la holding)*
+* Voir la disponibilité dans un autre établissement du réseau.
+![Image](./readme-files/UbmCustomAvailability2_autreetab.png)
+
+---
+
+### UbmLocationHook
+Affiche un message au niveau de la holding pour inciter l'usager à se connecter afin de :
+* Demander les documents qui se trouvent en magasin. *
 ![Image](./readme-files/UbmCustomAvailability2_magasin.png)
-* Réserver un document emprunté.*(]TODO: Déplacer le message au niveau de la holding)*
+* Réserver un document emprunté.
 ![Image](./readme-files/UbmCustomAvailability2_pasdispo.png)
 * Voir la disponibilité dans un autre établissement du réseau.
 ![Image](./readme-files/UbmCustomAvailability2_autreetab.png)

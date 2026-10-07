@@ -1,0 +1,32 @@
+  <div *ngIf="hasMagasin && !isLogin && !isUnavailable" class="ubm-alert">
+    <span class="material-icons ubm-alert-icon">event</span>
+    <div class="ubm-alert-content">
+      <strong class="ubm-alert-title">{{ 'ubm.delivery.alerts.magasin.titre' | translate }}</strong> 
+      {{ 'ubm.delivery.alerts.magasin.message' | translate }}
+      <a href="#" (click)="triggerLogin($event)" class="ubm-alert-link">
+        <span class="material-icons ubm-alert-icon">login</span>{{ 'ubm.delivery.alerts.login_action' | translate }}.
+      </a>.
+    </div>
+  </div>
+
+  <div *ngIf="inReserve" class="ubm-alert">
+    <span class="material-icons ubm-alert-icon">library_books</span>
+    <div class="ubm-alert-content">
+      <strong class="ubm-alert-title"> Document patrimonial</strong> 
+      <p>Ce document fait partie des collections patrimoniales. Sa consultation nécessite une <strong>validation préalable</strong> par les bibliothécaires. Adressez-vous à un <strong>bureau de prêt</strong> ou <a href="https://extranet.u-bordeaux-montaigne.fr/rita_fo/?num_cg=59&num_form=1">contactez-nous<span class="material-icons ubm-alert-icon">open_in_new</span></a> pour réserver et consulter ce document.</p>
+      <p><a href="https://www.u-bordeaux-montaigne.fr/fr/documentation/collections-patrimoniales/collections-patrimoniales-imprimees-de-l-universite.html">
+      En savoir plus sur les collections patrimoniales<span class="material-icons ubm-alert-icon">open_in_new</span>
+      </a></p>
+    </div>
+  </div>
+
+    <div *ngIf="isUnavailable && !isLogin && !inReserve" class="ubm-alert">
+    <span class="material-icons ubm-alert-icon">event</span>
+    <div class="ubm-alert-content">
+      <strong class="ubm-alert-title">{{ 'ubm.delivery.alerts.indisponible.titre' | translate }}</strong> 
+      {{ 'ubm.delivery.alerts.indisponible.message' | translate }}
+      <a href="#" (click)="triggerLogin($event)" class="ubm-alert-link">
+        <span class="material-icons ubm-alert-icon">login</span>{{ 'ubm.delivery.alerts.login_action' | translate }}
+      </a>.
+    </div>
+  </div>
